@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/lem-in.dir/src/main.c.o CMakeFiles/lem-in.dir/src/ft_parse.c.o CMakeFiles/lem-in.dir/src/ft_input.c.o CMakeFiles/lem-in.dir/src/ft_ants.c.o CMakeFiles/lem-in.dir/src/ft_farm.c.o  -o lem-in /libft/libft.a 
