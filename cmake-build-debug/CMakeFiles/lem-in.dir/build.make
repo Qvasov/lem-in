@@ -83,22 +83,9 @@ CMakeFiles/lem-in.dir/src/ft_parse.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem-in.dir/src/ft_parse.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dbennie/github/lem-in/src/ft_parse.c -o CMakeFiles/lem-in.dir/src/ft_parse.c.s
 
-CMakeFiles/lem-in.dir/src/ft_input.c.o: CMakeFiles/lem-in.dir/flags.make
-CMakeFiles/lem-in.dir/src/ft_input.c.o: ../src/ft_input.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbennie/github/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/lem-in.dir/src/ft_input.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem-in.dir/src/ft_input.c.o   -c /Users/dbennie/github/lem-in/src/ft_input.c
-
-CMakeFiles/lem-in.dir/src/ft_input.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lem-in.dir/src/ft_input.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dbennie/github/lem-in/src/ft_input.c > CMakeFiles/lem-in.dir/src/ft_input.c.i
-
-CMakeFiles/lem-in.dir/src/ft_input.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem-in.dir/src/ft_input.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dbennie/github/lem-in/src/ft_input.c -o CMakeFiles/lem-in.dir/src/ft_input.c.s
-
 CMakeFiles/lem-in.dir/src/ft_ants.c.o: CMakeFiles/lem-in.dir/flags.make
 CMakeFiles/lem-in.dir/src/ft_ants.c.o: ../src/ft_ants.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbennie/github/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/lem-in.dir/src/ft_ants.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbennie/github/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/lem-in.dir/src/ft_ants.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem-in.dir/src/ft_ants.c.o   -c /Users/dbennie/github/lem-in/src/ft_ants.c
 
 CMakeFiles/lem-in.dir/src/ft_ants.c.i: cmake_force
@@ -111,7 +98,7 @@ CMakeFiles/lem-in.dir/src/ft_ants.c.s: cmake_force
 
 CMakeFiles/lem-in.dir/src/ft_farm.c.o: CMakeFiles/lem-in.dir/flags.make
 CMakeFiles/lem-in.dir/src/ft_farm.c.o: ../src/ft_farm.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbennie/github/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/lem-in.dir/src/ft_farm.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbennie/github/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/lem-in.dir/src/ft_farm.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem-in.dir/src/ft_farm.c.o   -c /Users/dbennie/github/lem-in/src/ft_farm.c
 
 CMakeFiles/lem-in.dir/src/ft_farm.c.i: cmake_force
@@ -122,22 +109,35 @@ CMakeFiles/lem-in.dir/src/ft_farm.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem-in.dir/src/ft_farm.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dbennie/github/lem-in/src/ft_farm.c -o CMakeFiles/lem-in.dir/src/ft_farm.c.s
 
+CMakeFiles/lem-in.dir/src/ft_valid.c.o: CMakeFiles/lem-in.dir/flags.make
+CMakeFiles/lem-in.dir/src/ft_valid.c.o: ../src/ft_valid.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbennie/github/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/lem-in.dir/src/ft_valid.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem-in.dir/src/ft_valid.c.o   -c /Users/dbennie/github/lem-in/src/ft_valid.c
+
+CMakeFiles/lem-in.dir/src/ft_valid.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lem-in.dir/src/ft_valid.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dbennie/github/lem-in/src/ft_valid.c > CMakeFiles/lem-in.dir/src/ft_valid.c.i
+
+CMakeFiles/lem-in.dir/src/ft_valid.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem-in.dir/src/ft_valid.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dbennie/github/lem-in/src/ft_valid.c -o CMakeFiles/lem-in.dir/src/ft_valid.c.s
+
 # Object files for target lem-in
 lem__in_OBJECTS = \
 "CMakeFiles/lem-in.dir/src/main.c.o" \
 "CMakeFiles/lem-in.dir/src/ft_parse.c.o" \
-"CMakeFiles/lem-in.dir/src/ft_input.c.o" \
 "CMakeFiles/lem-in.dir/src/ft_ants.c.o" \
-"CMakeFiles/lem-in.dir/src/ft_farm.c.o"
+"CMakeFiles/lem-in.dir/src/ft_farm.c.o" \
+"CMakeFiles/lem-in.dir/src/ft_valid.c.o"
 
 # External object files for target lem-in
 lem__in_EXTERNAL_OBJECTS =
 
 lem-in: CMakeFiles/lem-in.dir/src/main.c.o
 lem-in: CMakeFiles/lem-in.dir/src/ft_parse.c.o
-lem-in: CMakeFiles/lem-in.dir/src/ft_input.c.o
 lem-in: CMakeFiles/lem-in.dir/src/ft_ants.c.o
 lem-in: CMakeFiles/lem-in.dir/src/ft_farm.c.o
+lem-in: CMakeFiles/lem-in.dir/src/ft_valid.c.o
 lem-in: CMakeFiles/lem-in.dir/build.make
 lem-in: /libft/libft.a
 lem-in: CMakeFiles/lem-in.dir/link.txt

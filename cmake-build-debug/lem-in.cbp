@@ -91,10 +91,10 @@
 		<Unit filename="/Users/dbennie/github/lem-in/src/ft_farm.c">
 			<Option target="lem-in"/>
 		</Unit>
-		<Unit filename="/Users/dbennie/github/lem-in/src/ft_input.c">
+		<Unit filename="/Users/dbennie/github/lem-in/src/ft_parse.c">
 			<Option target="lem-in"/>
 		</Unit>
-		<Unit filename="/Users/dbennie/github/lem-in/src/ft_parse.c">
+		<Unit filename="/Users/dbennie/github/lem-in/src/ft_valid.c">
 			<Option target="lem-in"/>
 		</Unit>
 		<Unit filename="/Users/dbennie/github/lem-in/src/main.c">

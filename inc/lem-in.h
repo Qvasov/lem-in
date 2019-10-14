@@ -36,16 +36,20 @@ typedef struct		s_room
 
 typedef struct		s_data
 {
-	char 			*map;
 	size_t			ants;
-	t_room			**farm;
+//	t_room			**farm;
 	t_room			*start;
 	t_room			*end;
-	long			index;
+	int 			start_define;
+	int 			end_define;
+	int 			ants_define;
+	int 			rooms_define;
+	int 			links_define;
 }					t_data;
 
-int					ft_input(char *map);
+int					ft_input(char **line);
 int					ft_parse(t_data *data);
+int					ft_valid(t_data *data, char *line);
 void				ft_ants(t_data *data);
 void				ft_farm(t_data *data);
 

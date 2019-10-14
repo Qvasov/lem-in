@@ -14,8 +14,32 @@
 
 int			ft_parse(t_data *data)
 {
-	ft_ants(data);
-	ft_farm(data);
-	ft_links(data);
-	return (1);
+	char	*line;
+	int 	r;
+	int		v;
+
+	while (1)
+	{
+		r = get_next_line(0, &line);
+		if (r > 0)
+		{
+			v = ft_valid(data, line);
+			if (v == 5 && !data->start_define)
+				data->start_define = 1;
+			if (v == 6 && !data->end_define)
+				data->end_define = 1;
+			if (v == 1 && !data->ants_define)
+				data->ants_define = 1;
+			else
+				ft_error();
+
+
+			ft_farm(data);
+			ft_links(data);
+		}
+		else if (r < 0)
+			return (ft_error());
+		else
+			return (1);
+	}
 }

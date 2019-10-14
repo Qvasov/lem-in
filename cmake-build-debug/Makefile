@@ -177,33 +177,6 @@ src/ft_farm.c.s:
 	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_farm.c.s
 .PHONY : src/ft_farm.c.s
 
-src/ft_input.o: src/ft_input.c.o
-
-.PHONY : src/ft_input.o
-
-# target to build an object file
-src/ft_input.c.o:
-	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_input.c.o
-.PHONY : src/ft_input.c.o
-
-src/ft_input.i: src/ft_input.c.i
-
-.PHONY : src/ft_input.i
-
-# target to preprocess a source file
-src/ft_input.c.i:
-	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_input.c.i
-.PHONY : src/ft_input.c.i
-
-src/ft_input.s: src/ft_input.c.s
-
-.PHONY : src/ft_input.s
-
-# target to generate assembly for a file
-src/ft_input.c.s:
-	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_input.c.s
-.PHONY : src/ft_input.c.s
-
 src/ft_parse.o: src/ft_parse.c.o
 
 .PHONY : src/ft_parse.o
@@ -230,6 +203,33 @@ src/ft_parse.s: src/ft_parse.c.s
 src/ft_parse.c.s:
 	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_parse.c.s
 .PHONY : src/ft_parse.c.s
+
+src/ft_valid.o: src/ft_valid.c.o
+
+.PHONY : src/ft_valid.o
+
+# target to build an object file
+src/ft_valid.c.o:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_valid.c.o
+.PHONY : src/ft_valid.c.o
+
+src/ft_valid.i: src/ft_valid.c.i
+
+.PHONY : src/ft_valid.i
+
+# target to preprocess a source file
+src/ft_valid.c.i:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_valid.c.i
+.PHONY : src/ft_valid.c.i
+
+src/ft_valid.s: src/ft_valid.c.s
+
+.PHONY : src/ft_valid.s
+
+# target to generate assembly for a file
+src/ft_valid.c.s:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_valid.c.s
+.PHONY : src/ft_valid.c.s
 
 src/main.o: src/main.c.o
 
@@ -273,12 +273,12 @@ help:
 	@echo "... src/ft_farm.o"
 	@echo "... src/ft_farm.i"
 	@echo "... src/ft_farm.s"
-	@echo "... src/ft_input.o"
-	@echo "... src/ft_input.i"
-	@echo "... src/ft_input.s"
 	@echo "... src/ft_parse.o"
 	@echo "... src/ft_parse.i"
 	@echo "... src/ft_parse.s"
+	@echo "... src/ft_valid.o"
+	@echo "... src/ft_valid.i"
+	@echo "... src/ft_valid.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
