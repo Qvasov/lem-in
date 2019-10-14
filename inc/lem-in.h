@@ -31,6 +31,7 @@ typedef struct		s_room
 	size_t			x;
 	size_t			y;
 	t_link			*links;
+	struct s_room	*next;
 }					t_room;
 
 typedef struct		s_data
