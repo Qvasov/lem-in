@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ants.c                                          :+:      :+:    :+:   */
+/*   ft_isnum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/13 20:02:28 by dbennie           #+#    #+#             */
-/*   Updated: 2019/10/13 20:02:32 by dbennie          ###   ########.fr       */
+/*   Created: 2019/10/15 17:41:14 by dbennie           #+#    #+#             */
+/*   Updated: 2019/10/15 17:41:15 by dbennie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "libft.h"
 
-void	ft_ants(t_data *data, char *line)
+int ft_isnum(char *str, int c)
 {
-	data->ants = ft_atoll(line);
+	size_t	i;
+
+	i = 0;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		++i;
+	}
+	return (1);
 }

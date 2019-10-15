@@ -93,5 +93,6 @@ void				ft_lstrev(t_list **beginlst);
 long long			ft_atoll(const char *str);
 int					get_next_line(const int fd, char **line);
 int					ft_printf(const char *format, ...);
+int 				ft_isnum(char *str, int c);
 
 #endif

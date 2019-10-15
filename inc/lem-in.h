@@ -50,7 +50,7 @@ typedef struct		s_data
 int					ft_input(char **line);
 int					ft_parse(t_data *data);
 int					ft_valid(t_data *data, char *line);
-void				ft_ants(t_data *data);
+void				ft_ants(t_data *data, char *line);
 void				ft_farm(t_data *data);
 
 #endif

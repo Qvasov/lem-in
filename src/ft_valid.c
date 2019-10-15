@@ -25,11 +25,9 @@ int	ft_valid(t_data *data, char *line)
 {
 	long	i;
 	int		space;
+	int 	dash;
 
-	if ((!data->start_define || !data->end_define || !data->rooms_define
-	|| !data->ants_define || !data->links_define) && line[0] == '\0')
-		return (ft_error());
-	if (line[0] == 'L')
+	if (line[0] == 0 || line[0] == 'L')
 		return (ft_error());
 	if (line[0] == '#')
 		return (ft_valid_comment(line));
@@ -39,21 +37,49 @@ int	ft_valid(t_data *data, char *line)
 		while (line[++i])
 			if (!ft_isdigit(line[i]))
 				return (ft_error());
-		data->ants = ft_atoll(line);
 		return (1);
 	}
-	if (data->rooms_define == 0)
+	if (data->rooms_define == 1)
+	{//ft_valid_links();
+		i = 0;
+		dash = 0;
+		while (line[++i])
+		{
+			if (line[i] == '-')
+				++dash;
+			else if (dash && line[i] == ' ')
+			{
+				if (line[i + 1] == '\0' && line[i - 1] == '-')
+					return (3);
+				else
+					break; // return(); //ft_valid_rooms
+			}
+			else if (!dash && line[i] == ' ')
+				break; // return(); //ft_valid_rooms
+		}
+		if (dash)
+			return (3);
+		else
+			return (ft_error(0));
+	}
+	if (data->rooms_define != 2)
 	{//ft_valid_rooms();
 		i = 0;
 		space = 0;
-		while (line[++i])
-			if (line[i] == ' ')
-			{
-				++space;
-				break;
-			}
-
-		}
+		while (line[i] && space == 0)
+			if (line[++i] == ' ')
+				space = 1;
+		if (!line[i] || !ft_isnum(&line[++i], ' '))
+			return (ft_error());
+		while (line[i] && space == 1)
+			if (line[++i] == ' ')
+				space = 2;
+		if (!line[i] || !ft_isnum(&line[++i], '\0'))
+			return (ft_error());
+		data->rooms_define = 1;
+		return (2);
 	}
+	else
+		return (ft_error());
 	return (0);
 }
