@@ -36,17 +36,16 @@ int			ft_parse(t_data *data)
 				data->ants_define = 1;
 			}
 			else if (v == 2 && data->rooms_define != 2)
-				ft_createroom; v funnkcii startdefine i end na 2 pomenyat
-			else if (v == 3 && data->rooms_define == 1)
+				ft_roomslist(data, line);
+			else if (v == 3 && data->rooms_define != 0)
 			{
 				data->rooms_define = 2;
-				ft_createlink;
+				ft_link(data, line);
 			}
 			else
 				ft_error();
 
 			ft_farm(data);
-			ft_links(data);
 		}
 		else if (r < 0)
 			return (ft_error());

@@ -150,32 +150,113 @@ src/ft_ants.c.s:
 	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_ants.c.s
 .PHONY : src/ft_ants.c.s
 
-src/ft_farm.o: src/ft_farm.c.o
+src/ft_findrooms.o: src/ft_findrooms.c.o
 
-.PHONY : src/ft_farm.o
+.PHONY : src/ft_findrooms.o
 
 # target to build an object file
-src/ft_farm.c.o:
-	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_farm.c.o
-.PHONY : src/ft_farm.c.o
+src/ft_findrooms.c.o:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_findrooms.c.o
+.PHONY : src/ft_findrooms.c.o
 
-src/ft_farm.i: src/ft_farm.c.i
+src/ft_findrooms.i: src/ft_findrooms.c.i
 
-.PHONY : src/ft_farm.i
+.PHONY : src/ft_findrooms.i
 
 # target to preprocess a source file
-src/ft_farm.c.i:
-	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_farm.c.i
-.PHONY : src/ft_farm.c.i
+src/ft_findrooms.c.i:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_findrooms.c.i
+.PHONY : src/ft_findrooms.c.i
 
-src/ft_farm.s: src/ft_farm.c.s
+src/ft_findrooms.s: src/ft_findrooms.c.s
 
-.PHONY : src/ft_farm.s
+.PHONY : src/ft_findrooms.s
 
 # target to generate assembly for a file
-src/ft_farm.c.s:
-	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_farm.c.s
-.PHONY : src/ft_farm.c.s
+src/ft_findrooms.c.s:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_findrooms.c.s
+.PHONY : src/ft_findrooms.c.s
+
+src/ft_free_names.o: src/ft_free_names.c.o
+
+.PHONY : src/ft_free_names.o
+
+# target to build an object file
+src/ft_free_names.c.o:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_free_names.c.o
+.PHONY : src/ft_free_names.c.o
+
+src/ft_free_names.i: src/ft_free_names.c.i
+
+.PHONY : src/ft_free_names.i
+
+# target to preprocess a source file
+src/ft_free_names.c.i:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_free_names.c.i
+.PHONY : src/ft_free_names.c.i
+
+src/ft_free_names.s: src/ft_free_names.c.s
+
+.PHONY : src/ft_free_names.s
+
+# target to generate assembly for a file
+src/ft_free_names.c.s:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_free_names.c.s
+.PHONY : src/ft_free_names.c.s
+
+src/ft_link.o: src/ft_link.c.o
+
+.PHONY : src/ft_link.o
+
+# target to build an object file
+src/ft_link.c.o:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_link.c.o
+.PHONY : src/ft_link.c.o
+
+src/ft_link.i: src/ft_link.c.i
+
+.PHONY : src/ft_link.i
+
+# target to preprocess a source file
+src/ft_link.c.i:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_link.c.i
+.PHONY : src/ft_link.c.i
+
+src/ft_link.s: src/ft_link.c.s
+
+.PHONY : src/ft_link.s
+
+# target to generate assembly for a file
+src/ft_link.c.s:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_link.c.s
+.PHONY : src/ft_link.c.s
+
+src/ft_names.o: src/ft_names.c.o
+
+.PHONY : src/ft_names.o
+
+# target to build an object file
+src/ft_names.c.o:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_names.c.o
+.PHONY : src/ft_names.c.o
+
+src/ft_names.i: src/ft_names.c.i
+
+.PHONY : src/ft_names.i
+
+# target to preprocess a source file
+src/ft_names.c.i:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_names.c.i
+.PHONY : src/ft_names.c.i
+
+src/ft_names.s: src/ft_names.c.s
+
+.PHONY : src/ft_names.s
+
+# target to generate assembly for a file
+src/ft_names.c.s:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_names.c.s
+.PHONY : src/ft_names.c.s
 
 src/ft_parse.o: src/ft_parse.c.o
 
@@ -203,6 +284,33 @@ src/ft_parse.s: src/ft_parse.c.s
 src/ft_parse.c.s:
 	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_parse.c.s
 .PHONY : src/ft_parse.c.s
+
+src/ft_roomslist.o: src/ft_roomslist.c.o
+
+.PHONY : src/ft_roomslist.o
+
+# target to build an object file
+src/ft_roomslist.c.o:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_roomslist.c.o
+.PHONY : src/ft_roomslist.c.o
+
+src/ft_roomslist.i: src/ft_roomslist.c.i
+
+.PHONY : src/ft_roomslist.i
+
+# target to preprocess a source file
+src/ft_roomslist.c.i:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_roomslist.c.i
+.PHONY : src/ft_roomslist.c.i
+
+src/ft_roomslist.s: src/ft_roomslist.c.s
+
+.PHONY : src/ft_roomslist.s
+
+# target to generate assembly for a file
+src/ft_roomslist.c.s:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_roomslist.c.s
+.PHONY : src/ft_roomslist.c.s
 
 src/ft_valid.o: src/ft_valid.c.o
 
@@ -270,12 +378,24 @@ help:
 	@echo "... src/ft_ants.o"
 	@echo "... src/ft_ants.i"
 	@echo "... src/ft_ants.s"
-	@echo "... src/ft_farm.o"
-	@echo "... src/ft_farm.i"
-	@echo "... src/ft_farm.s"
+	@echo "... src/ft_findrooms.o"
+	@echo "... src/ft_findrooms.i"
+	@echo "... src/ft_findrooms.s"
+	@echo "... src/ft_free_names.o"
+	@echo "... src/ft_free_names.i"
+	@echo "... src/ft_free_names.s"
+	@echo "... src/ft_link.o"
+	@echo "... src/ft_link.i"
+	@echo "... src/ft_link.s"
+	@echo "... src/ft_names.o"
+	@echo "... src/ft_names.i"
+	@echo "... src/ft_names.s"
 	@echo "... src/ft_parse.o"
 	@echo "... src/ft_parse.i"
 	@echo "... src/ft_parse.s"
+	@echo "... src/ft_roomslist.o"
+	@echo "... src/ft_roomslist.i"
+	@echo "... src/ft_roomslist.s"
 	@echo "... src/ft_valid.o"
 	@echo "... src/ft_valid.i"
 	@echo "... src/ft_valid.s"

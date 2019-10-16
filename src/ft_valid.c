@@ -27,7 +27,7 @@ int	ft_valid(t_data *data, char *line)
 	int		space;
 	int 	dash;
 
-	if (line[0] == 0 || line[0] == 'L')
+	if (line[0] == '\0' || line[0] == 'L')
 		return (ft_error());
 	if (line[0] == '#')
 		return (ft_valid_comment(line));
@@ -42,22 +42,22 @@ int	ft_valid(t_data *data, char *line)
 	if (data->rooms_define == 1)
 	{//ft_valid_links();
 		i = 0;
-		dash = 0;
+		data->dash = 0;
 		while (line[++i])
 		{
 			if (line[i] == '-')
-				++dash;
-			else if (dash && line[i] == ' ')
+				++data->dash;
+			else if (data->dash && line[i] == ' ')
 			{
 				if (line[i + 1] == '\0' && line[i - 1] == '-')
 					return (3);
 				else
 					break; // return(); //ft_valid_rooms
 			}
-			else if (!dash && line[i] == ' ')
+			else if (!data->dash && line[i] == ' ')
 				break; // return(); //ft_valid_rooms
 		}
-		if (dash)
+		if (data->dash)
 			return (3);
 		else
 			return (ft_error(0));

@@ -88,10 +88,22 @@
 		<Unit filename="/Users/dbennie/github/lem-in/src/ft_ants.c">
 			<Option target="lem-in"/>
 		</Unit>
-		<Unit filename="/Users/dbennie/github/lem-in/src/ft_farm.c">
+		<Unit filename="/Users/dbennie/github/lem-in/src/ft_findrooms.c">
+			<Option target="lem-in"/>
+		</Unit>
+		<Unit filename="/Users/dbennie/github/lem-in/src/ft_free_names.c">
+			<Option target="lem-in"/>
+		</Unit>
+		<Unit filename="/Users/dbennie/github/lem-in/src/ft_link.c">
+			<Option target="lem-in"/>
+		</Unit>
+		<Unit filename="/Users/dbennie/github/lem-in/src/ft_names.c">
 			<Option target="lem-in"/>
 		</Unit>
 		<Unit filename="/Users/dbennie/github/lem-in/src/ft_parse.c">
+			<Option target="lem-in"/>
+		</Unit>
+		<Unit filename="/Users/dbennie/github/lem-in/src/ft_roomslist.c">
 			<Option target="lem-in"/>
 		</Unit>
 		<Unit filename="/Users/dbennie/github/lem-in/src/ft_valid.c">

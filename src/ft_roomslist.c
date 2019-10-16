@@ -12,79 +12,40 @@
 
 #include "inc/lem-in.h"
 
-static t_room	*ft_createroom(char *data)
+static t_room	*ft_createroom(char *line)
 {
 	long	i;
 	t_room	*room;
 
 	if (!(room = (t_room *)malloc(sizeof(t_room))))
 		return (NULL);
-	i = 0;
-	while (data[i] != ' ')
+	i = 1;
+	while (line[i] != ' ')
 		++i;
-	if (!(room->name = ft_strsub(data, 0, i)))
+	if (!(room->name = ft_strsub(line, 0, i)))
 		return (ft_freeroom());
 	i = i + 1;
-	room->x = ft_atoll(&data[i]);
-	while (data[i] != ' ')
+	room->x = ft_atoll(&line[i]);
+	while (line[i] != ' ')
 		++i;
 	i = i + 1;
-	room->y = ft_atoll(&data[i]);
+	room->y = ft_atoll(&line[i]);
 	room->links = NULL;
 	room->next = NULL;
 	return (room);
 }
 
-static int		ft_createfarm(t_data *data, int rooms)
+void			ft_roomslist(t_data *data, char *line)
 {
-	t_room	*tmp;
+	t_room	*room;
 
-
-	if (!(data->farm = (t_room **)malloc(sizeof(t_room *) * (rooms + 1))))
-		return(ft_error());
-	data->farm[rooms] = NULL;
-
-}
-
-static void 	ft_rooms(t_data *data, t_room *rooms)
-{
-	long 	i;
-	long	j;
-	t_room 	*room;
-
-	i = data->index - 1;
-	while (data->map[++i])
-	{
-		if (data->map[i] == '#')
-		{
-			while (data->map[i] != '\n')
-				++i;
-		}
-		else if (data->map[i] != '#')
-		{
-			room = NULL;
-			j = i;
-			while (j && data->map[j] != '\n')
-				if (data->map[j++] == ' ')
-					j = 0;
-			if (j)
-				break;
-			if (!(room = ft_createroom(&data->map[i])))
-				return (ft_error());
-			room->next = rooms;
-			rooms = room;
-			while (data->map[i] != '\n')
-				++i;
-		}
-	}
-	data->index = i;
-}
-
-void			ft_farm(t_data *data)
-{
-	t_room	*rooms;
-
-	rooms = NULL;
-	ft_rooms(data, rooms);
-	ft_createfarm(data, rooms);
+	if (!(room = ft_createroom(line)))
+		return (ft_error());
+	room->next = data->tail;
+	data->tail = room;
+	++data->rooms_count;
+	if (data->start_define == 1)
+		data->start = data->tail;
+	if (data->end_define == 1)
+		data->end = data->tail;
 }

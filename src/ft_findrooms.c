@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_findnames.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 22:28:23 by dbennie           #+#    #+#             */
-/*   Updated: 2019/10/11 22:28:47 by dbennie          ###   ########.fr       */
+/*   Created: 2019/10/16 20:26:15 by dbennie           #+#    #+#             */
+/*   Updated: 2019/10/16 20:26:16 by dbennie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/lem-in.h"
 
-static int	ft_zerodata(t_data *data)
+int	ft_findrooms(t_data *data, t_line *names)
 {
-	data->ants = 0;
-	data->farm = NULL;
-	data->rooms_count = 0;
-	data->start = NULL;
-	data->end = NULL;
-	data->tail = NULL;
-	data->start_define = 0;
-	data->end_define = 0;
-	data->ants_define = 0;
-	data->rooms_define = 0;
-	data->links_define = 0;
-	data->dash = 0;
-	return (1);
-}
+	t_room	*head;
+	t_room	*ok1;
+	t_room	*ok2;
 
-int			main()
-{
-	t_data	data;
-
-	ft_zerodata(&data);
-	ft_parse(&data);
-
+	names->room2 = NULL;
+	names->room1 = NULL;
+	head = data->tail;
+	while (head)
+	{
+		if (!names->room1 && ft_strequ(head->name, names->name1))
+			names->room1 = head;
+		if (!names->room2 && ft_strequ(head->name, names->name2))
+			names->room2 = head;
+		head = head->next;
+	}
+	if (names->room1 && names->room2)
+		return (1);
+	return (0);
 }
