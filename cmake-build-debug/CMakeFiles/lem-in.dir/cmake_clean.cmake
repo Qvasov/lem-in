@@ -8,6 +8,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/lem-in.dir/src/ft_names.c.o"
   "CMakeFiles/lem-in.dir/src/ft_findrooms.c.o"
   "CMakeFiles/lem-in.dir/src/ft_free_names.c.o"
+  "CMakeFiles/lem-in.dir/src/ft_error.c.o"
+  "CMakeFiles/lem-in.dir/src/ft_free_data.c.o"
   "lem-in.pdb"
   "lem-in"
 )

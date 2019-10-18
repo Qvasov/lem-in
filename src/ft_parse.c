@@ -15,17 +15,15 @@
 int			ft_parse(t_data *data)
 {
 	char	*line;
-	int 	r;
 	int		v;
 
 	while (1)
 	{
-		r = get_next_line(0, &line);
-		if (r > 0)
+		if (get_next_line(0, &line) > 0)
 		{
 			v = ft_valid(data, line);
-			if (v != 2 && (data->start_define == 1 || data->end_define == 1)
-				return (ft_error());
+			if (v != 2 && (data->start_define == 1 || data->end_define == 1))
+				exit (ft_error(data, line));
 			if (v == 5 && !data->start_define)
 				data->start_define = 1;
 			else if (v == 6 && !data->end_define)
@@ -39,11 +37,12 @@ int			ft_parse(t_data *data)
 				ft_roomslist(data, line);
 			else if (v == 3 && data->rooms_define != 0)
 			{
-				data->rooms_define = 2;
 				ft_link(data, line);
+				data->rooms_define = 2;
 			}
 			else
-				ft_error();
+				exit (ft_error(data, line));
+
 
 			ft_farm(data);
 		}

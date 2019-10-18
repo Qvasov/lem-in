@@ -88,7 +88,13 @@
 		<Unit filename="/Users/dbennie/github/lem-in/src/ft_ants.c">
 			<Option target="lem-in"/>
 		</Unit>
+		<Unit filename="/Users/dbennie/github/lem-in/src/ft_error.c">
+			<Option target="lem-in"/>
+		</Unit>
 		<Unit filename="/Users/dbennie/github/lem-in/src/ft_findrooms.c">
+			<Option target="lem-in"/>
+		</Unit>
+		<Unit filename="/Users/dbennie/github/lem-in/src/ft_free_data.c">
 			<Option target="lem-in"/>
 		</Unit>
 		<Unit filename="/Users/dbennie/github/lem-in/src/ft_free_names.c">

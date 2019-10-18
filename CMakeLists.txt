@@ -13,6 +13,6 @@ add_executable(lem-in
         src/ft_roomslist.c
         src/ft_valid.c
         src/ft_link.c
-        src/ft_names.c src/ft_findrooms.c src/ft_free_names.c)
+        src/ft_names.c src/ft_findrooms.c src/ft_free_names.c src/ft_error.c src/ft_free_data.c)
 
 target_link_libraries(lem-in /libft/libft.a)

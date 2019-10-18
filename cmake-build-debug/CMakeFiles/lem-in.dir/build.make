@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
+CMAKE_COMMAND = /Users/dbennie/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
+RM = /Users/dbennie/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -174,6 +174,32 @@ CMakeFiles/lem-in.dir/src/ft_free_names.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem-in.dir/src/ft_free_names.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dbennie/github/lem-in/src/ft_free_names.c -o CMakeFiles/lem-in.dir/src/ft_free_names.c.s
 
+CMakeFiles/lem-in.dir/src/ft_error.c.o: CMakeFiles/lem-in.dir/flags.make
+CMakeFiles/lem-in.dir/src/ft_error.c.o: ../src/ft_error.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbennie/github/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/lem-in.dir/src/ft_error.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem-in.dir/src/ft_error.c.o   -c /Users/dbennie/github/lem-in/src/ft_error.c
+
+CMakeFiles/lem-in.dir/src/ft_error.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lem-in.dir/src/ft_error.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dbennie/github/lem-in/src/ft_error.c > CMakeFiles/lem-in.dir/src/ft_error.c.i
+
+CMakeFiles/lem-in.dir/src/ft_error.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem-in.dir/src/ft_error.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dbennie/github/lem-in/src/ft_error.c -o CMakeFiles/lem-in.dir/src/ft_error.c.s
+
+CMakeFiles/lem-in.dir/src/ft_free_data.c.o: CMakeFiles/lem-in.dir/flags.make
+CMakeFiles/lem-in.dir/src/ft_free_data.c.o: ../src/ft_free_data.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/dbennie/github/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/lem-in.dir/src/ft_free_data.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/lem-in.dir/src/ft_free_data.c.o   -c /Users/dbennie/github/lem-in/src/ft_free_data.c
+
+CMakeFiles/lem-in.dir/src/ft_free_data.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lem-in.dir/src/ft_free_data.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dbennie/github/lem-in/src/ft_free_data.c > CMakeFiles/lem-in.dir/src/ft_free_data.c.i
+
+CMakeFiles/lem-in.dir/src/ft_free_data.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lem-in.dir/src/ft_free_data.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dbennie/github/lem-in/src/ft_free_data.c -o CMakeFiles/lem-in.dir/src/ft_free_data.c.s
+
 # Object files for target lem-in
 lem__in_OBJECTS = \
 "CMakeFiles/lem-in.dir/src/main.c.o" \
@@ -184,7 +210,9 @@ lem__in_OBJECTS = \
 "CMakeFiles/lem-in.dir/src/ft_link.c.o" \
 "CMakeFiles/lem-in.dir/src/ft_names.c.o" \
 "CMakeFiles/lem-in.dir/src/ft_findrooms.c.o" \
-"CMakeFiles/lem-in.dir/src/ft_free_names.c.o"
+"CMakeFiles/lem-in.dir/src/ft_free_names.c.o" \
+"CMakeFiles/lem-in.dir/src/ft_error.c.o" \
+"CMakeFiles/lem-in.dir/src/ft_free_data.c.o"
 
 # External object files for target lem-in
 lem__in_EXTERNAL_OBJECTS =
@@ -198,10 +226,12 @@ lem-in: CMakeFiles/lem-in.dir/src/ft_link.c.o
 lem-in: CMakeFiles/lem-in.dir/src/ft_names.c.o
 lem-in: CMakeFiles/lem-in.dir/src/ft_findrooms.c.o
 lem-in: CMakeFiles/lem-in.dir/src/ft_free_names.c.o
+lem-in: CMakeFiles/lem-in.dir/src/ft_error.c.o
+lem-in: CMakeFiles/lem-in.dir/src/ft_free_data.c.o
 lem-in: CMakeFiles/lem-in.dir/build.make
 lem-in: /libft/libft.a
 lem-in: CMakeFiles/lem-in.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/dbennie/github/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking C executable lem-in"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/dbennie/github/lem-in/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking C executable lem-in"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lem-in.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

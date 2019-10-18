@@ -12,6 +12,64 @@
 
 #include "inc/lem-in.h"
 
+int	ft_valid_rooms(t_data *data, char *line)
+{
+	long	i;
+	int		space;
+
+	i = 0;
+	space = 0;
+	while (line[i] && space == 0)
+		if (line[++i] == ' ')
+			space = 1;
+	if (!line[i] || !ft_isnum(&line[++i], ' '))
+		return (-1);
+	while (line[i] && space == 1)
+		if (line[++i] == ' ')
+			space = 2;
+	if (!line[i] || !ft_isnum(&line[++i], '\0'))
+		return (-1);
+	data->rooms_define = 1;
+	return (2);
+}
+
+int	ft_valid_links(t_data *data, char *line)
+{
+	long	i;
+
+	i = 0;
+	data->dash = 0;
+	while (line[++i])
+	{
+		if (line[i] == '-')
+			++data->dash;
+		else if (data->dash && line[i] == ' ')
+		{
+			if (line[i + 1] == '\0' && line[i - 1] == '-')
+				return (3);
+			else
+				return(ft_valid_rooms(data, line));
+		}
+		else if (!data->dash && line[i] == ' ')
+			return(ft_valid_rooms(data, line));
+	}
+	if (data->dash)
+		return (3);
+	else
+		return (-1);
+}
+
+int	ft_valid_ants(char *line)
+{
+	long	i;
+
+	i = -1;
+	while (line[++i])
+		if (!ft_isdigit(line[i]))
+			return (-1);
+	return (1);
+}
+
 int	ft_valid_comment(char *line)
 {
 	if (ft_strequ(line, "##start"))
@@ -23,62 +81,16 @@ int	ft_valid_comment(char *line)
 
 int	ft_valid(t_data *data, char *line)
 {
-	long	i;
-	int		space;
-	int 	dash;
-
 	if (line[0] == '\0' || line[0] == 'L')
-		return (ft_error());
+		return (-1);
 	if (line[0] == '#')
 		return (ft_valid_comment(line));
 	if (data->ants_define == 0)
-	{//ft_valid_ants();
-		i = -1;
-		while (line[++i])
-			if (!ft_isdigit(line[i]))
-				return (ft_error());
-		return (1);
-	}
+		return (ft_valid_ants(line));
 	if (data->rooms_define == 1)
-	{//ft_valid_links();
-		i = 0;
-		data->dash = 0;
-		while (line[++i])
-		{
-			if (line[i] == '-')
-				++data->dash;
-			else if (data->dash && line[i] == ' ')
-			{
-				if (line[i + 1] == '\0' && line[i - 1] == '-')
-					return (3);
-				else
-					break; // return(); //ft_valid_rooms
-			}
-			else if (!data->dash && line[i] == ' ')
-				break; // return(); //ft_valid_rooms
-		}
-		if (data->dash)
-			return (3);
-		else
-			return (ft_error(0));
-	}
+		return (ft_valid_links(data, line));
 	if (data->rooms_define != 2)
-	{//ft_valid_rooms();
-		i = 0;
-		space = 0;
-		while (line[i] && space == 0)
-			if (line[++i] == ' ')
-				space = 1;
-		if (!line[i] || !ft_isnum(&line[++i], ' '))
-			return (ft_error());
-		while (line[i] && space == 1)
-			if (line[++i] == ' ')
-				space = 2;
-		if (!line[i] || !ft_isnum(&line[++i], '\0'))
-			return (ft_error());
-		data->rooms_define = 1;
-		return (2);
-	}
+		return (ft_valid_rooms(data, line));
 	else
 		return (ft_error());
 	return (0);

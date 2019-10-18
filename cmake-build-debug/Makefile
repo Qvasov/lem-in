@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
+CMAKE_COMMAND = /Users/dbennie/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
+RM = /Users/dbennie/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/dbennie/github/lem-in/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Users/dbennie/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/Users/dbennie/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -150,6 +150,33 @@ src/ft_ants.c.s:
 	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_ants.c.s
 .PHONY : src/ft_ants.c.s
 
+src/ft_error.o: src/ft_error.c.o
+
+.PHONY : src/ft_error.o
+
+# target to build an object file
+src/ft_error.c.o:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_error.c.o
+.PHONY : src/ft_error.c.o
+
+src/ft_error.i: src/ft_error.c.i
+
+.PHONY : src/ft_error.i
+
+# target to preprocess a source file
+src/ft_error.c.i:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_error.c.i
+.PHONY : src/ft_error.c.i
+
+src/ft_error.s: src/ft_error.c.s
+
+.PHONY : src/ft_error.s
+
+# target to generate assembly for a file
+src/ft_error.c.s:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_error.c.s
+.PHONY : src/ft_error.c.s
+
 src/ft_findrooms.o: src/ft_findrooms.c.o
 
 .PHONY : src/ft_findrooms.o
@@ -176,6 +203,33 @@ src/ft_findrooms.s: src/ft_findrooms.c.s
 src/ft_findrooms.c.s:
 	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_findrooms.c.s
 .PHONY : src/ft_findrooms.c.s
+
+src/ft_free_data.o: src/ft_free_data.c.o
+
+.PHONY : src/ft_free_data.o
+
+# target to build an object file
+src/ft_free_data.c.o:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_free_data.c.o
+.PHONY : src/ft_free_data.c.o
+
+src/ft_free_data.i: src/ft_free_data.c.i
+
+.PHONY : src/ft_free_data.i
+
+# target to preprocess a source file
+src/ft_free_data.c.i:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_free_data.c.i
+.PHONY : src/ft_free_data.c.i
+
+src/ft_free_data.s: src/ft_free_data.c.s
+
+.PHONY : src/ft_free_data.s
+
+# target to generate assembly for a file
+src/ft_free_data.c.s:
+	$(MAKE) -f CMakeFiles/lem-in.dir/build.make CMakeFiles/lem-in.dir/src/ft_free_data.c.s
+.PHONY : src/ft_free_data.c.s
 
 src/ft_free_names.o: src/ft_free_names.c.o
 
@@ -378,9 +432,15 @@ help:
 	@echo "... src/ft_ants.o"
 	@echo "... src/ft_ants.i"
 	@echo "... src/ft_ants.s"
+	@echo "... src/ft_error.o"
+	@echo "... src/ft_error.i"
+	@echo "... src/ft_error.s"
 	@echo "... src/ft_findrooms.o"
 	@echo "... src/ft_findrooms.i"
 	@echo "... src/ft_findrooms.s"
+	@echo "... src/ft_free_data.o"
+	@echo "... src/ft_free_data.i"
+	@echo "... src/ft_free_data.s"
 	@echo "... src/ft_free_names.o"
 	@echo "... src/ft_free_names.i"
 	@echo "... src/ft_free_names.s"
