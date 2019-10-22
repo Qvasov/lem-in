@@ -35,5 +35,4 @@ int			main()
 
 	ft_zerodata(&data);
 	ft_parse(&data);
-
 }

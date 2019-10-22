@@ -12,12 +12,6 @@
 
 #include "inc/lem-in.h"
 
-static t_room	*ft_free_room(t_room *room)
-{
-	free(room);
-	return (NULL);
-}
-
 static t_room	*ft_createroom(char *line)
 {
 	long	i;
@@ -29,7 +23,10 @@ static t_room	*ft_createroom(char *line)
 	while (line[i] != ' ')
 		++i;
 	if (!(room->name = ft_strsub(line, 0, i)))
-		return (ft_free_room(room));
+	{
+		free(room);
+		return (NULL);
+	}
 	i = i + 1;
 	room->x = ft_atoll(&line[i]);
 	while (line[i] != ' ')

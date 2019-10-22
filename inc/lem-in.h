@@ -63,12 +63,13 @@ int					ft_parse(t_data *data);
 int					ft_valid(t_data *data, char *line);
 void				ft_ants(t_data *data, char *line);
 void				ft_roomslist(t_data *data, char *line);
-void				ft_link(t_data *data, char *line);
-void				ft_names(t_line *names, char *line);
+void				ft_links(t_data *data, char *line);
+int					ft_names(t_line *names, char *line);
 int					ft_findrooms(t_data *data, t_line *names);
 void				ft_farm(t_data *data, char *line);
 void				ft_free_data(t_data *data);
 void				ft_free_names(t_line *names);
+void				ft_free_links(t_link *links);
 int					ft_error(t_data *data, char *line);
 
 #endif

@@ -92,6 +92,5 @@ int	ft_valid(t_data *data, char *line)
 	if (data->rooms_define != 2)
 		return (ft_valid_rooms(data, line));
 	else
-		return (ft_error());
-	return (0);
+		return (-1);
 }

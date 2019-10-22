@@ -12,14 +12,17 @@
 
 #include "inc/lem-in.h"
 
-int			ft_parse(t_data *data)
+int	ft_parse(t_data *data)
 {
 	char	*line;
 	int		v;
+	int		g;
 
+	line = NULL;
 	while (1)
 	{
-		if (get_next_line(0, &line) > 0)
+		g = get_next_line(0, &line);
+		if (g > 0)
 		{
 			v = ft_valid(data, line);
 			if (v != 2 && (data->start_define == 1 || data->end_define == 1))
@@ -37,22 +40,22 @@ int			ft_parse(t_data *data)
 				ft_roomslist(data, line);
 			else if (v == 3 && data->rooms_define != 0)
 			{
-				ft_link(data, line);
+				ft_links(data, line);
 				data->rooms_define = 2;
 			}
 			else
 				exit (ft_error(data, line));
-
-
-			ft_farm(data);
+			free(line);
+			line = NULL;
 		}
-		else if (r < 0)
-			return (ft_error());
-		else
+		else if (g < 0)
+			exit (ft_error(data, line));
+		else if (g == 0)
 			break;
 	}
-	if ((!data->start_define || !data->end_define || !data->rooms_define
-		 || !data->ants_define || !data->links_define) && line[0] == '\0')
-		return (ft_error());
+	if ((data->start_define != 2 || data->end_define != 2
+		|| data->rooms_define != 2 || data->ants_define != 1
+		|| data->links_define != 1) && !line)
+		exit (ft_error(data, line));
 	return (1);
 }
