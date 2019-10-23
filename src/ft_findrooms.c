@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_input.c                                         :+:      :+:    :+:   */
+/*   ft_findnames.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/13 18:10:12 by dbennie           #+#    #+#             */
-/*   Updated: 2019/10/13 18:10:13 by dbennie          ###   ########.fr       */
+/*   Created: 2019/10/16 20:26:15 by dbennie           #+#    #+#             */
+/*   Updated: 2019/10/16 20:26:16 by dbennie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/lem-in.h"
 
-int	ft_input(char *map)
+int	ft_findrooms(t_data *data, t_line *names)
 {
-	char	*tmp;
-	char	*buf;
-	int		ret;
+	t_room	*head;
 
-	if (!(buf = (char *)malloc(sizeof(char) * (BUFF_SIZE + 1))))
-		return (ft_error());
-	buf[BUFF_SIZE] = '\0';
-	while ((ret = read(0, buf, BUFF_SIZE)) >= 0)
+	head = data->tail;
+	while (head)
 	{
-		buf[ret] = '\0';
-		if (!(tmp = ft_strjoin(map, buf)))
-			return (ft_error());
-		free(map);
-		map = tmp;
+		if (!names->room1 && ft_strequ(head->name, names->name1))
+			names->room1 = head;
+		if (!names->room2 && ft_strequ(head->name, names->name2))
+			names->room2 = head;
+		head = head->next;
 	}
-	if (ret < 0)
-		return (ft_error());
-	return (1);
+	if (names->room1 && names->room2
+	&& !ft_strequ(names->room1->name, names->room2->name))
+		return (1);
+	return (0);
 }

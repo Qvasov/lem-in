@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ants.c                                          :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/13 20:02:28 by dbennie           #+#    #+#             */
-/*   Updated: 2019/10/13 20:02:32 by dbennie          ###   ########.fr       */
+/*   Created: 2019/10/18 17:44:00 by dbennie           #+#    #+#             */
+/*   Updated: 2019/10/18 17:44:01 by dbennie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/lem-in.h"
 
-void	ft_ants(t_data *data, char *line)
+int	ft_error(t_data *data, char *line)
 {
-	data->ants = ft_atoll(line);
+	ft_free_data(data);
+	free(line);
+	return (0);
 }

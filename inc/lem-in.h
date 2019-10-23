@@ -16,8 +16,6 @@
 # include "libft/libft.h"
 # include <stdio.h>
 
-# define BUFF_SIZE 1023
-
 typedef struct 		s_link
 {
 	char 			*name;
@@ -34,19 +32,44 @@ typedef struct		s_room
 	struct s_room	*next;
 }					t_room;
 
+typedef struct		s_line
+{
+	char			*name1;
+	char			*name2;
+	t_room			*room1;
+	t_room			*room2;
+	size_t			len;
+	size_t			dash;
+}					t_line;
+
 typedef struct		s_data
 {
-	char 			*map;
 	size_t			ants;
 	t_room			**farm;
+	size_t			rooms_count;
+	t_room			*tail;
 	t_room			*start;
 	t_room			*end;
-	long			index;
+	int 			start_define;
+	int 			end_define;
+	int 			ants_define;
+	int 			rooms_define;
+	int 			links_define;
+	size_t			dash;
 }					t_data;
 
-int					ft_input(char *map);
+int					ft_input(char **line);
 int					ft_parse(t_data *data);
-void				ft_ants(t_data *data);
-void				ft_farm(t_data *data);
+int					ft_valid(t_data *data, char *line);
+void				ft_ants(t_data *data, char *line);
+void				ft_roomslist(t_data *data, char *line);
+void				ft_links(t_data *data, char *line);
+int					ft_names(t_line *names, char *line);
+int					ft_findrooms(t_data *data, t_line *names);
+void				ft_farm(t_data *data, char *line);
+void				ft_free_data(t_data *data);
+void				ft_free_names(t_line *names);
+void				ft_free_links(t_link *links);
+int					ft_error(t_data *data, char *line);
 
 #endif
