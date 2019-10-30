@@ -35,5 +35,5 @@ int			main()
 
 	ft_zerodata(&data);
 	ft_parse(&data);
-	//while v valid links
+	//while v valid linkss
 }
