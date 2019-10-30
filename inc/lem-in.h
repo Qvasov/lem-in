@@ -19,6 +19,7 @@
 typedef struct 		s_link
 {
 	char 			*name;
+	struct s_room	*room;
 	struct s_link	*next;
 	struct s_link	*prev;
 }					t_link;
