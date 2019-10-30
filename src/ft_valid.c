@@ -41,6 +41,7 @@ int	ft_valid_links(t_data *data, char *line)
 	data->dash = 0;
 	while (line[++i])
 	{
+		//while
 		if (line[i] == '-')
 			++data->dash;
 		else if (data->dash && line[i] == ' ')
@@ -87,7 +88,7 @@ int	ft_valid(t_data *data, char *line)
 		return (ft_valid_comment(line));
 	if (data->ants_define == 0)
 		return (ft_valid_ants(line));
-	if (data->rooms_define == 1)
+	if (data->rooms_define >= 1)
 		return (ft_valid_links(data, line));
 	if (data->rooms_define != 2)
 		return (ft_valid_rooms(data, line));

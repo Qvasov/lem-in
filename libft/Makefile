@@ -6,7 +6,7 @@
 #    By: dbennie <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 17:34:33 by dbennie           #+#    #+#              #
-#    Updated: 2019/08/27 14:20:42 by dbennie          ###   ########.fr        #
+#    Updated: 2019/10/30 21:45:38 by dbennie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c\
 	  ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c\
 	  ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c\
 	  ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_swap.c ft_swapptr.c\
-	  ft_strrev.c ft_strlsplit.c ft_lstsize.c ft_lstrev.c ft_atoll.c \
-	  get_next_line.c ft_isnum.c \
+	  ft_strrev.c ft_strlsplit.c ft_lstsize.c ft_lstrev.c ft_atoll.c ft_isnum.c\
+	  get_next_line.c \
 
 PRINTF = ft_printf/
 

@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/15 17:41:14 by dbennie           #+#    #+#             */
-/*   Updated: 2019/10/15 17:41:15 by dbennie          ###   ########.fr       */
+/*   Created: 2019/10/30 21:44:16 by dbennie           #+#    #+#             */
+/*   Updated: 2019/10/30 21:47:21 by dbennie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isnum(char *str, int c)
+int	ft_isnum(char *str, int c)
 {
 	size_t	i;
 
 	i = 0;
 	if (!str[i])
 		return (0);
-	while (str[i])
+	while (str[i] != c)
 	{
 		if (!ft_isdigit(str[i]))
 			return (0);

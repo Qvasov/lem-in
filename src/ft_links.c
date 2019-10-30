@@ -12,34 +12,35 @@
 
 #include "inc/lem-in.h"
 
-static t_link	*ft_createlink(char *room_name)
+static t_link	*ft_createlink(t_room *room, char *room_name)
 {
 	t_link	*link;
 
 	if (!(link = (t_link *)malloc(sizeof(t_link))))
 		return (NULL);
 	link->name = room_name;
+	link->room = room;
 	link->next = NULL;
 	link->prev = NULL;
 	return (link);
 }
 
-static int		ft_connectlink(t_room *room, char *room_name)
+static int		ft_connectlink(t_room *room1, t_room * room2, char *room2_name)
 {
 	t_link	*link;
 	t_link	*tmp;
 
-	if (!(link = ft_createlink(room_name)))
+	if (!(link = ft_createlink(room2, room2_name)))
 		return (0);
-	if (room->links)
+	if (room1->links)
 	{
-		tmp = room->links;
-		room->links = link;
+		tmp = room1->links;
+		room1->links = link;
 		link->next = tmp;
 		tmp->prev = link;
 	}
 	else
-		room->links = link;
+		room1->links = link;
 	return (1);
 }
 
@@ -66,8 +67,8 @@ void			ft_links(t_data *data, char *line)
 		}
 		else if (n)
 		{
-			if (!(ft_connectlink(names->room1, names->room2->name))
-			|| !ft_connectlink(names->room2, names->room1->name))
+			if (!(ft_connectlink(names->room1, names->room2, names->room2->name))
+			|| !ft_connectlink(names->room2, names->room1, names->room1->name))
 			{
 				ft_free_names(names);
 				free(names);
