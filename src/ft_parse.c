@@ -19,7 +19,7 @@ int	ft_parse(t_data *data)
 	int		g;
 
 	line = NULL;
-	while ((g = get_next_line(0, &line)) > 0)
+	if ((g = ft_read(0, &line)) > 0)
 	{
 		v = ft_valid(data, line);
 		if (v != 2 && (data->start_define == 1 || data->end_define == 1))

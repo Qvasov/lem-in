@@ -16,7 +16,7 @@ int	ft_findrooms(t_data *data, t_line *names)
 {
 	t_room	*head;
 
-	head = data->tail;
+	head = data->rooms;
 	while (head)
 	{
 		if (!names->room1 && ft_strequ(head->name, names->name1))

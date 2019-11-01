@@ -18,7 +18,6 @@
 
 typedef struct 		s_link
 {
-	char 			*name;
 	struct s_room	*room;
 	struct s_link	*next;
 	struct s_link	*prev;
@@ -31,6 +30,7 @@ typedef struct		s_room
 	size_t			y;
 	t_link			*links;
 	struct s_room	*next;
+	struct s_room	*prev;
 }					t_room;
 
 typedef struct		s_line
@@ -48,7 +48,7 @@ typedef struct		s_data
 	size_t			ants;
 	t_room			**farm;
 	size_t			rooms_count;
-	t_room			*tail;
+	t_room			*rooms;
 	t_room			*start;
 	t_room			*end;
 	int 			start_define;
@@ -61,6 +61,7 @@ typedef struct		s_data
 
 int					ft_input(char **line);
 int					ft_parse(t_data *data);
+int					ft_read(int fd, char **line);
 int					ft_valid(t_data *data, char *line);
 void				ft_ants(t_data *data, char *line);
 void				ft_roomslist(t_data *data, char *line);

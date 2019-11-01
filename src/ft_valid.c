@@ -41,7 +41,6 @@ int	ft_valid_links(t_data *data, char *line)
 	data->dash = 0;
 	while (line[++i])
 	{
-		//while
 		if (line[i] == '-')
 			++data->dash;
 		else if (data->dash && line[i] == ' ')

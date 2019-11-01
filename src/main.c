@@ -19,7 +19,7 @@ static int	ft_zerodata(t_data *data)
 	data->rooms_count = 0;
 	data->start = NULL;
 	data->end = NULL;
-	data->tail = NULL;
+	data->rooms = NULL;
 	data->start_define = 0;
 	data->end_define = 0;
 	data->ants_define = 0;

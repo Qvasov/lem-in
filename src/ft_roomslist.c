@@ -44,17 +44,17 @@ void			ft_roomslist(t_data *data, char *line)
 
 	if (!(room = ft_createroom(line)))
 		exit (ft_error(data, line));
-	room->next = data->tail;
-	data->tail = room;
+	room->next = data->rooms;
+	data->rooms = room;
 	++data->rooms_count;
 	if (data->start_define == 1)
 	{
-		data->start = data->tail;
+		data->start = data->rooms;
 		data->start_define = 2;
 	}
 	if (data->end_define == 1)
 	{
-		data->end = data->tail;
+		data->end = data->rooms;
 		data->end_define = 2;
 	}
 }
