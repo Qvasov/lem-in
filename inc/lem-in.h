@@ -16,6 +16,9 @@
 # include "libft/libft.h"
 # include <stdio.h>
 
+# define ANTS flag[0] == 0
+# define ROOMS flag[0] == 1
+
 typedef struct 		s_link
 {
 	struct s_room	*room;
@@ -61,8 +64,8 @@ typedef struct		s_data
 
 int					ft_input(char **line);
 int					ft_parse(t_data *data);
-int					ft_read(int fd, char **line);
-int					ft_valid(t_data *data, char *line);
+int					ft_read(int fd, char ***data);
+int					ft_valid(char **data);
 void				ft_ants(t_data *data, char *line);
 void				ft_roomslist(t_data *data, char *line);
 void				ft_links(t_data *data, char *line);
@@ -72,6 +75,6 @@ void				ft_farm(t_data *data, char *line);
 void				ft_free_data(t_data *data);
 void				ft_free_names(t_line *names);
 void				ft_free_links(t_link *links);
-int					ft_error(t_data *data, char *line);
+int					ft_error(t_data *data, char **dat);
 
 #endif

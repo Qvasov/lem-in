@@ -65,32 +65,61 @@ int	ft_valid_ants(char *line)
 
 	i = -1;
 	while (line[++i])
-		if (!ft_isdigit(line[i]))
+		if (line[i] >= '0' && line[i] <= '9')
 			return (-1);
-	return (1);
+	if (ft_strcmp(ft_lltoa(ft_atoll(line)), line))
+		return (-1);
+	return (0);
 }
 
-int	ft_valid_comment(char *line)
+int	ft_valid_startend(char *line, int *flag)
 {
 	if (ft_strequ(line, "##start"))
-		return (5);
+	{
+		flag[1] = 1
+		return (0);
+	}
 	else if (ft_strequ(line, "##end"))
-		return (6);
-	return (4);
+		return (0);
+	return (-1);
 }
 
-int	ft_valid(t_data *data, char *line)
+int	ft_valid(char **data)
 {
-	if (line[0] == '\0' || line[0] == 'L')
-		return (-1);
-	if (line[0] == '#')
-		return (ft_valid_comment(line));
-	if (data->ants_define == 0)
-		return (ft_valid_ants(line));
-	if (data->rooms_define >= 1)
-		return (ft_valid_links(data, line));
-	if (data->rooms_define != 2)
-		return (ft_valid_rooms(data, line));
-	else
-		return (-1);
+	int	i;
+	int flag[3];
+
+	flag[0] = 0;
+
+	i = -1;
+	while (data[++i])
+	{
+		if (data[i][0] == '\0' || data[i][0] == 'L')
+			return (-1);
+		else if (data[i][0] == '#' && data[i][1] != '#')
+			;
+		else
+		{
+			if (ANTS)
+			{
+				if (ft_valid_ants(data[i]))
+					return (-1);
+				flag = 1;
+			}
+			else if (ROOMS)
+			{
+				if (data[i][0] == '#' && data[i][1] == '#' && ft_valid_startend(data[i]))
+						return (-1);
+					flag = 2;
+
+			}
+//			if (data->rooms_define >= 1)
+//				return (ft_valid_links(data, line));
+//			if (data->rooms_define != 2)
+//				return (ft_valid_rooms(data, line));
+//			else
+//				return (0);
+		}
+	}
+
 }

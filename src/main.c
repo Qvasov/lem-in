@@ -32,7 +32,15 @@ static int	ft_zerodata(t_data *data)
 int			main()
 {
 	t_data	data;
+	char	**dat;
+	int		r;
 
+	if ((r = ft_read(0, &dat)) == 0)
+		exit (ft_error(&data, dat));
+	else if (r < 0)
+		return (0);
+	if (!ft_valid(dat))
+		exit (ft_error(&data, dat));
 	ft_zerodata(&data);
 	ft_parse(&data);
 	//while v valid links

@@ -12,29 +12,30 @@
 
 #include "inc/lem-in.h"
 
-int	ft_read(int fd, char **line)
+int	ft_read(int fd, char ***data)
 {
 	int		ret;
 	char	buf[10240];
 	char	*tmp;
-	int		i;
+	char	*trash;
 
-	i = -1;
-	if (line == NULL || !(tmp = ft_strnew(0)))
+	if (data == NULL || !(tmp = ft_strnew(0)))
 		return (-1);
-	while ((ret = read(fd, &buf, 1)) > 0)
+	while ((ret = read(fd, &buf, 10239)) > 0)
 	{
-		//if (i > 2)
-		//	ft_error(s, NULL, NULL);
-		if (buf == '\n' || buf == '\0')
-		{
-			if (ft_op(s, tmp) == 0)
-				ft_error(s, NULL, NULL);
-			ft_bzero(tmp, 5);
-			i = -1;
-		}
-		else
-			tmp[++i] = buf;
+		buf[ret] = '\0';
+		trash = tmp;
+		if (!(tmp = ft_strjoin(tmp, buf)))
+			return (-1);
+		free(trash);
 	}
-	return ((ret == 0 && i == -1) ? 1 : -1);
+	if (ret < 0)
+		return (0);
+	if (!(*data = ft_strsplit(tmp, '\n')))
+	{
+		free(tmp);
+		return (-1);
+	}
+	free(tmp);
+	return (1);
 }

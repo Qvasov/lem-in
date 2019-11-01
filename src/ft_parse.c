@@ -14,14 +14,18 @@
 
 int	ft_parse(t_data *data)
 {
-	char	*line;
+	char	**dat;
 	int		v;
-	int		g;
+	int		r;
 
-	line = NULL;
-	if ((g = ft_read(0, &line)) > 0)
+	dat = NULL;
+	if ((r = ft_read(0, &dat)) == 0)
+		exit (ft_error(data, dat));
+	else if (r < 0)
+		return (0);
+	else
 	{
-		v = ft_valid(data, line);
+		v = ft_valid(data, );
 		if (v != 2 && (data->start_define == 1 || data->end_define == 1))
 			exit (ft_error(data, line));
 		if (v == 5 && !data->start_define)
@@ -45,8 +49,6 @@ int	ft_parse(t_data *data)
 		free(line);
 		line = NULL;
 	}
-	if (g < 0)
-		exit (ft_error(data, line));
 	if ((data->start_define != 2 || data->end_define != 2
 		|| data->rooms_define != 2 || data->ants_define != 1
 		|| data->links_define != 1) && !line)
