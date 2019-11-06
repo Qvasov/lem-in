@@ -8,7 +8,6 @@ void	ft_free_links(t_link *links)
 	{
 		tmp = links;
 		links = links->next;
-		free(tmp->name);
 		free(tmp);
 	}
 }

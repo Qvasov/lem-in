@@ -68,12 +68,8 @@ char			**ft_strsplit(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	if (c == '\0')
-		if (!(ft_strdup(s)))
-			return (NULL);
 	j = ft_numstrs(s, c);
-	r = (char **)malloc(sizeof(char *) * (j + 1));
-	if (!r)
+	if (!(r = (char **)malloc(sizeof(char *) * (j + 1))))
 		return (NULL);
 	r[j] = NULL;
 	k = ft_arrstrs(r, s, c);

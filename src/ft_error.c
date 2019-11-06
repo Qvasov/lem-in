@@ -12,11 +12,11 @@
 
 #include "inc/lem-in.h"
 
-int	ft_error(t_data *data, char **dat)
+int	ft_error(t_data *data, char **str_split)
 {
 	if (data)
 		ft_free_data(data);
-	if (dat)
-		free(dat); //очистака сплита двумерного line
+	if (str_split)
+		ft_free_str_split(str_split);
 	return (0);
 }

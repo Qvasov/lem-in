@@ -38,23 +38,14 @@ static t_room	*ft_createroom(char *line)
 	return (room);
 }
 
-void			ft_roomslist(t_data *data, char *line)
+int				ft_roomslist(t_data *data, char *str)
 {
 	t_room	*room;
 
-	if (!(room = ft_createroom(line)))
-		exit (ft_error(data, line));
+	if (!(room = ft_createroom(str)))
+		return (-1);
 	room->next = data->rooms;
 	data->rooms = room;
 	++data->rooms_count;
-	if (data->start_define == 1)
-	{
-		data->start = data->rooms;
-		data->start_define = 2;
-	}
-	if (data->end_define == 1)
-	{
-		data->end = data->rooms;
-		data->end_define = 2;
-	}
+	return (0);
 }

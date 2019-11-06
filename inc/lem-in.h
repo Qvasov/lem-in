@@ -16,8 +16,12 @@
 # include "libft/libft.h"
 # include <stdio.h>
 
-# define ANTS flag[0] == 0
-# define ROOMS flag[0] == 1
+# define ANTS	flag[0]
+# define ROOMS	flag[1]
+# define LINKS	flag[2]
+# define START	flag[3]
+# define END	flag[4]
+# define SE		flag[5]
 
 typedef struct 		s_link
 {
@@ -48,33 +52,32 @@ typedef struct		s_line
 
 typedef struct		s_data
 {
-	size_t			ants;
 	t_room			**farm;
-	size_t			rooms_count;
-	t_room			*rooms;
+	size_t			ants;
 	t_room			*start;
 	t_room			*end;
-	int 			start_define;
-	int 			end_define;
-	int 			ants_define;
-	int 			rooms_define;
-	int 			links_define;
-	size_t			dash;
+	t_room			*rooms;
+	size_t			rooms_count;
+	long			i_ants;
+	long			i_rooms_start;
+	long			i_rooms_end;
+	long			i_links_start;
+	long			i_links_end;
+	long			i_start;
+	long			i_end;
 }					t_data;
 
-int					ft_input(char **line);
-int					ft_parse(t_data *data);
+int					ft_parse(t_data *data, char **str_split);
 int					ft_read(int fd, char ***data);
-int					ft_valid(char **data);
-void				ft_ants(t_data *data, char *line);
-void				ft_roomslist(t_data *data, char *line);
-void				ft_links(t_data *data, char *line);
-int					ft_names(t_line *names, char *line);
-int					ft_findrooms(t_data *data, t_line *names);
+int					ft_valid(t_data *data, char **strings);
+int					ft_ants(t_data *data, char **strings);
+int					ft_roomslist(t_data *data, char *str);
+int					ft_links(t_data *data, char *str);
+int					ft_findrooms(t_data *data, char *str, t_room **room1, t_room **room2);
 void				ft_farm(t_data *data, char *line);
+void				ft_free_str_split(char **str_split);
 void				ft_free_data(t_data *data);
-void				ft_free_names(t_line *names);
 void				ft_free_links(t_link *links);
-int					ft_error(t_data *data, char **dat);
+int					ft_error(t_data *data, char **str_split);
 
 #endif

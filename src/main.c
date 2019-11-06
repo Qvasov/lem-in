@@ -10,38 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
 #include "inc/lem-in.h"
 
 static int	ft_zerodata(t_data *data)
 {
-	data->ants = 0;
 	data->farm = NULL;
-	data->rooms_count = 0;
+	data->ants = 0;
 	data->start = NULL;
 	data->end = NULL;
 	data->rooms = NULL;
-	data->start_define = 0;
-	data->end_define = 0;
-	data->ants_define = 0;
-	data->rooms_define = 0;
-	data->links_define = 0;
-	data->dash = 0;
+	data->rooms_count = 0;
+	data->i_ants = 0;
+	data->i_rooms_start = 0;
+	data->i_rooms_end = 0;
+	data->i_links_start = 0;
+	data->i_links_start = 0;
+	data->i_links_end = 0;
+	data->i_start = 0;
+	data->i_end = 0;
 	return (1);
 }
 
 int			main()
 {
 	t_data	data;
-	char	**dat;
-	int		r;
+	char	**str_split;
 
-	if ((r = ft_read(0, &dat)) == 0)
-		exit (ft_error(&data, dat));
-	else if (r < 0)
+	int fd = open("1", O_RDONLY);
+	if (ft_read(fd, &str_split) < 0)
 		return (0);
-	if (!ft_valid(dat))
-		exit (ft_error(&data, dat));
 	ft_zerodata(&data);
-	ft_parse(&data);
+	if (ft_valid(&data, str_split) < 0)
+		exit (ft_error(NULL, str_split));
+	ft_parse(&data, str_split);
 	//while v valid links
 }

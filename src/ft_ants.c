@@ -12,7 +12,9 @@
 
 #include "inc/lem-in.h"
 
-void	ft_ants(t_data *data, char *line)
+int	ft_ants(t_data *data, char **strings)
 {
-	data->ants = ft_atoll(line);
+	data->ants = ft_atoll(strings[data->i_ants]);
+//	data->ants_define = 1;
+	return (0);
 }

@@ -12,46 +12,30 @@
 
 #include "inc/lem-in.h"
 
-int	ft_parse(t_data *data)
+int	ft_parse(t_data *data, char **strings)
 {
-	char	**dat;
-	int		v;
-	int		r;
+	long	i;
 
-	dat = NULL;
-	if ((r = ft_read(0, &dat)) == 0)
-		exit (ft_error(data, dat));
-	else if (r < 0)
-		return (0);
-	else
+	ft_ants(data, strings);
+	i = data->i_rooms_start;
+	while (i <= data->i_rooms_end)
 	{
-		v = ft_valid(data, );
-		if (v != 2 && (data->start_define == 1 || data->end_define == 1))
-			exit (ft_error(data, line));
-		if (v == 5 && !data->start_define)
-			data->start_define = 1;
-		else if (v == 6 && !data->end_define)
-			data->end_define = 1;
-		else if (v == 1 && !data->ants_define)
-		{
-			ft_ants(data, line);
-			data->ants_define = 1;
-		}
-		else if (v == 2 && data->rooms_define != 2)
-			ft_roomslist(data, line);
-		else if (v == 3 && data->rooms_define != 0)
-		{
-			ft_links(data, line);
-			data->rooms_define = 2;
-		}
-		else
-			exit (ft_error(data, line));
-		free(line);
-		line = NULL;
+		if (strings[i][0] != '#')
+			if (ft_roomslist(data, strings[i]))
+				exit(ft_error(data, strings));
+		if (i == data->i_start)
+			data->start = data->rooms;
+		if (i == data->i_end)
+			data->end = data->rooms;
+		++i;
 	}
-	if ((data->start_define != 2 || data->end_define != 2
-		|| data->rooms_define != 2 || data->ants_define != 1
-		|| data->links_define != 1) && !line)
-		exit (ft_error(data, line));
-	return (1);
+	i = data->i_links_start;
+	while (i <= data->i_links_end)
+	{
+		if (strings[i][0] != '#')
+			if (ft_links(data, strings[i]))
+				exit(ft_error(data, strings));
+		++i;
+	}
+	return (0);
 }

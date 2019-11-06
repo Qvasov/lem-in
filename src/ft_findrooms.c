@@ -12,21 +12,44 @@
 
 #include "inc/lem-in.h"
 
-int	ft_findrooms(t_data *data, t_line *names)
+int		ft_name_equ(char *name_room, char *name_link, int direction)
+{
+	long	i;
+	long	j;
+
+	i = -1;
+	if (!direction)
+	{
+		while (name_room[++i] && name_link[i] && name_link[i] != '-')
+			if (name_room[i] != name_link[i])
+				return (0);
+	}
+	else
+	{
+		while (name_link[++i] && name_link[i] != '-')
+			;
+		j = -1;
+		while (name_room[++j] && name_link[++i])
+			if (name_room[j] != name_link[i])
+				return (0);
+	}
+	return (1);
+}
+
+int	ft_findrooms(t_data *data, char *str, t_room **room1, t_room **room2)
 {
 	t_room	*head;
 
 	head = data->rooms;
-	while (head)
+	if (!room1 || !room2)
+		return (-1);
+	while (head && (!*room1 || !*room2))
 	{
-		if (!names->room1 && ft_strequ(head->name, names->name1))
-			names->room1 = head;
-		if (!names->room2 && ft_strequ(head->name, names->name2))
-			names->room2 = head;
+		if (!*room1 && ft_name_equ(head->name, str, 0))
+			*room1 = head;
+		else if (!*room2 && ft_name_equ(head->name, str, 1))
+			*room2 = head;
 		head = head->next;
 	}
-	if (names->room1 && names->room2
-	&& !ft_strequ(names->room1->name, names->room2->name))
-		return (1);
 	return (0);
 }

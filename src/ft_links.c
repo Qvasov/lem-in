@@ -12,25 +12,24 @@
 
 #include "inc/lem-in.h"
 
-static t_link	*ft_createlink(t_room *room, char *room_name)
+static t_link	*ft_createlink(t_room *room)
 {
 	t_link	*link;
 
 	if (!(link = (t_link *)malloc(sizeof(t_link))))
 		return (NULL);
-	link->name = room_name;
 	link->room = room;
 	link->next = NULL;
 	link->prev = NULL;
 	return (link);
 }
 
-static int		ft_connectlink(t_room *room1, t_room * room2, char *room2_name)
+static int		ft_connectlink(t_room *room1, t_room *room2)
 {
 	t_link	*link;
 	t_link	*tmp;
 
-	if (!(link = ft_createlink(room2, room2_name)))
+	if (!(link = ft_createlink(room2)))
 		return (0);
 	if (room1->links)
 	{
@@ -44,39 +43,17 @@ static int		ft_connectlink(t_room *room1, t_room * room2, char *room2_name)
 	return (1);
 }
 
-void			ft_links(t_data *data, char *line)
+int				ft_links(t_data *data, char *str)
 {
-	t_line	*names;
-	int		n;
+	t_room	*room1;
+	t_room	*room2;
 
-	if (!(names = (t_line *)malloc(sizeof(t_line))))
-		exit (ft_error(data, line));
-	while (data->dash--)
-	{
-		if (!(ft_names(names, line)))
-		{
-			free(names);
-			ft_error(data, line);
-		}
-		n = ft_findrooms(data, names);
-		if (!n && !data->dash)
-		{
-			ft_free_names(names);
-			free(names);
-			exit (ft_error(data, line));
-		}
-		else if (n)
-		{
-			if (!(ft_connectlink(names->room1, names->room2, names->room2->name))
-			|| !ft_connectlink(names->room2, names->room1, names->room1->name))
-			{
-				ft_free_names(names);
-				free(names);
-				exit (ft_error(data, line));
-			}
-		}
-		ft_free_names(names);
-		free(names);
-		data->links_define = 1;
-	}
+	room1 = NULL;
+	room2 = NULL;
+	if (ft_findrooms(data, str, &room1, &room2))
+		return (-1);
+	if (!(ft_connectlink(room1, room2) || !ft_connectlink(room2, room1)))
+		return (-1);
+//	data->links_define = 1;
+	return (0);
 }
