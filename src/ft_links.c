@@ -52,8 +52,7 @@ int				ft_links(t_data *data, char *str)
 	room2 = NULL;
 	if (ft_findrooms(data, str, &room1, &room2))
 		return (-1);
-	if (!(ft_connectlink(room1, room2) || !ft_connectlink(room2, room1)))
+	if (!ft_connectlink(room1, room2) || !ft_connectlink(room2, room1))
 		return (-1);
-//	data->links_define = 1;
 	return (0);
 }

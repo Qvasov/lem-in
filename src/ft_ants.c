@@ -15,6 +15,5 @@
 int	ft_ants(t_data *data, char **strings)
 {
 	data->ants = ft_atoll(strings[data->i_ants]);
-//	data->ants_define = 1;
 	return (0);
 }

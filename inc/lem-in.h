@@ -52,7 +52,6 @@ typedef struct		s_line
 
 typedef struct		s_data
 {
-	t_room			**farm;
 	size_t			ants;
 	t_room			*start;
 	t_room			*end;

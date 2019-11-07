@@ -15,7 +15,6 @@
 
 static int	ft_zerodata(t_data *data)
 {
-	data->farm = NULL;
 	data->ants = 0;
 	data->start = NULL;
 	data->end = NULL;

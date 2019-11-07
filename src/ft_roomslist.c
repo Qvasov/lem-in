@@ -35,6 +35,7 @@ static t_room	*ft_createroom(char *line)
 	room->y = ft_atoll(&line[i]);
 	room->links = NULL;
 	room->next = NULL;
+	room->prev = NULL; //возможно не понадобится
 	return (room);
 }
 
