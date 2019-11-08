@@ -43,6 +43,7 @@ int			main()
 	if (ft_valid(&data, str_split) < 0)
 		exit (ft_error(NULL, str_split));
 	ft_parse(&data, str_split);
-//	ft_algos // кратчайший путь находиться поиском в ширину
+	if (!(ft_bfs(&data)))
+		exit(ft_error(&data, str_split));
 	//while v valid links
 }
