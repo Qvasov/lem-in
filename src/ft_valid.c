@@ -198,6 +198,8 @@ int	ft_valid(t_data *data, char **strings)
 				data->i_links_start = i;
 			data->i_links_end = i;
 		}
+		else
+			return (-1);
 	}
 	ft_valid_duplicates(data, strings);
 	ft_valid_duplinks(data, strings);

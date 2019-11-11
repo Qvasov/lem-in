@@ -74,7 +74,7 @@ int					ft_parse(t_data *data, char **str_split);
 int					ft_ants(t_data *data, char **strings);
 int					ft_roomslist(t_data *data, char *str);
 int					ft_links(t_data *data, char *str);
-int					ft_findrooms(t_data *data, char *str, t_room **room1, t_room **room2);
+int					ft_findrooms(t_data *data, char *link, t_room **room1, t_room **room2);
 t_way				*ft_bfs(t_data* data);
 
 void				ft_free_str_split(char **str_split);

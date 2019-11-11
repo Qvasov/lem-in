@@ -20,6 +20,7 @@ static int	ft_zerodata(t_data *data)
 	data->end = NULL;
 	data->rooms = NULL;
 	data->rooms_count = 0;
+	data->ways = NULL;
 	data->i_ants = 0;
 	data->i_rooms_start = 0;
 	data->i_rooms_end = 0;
@@ -36,7 +37,7 @@ int			main()
 	t_data	data;
 	char	**str_split;
 
-	int fd = open("1", O_RDONLY);
+	int fd = open("2", O_RDONLY);
 	if (ft_read(fd, &str_split) < 0)
 		return (0);
 	ft_zerodata(&data);
