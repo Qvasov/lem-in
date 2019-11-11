@@ -36,7 +36,7 @@ static t_room	*ft_createroom(char *line)
 	room->links = NULL;
 	room->next = NULL;
 	room->prev = NULL; //возможно не понадобится
-	room->turn_is = 0;
+	room->turn_in = 0;
 	return (room);
 }
 

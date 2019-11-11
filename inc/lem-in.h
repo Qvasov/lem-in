@@ -46,7 +46,7 @@ typedef struct		s_room
 	t_link			*links;
 	struct s_room	*next;
 	struct s_room	*prev;
-	int				turn_is;
+	int				turn_in;
 }					t_room;
 
 typedef struct		s_data

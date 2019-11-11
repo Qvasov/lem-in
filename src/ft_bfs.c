@@ -41,7 +41,7 @@ static t_link	*ft_link_start(t_room *start)
 	{
 		if (ptr->room->name == start->name)
 		{
-			ptr->room->turn_is = 1;
+			ptr->room->turn_in = 1;
 			return (ptr);
 		}
 		ptr = ptr->next;
@@ -66,11 +66,11 @@ t_way	*ft_bfs(t_data* data)
 			link = turn_head->room->links;
 			while (link)
 			{
-				if (link->room->turn_is == 0)
+				if (link->room->turn_in == 0)
 				{
 					turn_tail->turn_next = link;
 					turn_tail = turn_tail->turn_next;
-					turn_tail->room->turn_is = 1;
+					turn_tail->room->turn_in = 1;
 					turn_tail->parrent = turn_head;
 				}
 				link = link->next;
