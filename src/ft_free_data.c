@@ -29,4 +29,12 @@ void	ft_free_data(t_data *data)
 	free(data->rooms->name);
 	ft_free_links(data->rooms->links);
 	free(data->rooms);
+
+	t_path	*ptr;
+	while (data->ways)
+	{
+		ptr = data->ways;
+		data->ways = data->ways->next;
+		free(ptr);
+	}
 }

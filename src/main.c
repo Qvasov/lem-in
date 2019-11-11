@@ -21,6 +21,7 @@ static int	ft_zerodata(t_data *data)
 	data->rooms = NULL;
 	data->rooms_count = 0;
 	data->ways = NULL;
+	data->ways_count = 0;
 	data->i_ants = 0;
 	data->i_rooms_start = 0;
 	data->i_rooms_end = 0;
@@ -29,6 +30,34 @@ static int	ft_zerodata(t_data *data)
 	data->i_links_end = 0;
 	data->i_start = 0;
 	data->i_end = 0;
+	return (1);
+}
+
+static int	ft_ways(t_data *data)
+{
+	size_t	i;
+	t_link	*ptr;
+	t_path *tmp;
+
+	i = 0;
+	ptr = data->start->links;
+	while (ptr)
+	{
+		++i;
+		ptr = ptr->next;
+	}
+	data->ways_count = i;
+	while (i)
+	{
+		if (!(tmp = (t_path *)malloc(sizeof(t_path))))
+			return (0);
+		tmp->way = NULL;
+		tmp->prev = data->ways;
+		if (data->ways)
+			data->ways->next = tmp;
+		data->ways = tmp;
+		--i;
+	}
 	return (1);
 }
 
@@ -44,6 +73,8 @@ int			main()
 	if (ft_valid(&data, str_split) < 0)
 		exit (ft_error(NULL, str_split));
 	ft_parse(&data, str_split);
+	if (!(ft_ways(&data)))
+		exit(ft_error(&data, str_split));
 	if (!(ft_bfs(&data)))
 		exit(ft_error(&data, str_split));
 	//while v valid links

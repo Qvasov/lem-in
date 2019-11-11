@@ -29,6 +29,13 @@ typedef struct 		s_way
 	struct s_way	*next;
 }					t_way;
 
+typedef struct 		s_path
+{
+	struct s_way	*way;
+	struct s_path	*next;
+	struct s_path	*prev;
+}					t_path;
+
 typedef struct 		s_link
 {
 	struct s_room	*room;
@@ -57,7 +64,8 @@ typedef struct		s_data
 	t_room			*rooms;
 	size_t			rooms_count;
 
-	t_way			*ways;
+	t_path			*ways;
+	long			ways_count;
 
 	long			i_ants;
 	long			i_rooms_start;
@@ -75,7 +83,7 @@ int					ft_ants(t_data *data, char **strings);
 int					ft_roomslist(t_data *data, char *str);
 int					ft_links(t_data *data, char *str);
 int					ft_findrooms(t_data *data, char *link, t_room **room1, t_room **room2);
-t_way				*ft_bfs(t_data* data);
+int					ft_bfs(t_data* data);
 
 void				ft_free_str_split(char **str_split);
 void				ft_free_data(t_data *data);
