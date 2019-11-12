@@ -56,6 +56,7 @@ typedef struct		s_room
 	struct s_room	*next;
 	struct s_room	*prev;
 	int				turn_in;
+	size_t			ant;
 }					t_room;
 
 typedef struct		s_data
@@ -80,10 +81,11 @@ int					ft_read(int fd, char ***data);
 int					ft_valid(t_data *data, char **strings);
 int					ft_parse(t_data *data, char **str_split);
 int					ft_ants(t_data *data, char **strings);
-int					ft_roomslist(t_data *data, char *str);
+int					ft_rooms(t_data *data, char *str);
 int					ft_links(t_data *data, char *str);
 int					ft_findrooms(t_data *data, char *link, t_room **room1, t_room **room2);
 int					ft_bfs(t_data* data);
+void				ft_lem_in(t_path *ways, t_room *start, t_room *end);
 
 void				ft_free_str_split(char **str_split);
 void				ft_free_data(t_data *data);

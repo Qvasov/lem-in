@@ -21,7 +21,7 @@ int	ft_parse(t_data *data, char **strings)
 	while (i <= data->i_rooms_end)
 	{
 		if (strings[i][0] != '#')
-			if (ft_roomslist(data, strings[i]))
+			if (ft_rooms(data, strings[i]))
 				exit(ft_error(data, strings));
 		if (i == data->i_start)
 			data->start = data->rooms;

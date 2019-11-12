@@ -63,5 +63,8 @@ int			main()
 	ft_ways(&data);
 	if (!(ft_bfs(&data)))
 		exit(ft_error(&data, str_split));
+	data.start->ant = data.ants;
+	ft_lem_in(data.ways, data.start, data.end);
 	//while v valid links
+	//error sdelat normalniy
 }
