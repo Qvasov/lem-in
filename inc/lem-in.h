@@ -61,7 +61,7 @@ typedef struct		s_room
 
 typedef struct		s_data
 {
-	size_t			ants;
+	size_t			agit nts;
 	t_room			*start;
 	t_room			*end;
 	t_room			*rooms;
