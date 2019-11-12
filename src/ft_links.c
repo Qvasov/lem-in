@@ -22,6 +22,7 @@ static t_link	*ft_createlink(t_room *room)
 	link->next = NULL;
 	link->prev = NULL;
 	link->turn_next = NULL;
+	link->turn_prev = NULL;
 	link->parrent = NULL;
 	return (link);
 }

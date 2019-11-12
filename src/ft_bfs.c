@@ -1,6 +1,6 @@
 #include "inc/lem-in.h"
 
-t_way		*ft_free_way(t_way **way)
+int	ft_free_way(t_way **way)
 {
 	t_way	*tmp;
 
@@ -11,13 +11,14 @@ t_way		*ft_free_way(t_way **way)
 		free(tmp);
 	}
 	free(way);
-	return (NULL);
+	return (0);
 }
 
-t_way	*ft_way(t_link *tail)
+int	ft_way(t_link *tail, t_path **ways)
 {
 	t_way	*way;
 	t_way	*tmp;
+	t_path	*path;
 
 	way = NULL;
 	tail->room->turn_in = 0;
@@ -30,7 +31,16 @@ t_way	*ft_way(t_link *tail)
 		way->next = tmp;
 		tail = tail->parrent;
 	}
-	return (way);
+	if (!(path = (t_path *)malloc(sizeof(t_path))))
+		return (0);
+	path->way = way;
+	path->prev = *ways;
+	if (*ways)
+		(*ways)->next = path;
+	path->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
+	path->next = NULL;
+	*ways = path;
+	return (1);
 }
 
 static t_link	*ft_link_start(t_room *start)
@@ -60,12 +70,12 @@ int	ft_bfs(t_data* data)
 	turn_tail = turn_head;
 	while (turn_head)
 	{
-		if (turn_tail->room->name == data->end->name)
+		if (turn_tail->room->name == data->end->name && turn_tail->room->turn_in)
 		{
-			if (!(data->ways->way = ft_way(turn_tail)))
+			if (!ft_way(turn_tail, &data->ways))
 				return (0);
-			data->ways = data->ways->prev;
-			--data->ways_count;
+			if (data->ways->path_number == data->ways_count)
+				return (1);
 		}
 		if 	(turn_head->room->links)
 		{
@@ -75,6 +85,7 @@ int	ft_bfs(t_data* data)
 				if (link->room->turn_in == 0)
 				{
 					turn_tail->turn_next = link;
+					link->turn_prev = turn_tail;
 					turn_tail = turn_tail->turn_next;
 					turn_tail->room->turn_in = 1;
 					turn_tail->parrent = turn_head;

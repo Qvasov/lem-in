@@ -32,6 +32,7 @@ typedef struct 		s_way
 typedef struct 		s_path
 {
 	struct s_way	*way;
+	size_t			path_number;
 	struct s_path	*next;
 	struct s_path	*prev;
 }					t_path;
@@ -42,6 +43,7 @@ typedef struct 		s_link
 	struct s_link	*next;
 	struct s_link	*prev;
 	struct s_link	*turn_next;
+	struct s_link	*turn_prev;
 	struct s_link	*parrent;
 }					t_link;
 
@@ -63,10 +65,8 @@ typedef struct		s_data
 	t_room			*end;
 	t_room			*rooms;
 	size_t			rooms_count;
-
 	t_path			*ways;
 	long			ways_count;
-
 	long			i_ants;
 	long			i_rooms_start;
 	long			i_rooms_end;
