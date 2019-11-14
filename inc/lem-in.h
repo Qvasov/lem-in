@@ -23,29 +23,32 @@
 # define END	flag[4]
 # define SE		flag[5]
 
-typedef struct 		s_way
-{
-	struct s_room	*room;
-	struct s_way	*next;
-}					t_way;
-
 typedef struct 		s_path
 {
-	struct s_way	*way;
-	size_t			path_number;
+	struct s_room	*room;
 	struct s_path	*next;
-	struct s_path	*prev;
 }					t_path;
+
+typedef struct 		s_way
+{
+	struct s_path	*path;
+	size_t			path_number;
+	size_t			path_lenght;
+	struct s_way	*next;
+	struct s_way	*prev;
+}					t_way;
 
 typedef struct 		s_link
 {
+	int				cost;
+	struct s_room	*room_src;
 	struct s_room	*room;
 	struct s_link	*next;
 	struct s_link	*prev;
 	struct s_link	*turn_next;
 	struct s_link	*turn_prev;
 	struct s_link	*parrent;
-	int				way_in;
+	int				path_in;
 }					t_link;
 
 typedef struct		s_room
@@ -54,6 +57,7 @@ typedef struct		s_room
 	size_t			x;
 	size_t			y;
 	t_link			*links;
+	struct s_room	*room_out;
 	struct s_room	*next;
 	struct s_room	*prev;
 	int				turn_in;
@@ -67,7 +71,7 @@ typedef struct		s_data
 	t_room			*end;
 	t_room			*rooms;
 	size_t			rooms_count;
-	t_path			*ways;
+	t_way			*ways;
 	long			ways_count;
 	long			i_ants;
 	long			i_rooms_start;
@@ -83,8 +87,13 @@ int					ft_valid(t_data *data, char **strings);
 int					ft_parse(t_data *data, char **str_split);
 int					ft_ants(t_data *data, char **strings);
 int					ft_rooms(t_data *data, char *str);
+t_room				*ft_createroom(char *line);
 int					ft_links(t_data *data, char *str);
+t_link				*ft_createlink(t_room *room);
 int					ft_findrooms(t_data *data, char *link, t_room **room1, t_room **room2);
+int					ft_ways(t_data *data);
+
+int					ft_suurballe(t_data *data);
 int					ft_bfs(t_data* data);
 void				ft_lem_in(t_path *ways, t_room *start, t_room *end);
 

@@ -60,7 +60,7 @@ int			main()
 	t_data	data;
 	char	**str_split;
 
-	int fd = open("1", O_RDONLY);
+	int fd = open("3", O_RDONLY);
 	if (ft_read(fd, &str_split) < 0)
 		return (0);
 	ft_zerodata(&data);
@@ -68,8 +68,10 @@ int			main()
 		exit (ft_error(NULL, str_split));
 	ft_parse(&data, str_split);
 	ft_min_ways_count(&data);
-	if (!(ft_bfs(&data)))
+
+	if (ft_ways(&data) < 0)
 		exit(ft_error(&data, str_split));
+
 	data.start->ant = data.ants;
 	ft_lem_in(data.ways, data.start, data.end);
 	//while v valid links

@@ -12,38 +12,41 @@
 
 #include "inc/lem-in.h"
 
-static t_link	*ft_createlink(t_room *room)
+t_link	*ft_createlink(t_room *room)
 {
 	t_link	*link;
 
 	if (!(link = (t_link *)malloc(sizeof(t_link))))
 		return (NULL);
+	link->cost = 1;
+	link->room_src = NULL;
 	link->room = room;
 	link->next = NULL;
 	link->prev = NULL;
 	link->turn_next = NULL;
 	link->turn_prev = NULL;
 	link->parrent = NULL;
-	link->way_in = 0;
+	link->path_in = 0;
 	return (link);
 }
 
-static int		ft_connectlink(t_room *room1, t_room *room2)
+static int		ft_connectlink(t_room *room_src, t_room *room_dst)
 {
 	t_link	*link;
 	t_link	*tmp;
 
-	if (!(link = ft_createlink(room2)))
+	if (!(link = ft_createlink(room_dst)))
 		return (0);
-	if (room1->links)
+	if (room_src->links)
 	{
-		tmp = room1->links;
-		room1->links = link;
+		tmp = room_src->links;
+		room_src->links = link;
 		link->next = tmp;
 		tmp->prev = link;
 	}
 	else
-		room1->links = link;
+		room_src->links = link;
+	link->room_src = room_src;
 	return (1);
 }
 

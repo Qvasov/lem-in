@@ -1,46 +1,51 @@
 #include "inc/lem-in.h"
 
-int	ft_free_way(t_way **way)
+int	ft_free_path(t_path **path)
 {
-	t_way	*tmp;
+	t_path	*tmp;
 
-	while (*way)
+	while (*path)
 	{
-		tmp = *way;
-		(*way) = (*way)->next;
+		tmp = *path;
+		(*path) = (*path)->next;
 		free(tmp);
 	}
-	free(way);
+	free(path);
 	return (0);
 }
 
-int	ft_way(t_link *tail, t_path **ways)
+int	ft_path(t_link *tail, t_way **ways)
 {
 	t_way	*way;
-	t_way	*tmp;
+	t_path	*tmp;
 	t_path	*path;
+	size_t	len;
 
-	way = NULL;
+	path = NULL;
+	len = 0;
 	tail->room->turn_in = 0;
 	while (tail)
 	{
-		tmp = way;
-		if (!(way = (t_way *)malloc(sizeof(t_way))))
-			return (ft_free_way(&tmp));
-		way->room = tail->room;
-		way->next = tmp;
-		tail->way_in = 1;
+		tmp = path;
+		if (!(path = (t_path *)malloc(sizeof(t_path))))
+			return (ft_free_path(&tmp));
+		path->room = tail->room;
+		path->next = tmp;
+		//tail->path_in = 1;
 		tail = tail->parrent;
+		++len;
 	}
-	if (!(path = (t_path *)malloc(sizeof(t_path))))
+
+	if (!(way = (t_way *)malloc(sizeof(t_way))))
 		return (0);
-	path->way = way;
-	path->prev = *ways;
+	way->path = path;
+	way->prev = *ways;
 	if (*ways)
-		(*ways)->next = path;
-	path->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
-	path->next = NULL;
-	*ways = path;
+		(*ways)->next = way;
+	way->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
+	way->path_lenght = len;
+	way->next = NULL;
+	*ways = way;
 	return (1);
 }
 
@@ -73,10 +78,14 @@ int	ft_bfs(t_data* data)
 	{
 		if (turn_tail->room->name == data->end->name && turn_tail->room->turn_in)
 		{
-			if (!ft_way(turn_tail, &data->ways))
-				return (0);
-			if (data->ways->path_number == data->ways_count)
-				return (1);
+			if (!ft_path(turn_tail, &data->ways))
+				return (-1);
+			while (turn_tail)
+			{
+				turn_tail->room->turn_in = 0;
+				turn_tail = turn_tail->turn_prev;
+			}
+			return (1);
 		}
 		if 	(turn_head->room->links)
 		{
@@ -96,5 +105,5 @@ int	ft_bfs(t_data* data)
 		}
 		turn_head = turn_head->turn_next;
 	}
-	return (1);
+	return (0);
 }

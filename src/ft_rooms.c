@@ -12,7 +12,7 @@
 
 #include "inc/lem-in.h"
 
-static t_room	*ft_createroom(char *line)
+t_room	*ft_createroom(char *line)
 {
 	long	i;
 	t_room	*room;
@@ -34,6 +34,7 @@ static t_room	*ft_createroom(char *line)
 	i = i + 1;
 	room->y = ft_atoll(&line[i]);
 	room->links = NULL;
+	room->room_out = NULL;
 	room->next = NULL;
 	room->prev = NULL; //возможно не понадобится
 	room->turn_in = 0;
