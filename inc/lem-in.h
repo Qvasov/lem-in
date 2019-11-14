@@ -45,6 +45,7 @@ typedef struct 		s_link
 	struct s_link	*turn_next;
 	struct s_link	*turn_prev;
 	struct s_link	*parrent;
+	int				way_in;
 }					t_link;
 
 typedef struct		s_room
@@ -61,7 +62,7 @@ typedef struct		s_room
 
 typedef struct		s_data
 {
-	size_t			agit nts;
+	size_t			ants;
 	t_room			*start;
 	t_room			*end;
 	t_room			*rooms;

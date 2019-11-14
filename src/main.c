@@ -33,9 +33,9 @@ static int	ft_zerodata(t_data *data)
 	return (1);
 }
 
-static void	ft_ways(t_data *data)
+static void	ft_min_ways_count(t_data *data)
 {
-	size_t	i;
+	long	i;
 	t_link	*ptr;
 
 	i = 0;
@@ -46,6 +46,13 @@ static void	ft_ways(t_data *data)
 		ptr = ptr->next;
 	}
 	data->ways_count = i;
+	ptr = data->end->links;
+	while (ptr)
+	{
+		++i;
+		ptr = ptr->next;
+	}
+	data->ways_count = (data->ways_count < i) ? data->ways_count : i;
 }
 
 int			main()
@@ -53,14 +60,14 @@ int			main()
 	t_data	data;
 	char	**str_split;
 
-	int fd = open("2", O_RDONLY);
+	int fd = open("1", O_RDONLY);
 	if (ft_read(fd, &str_split) < 0)
 		return (0);
 	ft_zerodata(&data);
 	if (ft_valid(&data, str_split) < 0)
 		exit (ft_error(NULL, str_split));
 	ft_parse(&data, str_split);
-	ft_ways(&data);
+	ft_min_ways_count(&data);
 	if (!(ft_bfs(&data)))
 		exit(ft_error(&data, str_split));
 	data.start->ant = data.ants;
