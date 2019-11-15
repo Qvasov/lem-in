@@ -113,3 +113,6 @@ int 		ft_suurballe(t_data *data)
 	}
 	return (0);
 }
+
+//сдулать link_in вместо комнат
+//продумать реализацию дейкстры через BFS

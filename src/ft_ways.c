@@ -20,6 +20,5 @@ int	ft_ways(t_data *data)
 	while (s)
 		s = ft_suurballe(data);
 	//if
-	//daet 1 ili 2 puti
 	return (0);
 }
