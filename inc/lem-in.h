@@ -57,7 +57,7 @@ typedef struct		s_room
 	size_t			x;
 	size_t			y;
 	t_link			*links;
-	struct s_room	*room_out;
+	struct s_room	*room_double;
 	struct s_room	*next;
 	struct s_room	*prev;
 	int				turn_in;
@@ -95,7 +95,7 @@ int					ft_ways(t_data *data);
 
 int					ft_suurballe(t_data *data);
 int					ft_bfs(t_data* data);
-void				ft_lem_in(t_path *ways, t_room *start, t_room *end);
+void				ft_lem_in(t_way *ways, t_room *start, t_room *end);
 
 void				ft_free_str_split(char **str_split);
 void				ft_free_data(t_data *data);

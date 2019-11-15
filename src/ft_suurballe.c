@@ -14,36 +14,38 @@
 
 static int	ft_duplicate_rooms(t_path *path)
 {
-	t_room	*tmp_in;
-	t_room	*tmp_out;
-	t_link	*tmp_link;
-	char	*tmp_name;
+	t_room	*in;
+	t_room	*out;
+	t_link	*link;
+	char	*name;
 
 	while (path)
 	{
-		if (!path->next)
+		if (!path->next || !path->next->next)
 			return (0);
-		tmp_in = path->next->room;
-		tmp_name = ft_strdup(tmp_in->name);
-		if (!(tmp_out = ft_createroom(tmp_name)))
+		in = path->next->room;
+		name = ft_strdup(in->name);
+		if (!(out = ft_createroom(name)))
 			return (-1);
-		if (!(tmp_link = ft_createlink(path->room)))
+		if (!(link = ft_createlink(path->room->room_double ? path->room->room_double : path->room)))
 			return (-1);
-		tmp_link->cost = -1;
-		tmp_in->room_out = tmp_out;
-		tmp_out->links = tmp_in->links;
-		tmp_in->links = tmp_link;
-		tmp_link = tmp_out->links;
-		while(tmp_link)
+		link->cost = -1;
+		link->room_src = in;
+		in->room_double = out;
+		out->room_double = in;
+		out->links = in->links;
+		in->links = link;
+		link = out->links;
+		while(link)
 		{
-			if (tmp_link->room == path->room)
+			if (link->room == path->room)
 			{
-				tmp_link->room = tmp_in;
-				tmp_link->cost = 0;
-				tmp_link = NULL;
+				link->room = in;
+				link->cost = 0;
+				link = NULL;
 			}
 			else
-				tmp_link = tmp_link->next;
+				link = link->next;
 		}
 		path = path->next;
 	}
@@ -96,9 +98,10 @@ static void	ft_direct(t_path *path)
 
 int 		ft_suurballe(t_data *data)
 {
-	if ((ft_bfs(data)) < 0)
-		return (error);
-	if ((ft_bfs(data)) == 0) //netu korotkogo puti
+//	if ((ft_bfs(data)) < 0)
+//		return (error);
+//	if ((ft_bfs(data)) == 0) //netu korotkogo puti
+//
 	if ((ft_bfs(data)) > 0) // est put
 	{
 		//proverka na kolichestvo putey
@@ -108,4 +111,5 @@ int 		ft_suurballe(t_data *data)
 			return (-1);
 		return (1);
 	}
+	return (0);
 }

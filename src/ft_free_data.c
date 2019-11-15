@@ -30,7 +30,7 @@ void	ft_free_data(t_data *data)
 	ft_free_links(data->rooms->links);
 	free(data->rooms);
 
-	t_path	*ptr;
+	t_way	*ptr;
 	while (data->ways)
 	{
 		ptr = data->ways;

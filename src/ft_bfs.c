@@ -76,17 +76,17 @@ int	ft_bfs(t_data* data)
 	turn_tail = turn_head;
 	while (turn_head)
 	{
-		if (turn_tail->room->name == data->end->name && turn_tail->room->turn_in)
-		{
-			if (!ft_path(turn_tail, &data->ways))
-				return (-1);
-			while (turn_tail)
-			{
-				turn_tail->room->turn_in = 0;
-				turn_tail = turn_tail->turn_prev;
-			}
-			return (1);
-		}
+//		if (turn_tail->room->name == data->end->name && turn_tail->room->turn_in)
+//		{
+//			if (!ft_path(turn_tail, &data->ways))
+//				return (-1);
+//			while (turn_tail)
+//			{
+//				turn_tail->room->turn_in = 0;
+//				turn_tail = turn_tail->turn_prev;
+//			}
+//			return (1);
+//		}
 		if 	(turn_head->room->links)
 		{
 			link = turn_head->room->links;
@@ -98,7 +98,19 @@ int	ft_bfs(t_data* data)
 					link->turn_prev = turn_tail;
 					turn_tail = turn_tail->turn_next;
 					turn_tail->room->turn_in = 1;
+					turn_tail->room->room_double->turn_in = 1;
 					turn_tail->parrent = turn_head;
+					if (turn_tail->room == data->end)
+					{
+						if (!ft_path(turn_tail, &data->ways))
+							return (-1);
+						while (turn_tail)
+						{
+							turn_tail->room->turn_in = 0;
+							turn_tail = turn_tail->turn_prev;
+						}
+						return (1);
+					}
 				}
 				link = link->next;
 			}

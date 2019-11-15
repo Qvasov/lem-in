@@ -19,7 +19,7 @@ int	ft_ways(t_data *data)
 	s = ft_suurballe(data);
 	while (s)
 		s = ft_suurballe(data);
-	if
+	//if
 	//daet 1 ili 2 puti
 	return (0);
 }
