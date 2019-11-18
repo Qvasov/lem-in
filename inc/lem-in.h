@@ -40,7 +40,7 @@ typedef struct 		s_way
 
 typedef struct 		s_link
 {
-	int				cost;
+	long			cost;
 	struct s_room	*room_src;
 	struct s_room	*room;
 	struct s_link	*next;
@@ -48,7 +48,7 @@ typedef struct 		s_link
 	struct s_link	*turn_next;
 	struct s_link	*turn_prev;
 	struct s_link	*parrent;
-	int				path_in;
+	int				turn_in;
 }					t_link;
 
 typedef struct		s_room
@@ -58,10 +58,10 @@ typedef struct		s_room
 	size_t			y;
 	t_link			*links;
 	struct s_room	*room_double;
+	size_t			ant;
+	long 			cost;
 	struct s_room	*next;
 	struct s_room	*prev;
-	int				turn_in;
-	size_t			ant;
 }					t_room;
 
 typedef struct		s_data
@@ -94,7 +94,7 @@ int					ft_findrooms(t_data *data, char *link, t_room **room1, t_room **room2);
 int					ft_ways(t_data *data);
 
 int					ft_suurballe(t_data *data);
-int					ft_bfs(t_data* data);
+int					ft_dijkstra(t_data* data);
 void				ft_lem_in(t_way *ways, t_room *start, t_room *end);
 
 void				ft_free_str_split(char **str_split);

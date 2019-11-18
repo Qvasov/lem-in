@@ -26,7 +26,7 @@ t_link	*ft_createlink(t_room *room)
 	link->turn_next = NULL;
 	link->turn_prev = NULL;
 	link->parrent = NULL;
-	link->path_in = 0;
+	link->turn_in = 0;
 	return (link);
 }
 

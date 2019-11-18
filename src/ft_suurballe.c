@@ -24,7 +24,7 @@ static int	ft_duplicate_rooms(t_path *path)
 		if (!path->next || !path->next->next)
 			return (0);
 		in = path->next->room;
-		name = ft_strdup(in->name);
+		name = ft_strdup(in->name); //
 		if (!(out = ft_createroom(name)))
 			return (-1);
 		if (!(link = ft_createlink(path->room->room_double ? path->room->room_double : path->room)))
@@ -52,7 +52,7 @@ static int	ft_duplicate_rooms(t_path *path)
 	return (0);
 }
 
-static void	ft_direct(t_path *path)
+static void	ft_direction(t_path *path)
 {
 	t_room	*room_src;
 	t_room	*room_dst;
@@ -102,11 +102,11 @@ int 		ft_suurballe(t_data *data)
 //		return (error);
 //	if ((ft_bfs(data)) == 0) //netu korotkogo puti
 //
-	if ((ft_bfs(data)) > 0) // est put
+	if ((ft_dijkstra(data)) > 0) // est put
 	{
 		//proverka na kolichestvo putey
 		//proverka na potoki
-		ft_direct(data->ways->path);
+		ft_direction(data->ways->path);
 		if ((ft_duplicate_rooms(data->ways->path)) < 0)
 			return (-1);
 		return (1);
