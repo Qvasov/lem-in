@@ -33,7 +33,7 @@ typedef struct 		s_way
 {
 	struct s_path	*path;
 	size_t			path_number;
-	size_t			path_lenght;
+	size_t			path_cost;
 	struct s_way	*next;
 	struct s_way	*prev;
 }					t_way;

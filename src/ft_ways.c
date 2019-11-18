@@ -22,3 +22,5 @@ int	ft_ways(t_data *data)
 	//if
 	return (0);
 }
+
+//не находит третий путь

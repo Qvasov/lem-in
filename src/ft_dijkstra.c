@@ -19,23 +19,19 @@ int	ft_path(t_link *tail, t_way **ways)
 	t_way	*way;
 	t_path	*tmp;
 	t_path	*path;
-	size_t	len;
+	size_t	cost;
 
 	path = NULL;
-	len = 0;
-	tail->room->cost = 0x7FFFFFFF;
+	cost = tail->room->cost;
 	while (tail)
 	{
 		tmp = path;
 		if (!(path = (t_path *)malloc(sizeof(t_path))))
-			return (ft_free_path(&tmp));
+			return (ft_free_path(&tmp)); // продумать очистку
 		path->room = tail->room;
 		path->next = tmp;
-		//tail->path_in += 1;
 		tail = tail->parrent;
-		++len;
 	}
-
 	if (!(way = (t_way *)malloc(sizeof(t_way))))
 		return (0);
 	way->path = path;
@@ -43,7 +39,7 @@ int	ft_path(t_link *tail, t_way **ways)
 	if (*ways)
 		(*ways)->next = way;
 	way->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
-	way->path_lenght = len;
+	way->path_cost = cost;
 	way->next = NULL;
 	*ways = way;
 	return (1);
@@ -76,8 +72,6 @@ int	ft_dijkstra(t_data* data)
 	end = NULL;
 	while (turn_head)
 	{
-		if (turn_head->room == data->end)
-			end = turn_head;
 		if 	(turn_head->room->links && turn_head->room != data->end)
 		{
 			link = turn_head->room->links;
@@ -86,26 +80,17 @@ int	ft_dijkstra(t_data* data)
 				if ((turn_head->room->cost + link->cost < link->room->cost) && \
 				(!turn_head->parrent || link->room != turn_head->parrent->room)) //
 				{
-					link->turn_in += 1;
-					if (link->turn_in > turn_head->turn_in)
+					if (link->turn_in == 0)
 					{
-						while (link->turn_prev)
-						{
-							link->turn_prev->room->cost = 0x7FFFFFFF;
-							link->turn_prev->turn_next = NULL;
-							link->turn_prev->turn_in = 0;
-							link->turn_prev = link->turn_prev->turn_prev;
-							if (link->turn_prev)
-								link->turn_prev->turn_next->turn_prev = NULL;
-						}
-						link->turn_prev = NULL;
-						link->turn_next = NULL;
+						turn_tail->turn_next = link;
+						link->turn_prev = turn_tail;
+						link->turn_in = 1;
+						turn_tail = turn_tail->turn_next;
 					}
-					turn_tail->turn_next = link;
-					link->turn_prev = turn_tail;
-					turn_tail = turn_tail->turn_next;
-					turn_tail->parrent = turn_head;
-					turn_tail->room->cost = turn_head->room->cost + link->cost;
+					link->parrent = turn_head;
+					link->room->cost = turn_head->room->cost + link->cost;
+					if (link->room == data->end)
+						end = link;
 				}
 				link = link->next;
 			}
@@ -119,6 +104,7 @@ int	ft_dijkstra(t_data* data)
 		while (turn_tail)
 		{
 			turn_tail->room->cost = 0x7FFFFFFF;
+			turn_tail->turn_in = 0;
 			turn_tail->parrent = NULL;
 			if (turn_tail->turn_next)
 				turn_tail->turn_next->turn_prev = NULL;
