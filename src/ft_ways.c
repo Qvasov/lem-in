@@ -35,7 +35,7 @@ static void	ft_number_of_paths(t_data *data)
 	data->ways_count = (data->ways_count < i) ? data->ways_count : i;
 }
 
-int	ft_check_ways(t_way	*ways, size_t ants)
+int	ft_check_ways(t_way	**old, t_way **new)
 {
 	t_way	*ptr;
 	size_t	sum;
@@ -51,18 +51,24 @@ int	ft_check_ways(t_way	*ways, size_t ants)
 	if (есть еще ВОЗМОЖНЫЕ пути && муравьев больше максимального потока)
 }
 
-int	ft_mod_ways(t_room *start, t_link *link, t_way *ways)
+t_path	*ft_path(t_link *link, t_room *start, t_room *end, size_t *cost)
 {
 	t_path	*path;
 	t_path	*tmp;
 	t_link	*ptr;
 
-	if (ways->path_number <= 1)
-		return (0);
 	path = NULL;
-	ptr = link;
-	while (link->room_src != start)
+	tmp = path;
+	if (!(path = (t_path *)malloc(sizeof(t_path))))
+		return (NULL); //(ft_free_path(&tmp)); // продумать очистку
+	path->room = end;
+	path->next = tmp;
+	end = link->room;
+	++(*cost);
+	while (end != start)
 	{
+		link = end->links;
+		ptr = link;
 		while (link)
 		{
 			if (link->cost < ptr->cost)
@@ -71,29 +77,66 @@ int	ft_mod_ways(t_room *start, t_link *link, t_way *ways)
 		}
 		tmp = path;
 		if (!(path = (t_path *)malloc(sizeof(t_path))))
-			return; //(ft_free_path(&tmp)); // продумать очистку
+			return (NULL); //(ft_free_path(&tmp)); // продумать очистку
 		path->room = ptr->room_src;
 		path->next = tmp;
-		link = ptr->room->links;
+		end = ptr->room;
+		++(*cost);
 	}
 	tmp = path;
 	if (!(path = (t_path *)malloc(sizeof(t_path))))
-		return; //(ft_free_path(&tmp)); // продумать очистку
-	path->room = link->room_src;
+		return (NULL); //(ft_free_path(&tmp)); // продумать очистку
+	path->room = end;
 	path->next = tmp;
-	
-	return (0);
+	return (path);
+}
+
+t_way	*ft_paths(t_room *start, t_room *end)
+{
+	t_path	*path;
+	t_link	*link;
+	t_way	*ways;
+	t_way	*way;
+	size_t	cost;
+
+	ways = NULL;
+	link = end->links;
+	while (link)
+	{
+		if (link->cost == -1)
+		{
+			cost = 0;
+			if (!(path = ft_path(link, start, end, &cost)))
+				return (NULL);
+			if (!(way = (t_way *)malloc(sizeof(t_way))))
+				return (NULL); // продумать очистку
+			way->path = path;
+			way->path_cost = cost;
+			way->prev = ways;
+			if (ways)
+				ways->next = way;
+			way->path_number = ways ? ways->path_number + 1 : 1;
+			way->next = NULL;
+			ways = way;
+		}
+		link = link->next;
+	}
+	return (ways);
 }
 
 int	ft_ways(t_data *data)
 {
+	t_way	*new_ways;
 	int	s;
 
 	ft_number_of_paths(data);
 	while ((s = ft_suurballe(data)) > 0)
 	{
-		ft_mod_ways(data->start, data->end->links, data->ways);
-		ft_check_ways(data->ways, data->ants);
+		new_ways = ft_paths(data->start, data->end);
+		if (!data->ways)
+			data->ways = new_ways;
+		else
+			ft_check_ways(&data->ways, &new_ways);
 		//proverka na potoki
 		//proverka na kolichestvo putey
 	}
