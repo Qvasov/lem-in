@@ -149,15 +149,13 @@ int 		ft_suurballe(t_data *data)
 
 	if ((d = ft_dijkstra(data)) > 0) // est put
 	{
-		//proverka na kolichestvo putey
-		//proverka na potoki
 		ft_direction(data->ways->path);
 		if ((ft_duplicate_rooms(data->ways->path)) < 0)
 			return (-1);
 		return (1);
 	}
 //	if (d == 0) //netu korotkogo puti
-	if (d < 0)
-		return (error);
+//	if (d < 0)
+//		return (error);
 	return (0);
 }

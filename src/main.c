@@ -33,28 +33,6 @@ static int	ft_zerodata(t_data *data)
 	return (1);
 }
 
-static void	ft_min_ways_count(t_data *data)
-{
-	long	i;
-	t_link	*ptr;
-
-	i = 0;
-	ptr = data->start->links;
-	while (ptr)
-	{
-		++i;
-		ptr = ptr->next;
-	}
-	data->ways_count = i;
-	ptr = data->end->links;
-	while (ptr)
-	{
-		++i;
-		ptr = ptr->next;
-	}
-	data->ways_count = (data->ways_count < i) ? data->ways_count : i;
-}
-
 int			main()
 {
 	t_data	data;
@@ -67,7 +45,6 @@ int			main()
 	if (ft_valid(&data, str_split) < 0)
 		exit (ft_error(NULL, str_split));
 	ft_parse(&data, str_split);
-	ft_min_ways_count(&data);
 
 	if (ft_ways(&data) < 0)
 		exit(ft_error(&data, str_split));

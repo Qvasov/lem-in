@@ -100,7 +100,7 @@ int	ft_dijkstra(t_data* data)
 	}
 	if (end)
 	{
-		if (!ft_path(end, &data->ways))
+		if (!ft_path(end, &data->ways)) //попробовать удалить если есть ft_mod_way
 			return (-1);
 		while (turn_tail)
 		{
