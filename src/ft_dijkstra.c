@@ -14,36 +14,36 @@ int	ft_free_path(t_path **path)
 	return (0);
 }
 
-//int	ft_path(t_link *tail, t_way **ways)
-//{
-//	t_way	*way;
-//	t_path	*tmp;
-//	t_path	*path;
-//	size_t	cost;
-//
-//	path = NULL;
-//	cost = tail->room->cost;
-//	while (tail)
-//	{
-//		tmp = path;
-//		if (!(path = (t_path *)malloc(sizeof(t_path))))
-//			return (ft_free_path(&tmp)); // продумать очистку
-//		path->room = tail->room;
-//		path->next = tmp;
-//		tail = tail->parrent;
-//	}
-//	if (!(way = (t_way *)malloc(sizeof(t_way))))
-//		return (0);
-//	way->path = path;
-//	way->prev = *ways;
-//	if (*ways)
-//		(*ways)->next = way;
-//	way->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
-//	way->path_cost = cost;
-//	way->next = NULL;
-//	*ways = way;
-//	return (1);
-//}
+int	ft_path(t_link *tail, t_way **ways)
+{
+	t_way	*way;
+	t_path	*tmp;
+	t_path	*path;
+	size_t	cost;
+
+	path = NULL;
+	cost = tail->room->cost;
+	while (tail)
+	{
+		tmp = path;
+		if (!(path = (t_path *)malloc(sizeof(t_path))))
+			return (ft_free_path(&tmp)); // продумать очистку
+		path->room = tail->room;
+		path->next = tmp;
+		tail = tail->parrent;
+	}
+	if (!(way = (t_way *)malloc(sizeof(t_way))))
+		return (0);
+	way->path = path;
+	way->prev = *ways;
+	if (*ways)
+		(*ways)->next = way;
+	way->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
+	way->path_cost = cost;
+	way->next = NULL;
+	*ways = way;
+	return (1);
+}
 
 static t_link	*ft_link_start(t_room *start)
 {
@@ -100,8 +100,8 @@ int	ft_dijkstra(t_data* data)
 	}
 	if (end)
 	{
-		//if (!ft_path(end, &data->ways)) //попробовать удалить если есть ft_mod_way
-		//	return (-1);
+		if (!ft_path(end, &data->ways)) //попробовать удалить если есть ft_mod_way
+			return (-1);
 		while (turn_tail)
 		{
 			turn_tail->room->cost = 0x7FFFFFFF;

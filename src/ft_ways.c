@@ -35,21 +35,24 @@ static void	ft_number_of_paths(t_data *data)
 	data->ways_count = (data->ways_count < i) ? data->ways_count : i;
 }
 
-int	ft_check_ways(t_way	**old, t_way **new)
-{
-	t_way	*ptr;
-	size_t	sum;
-
-	ptr = ways;
-	sum = 0;
-	while (ptr)
-	{
-		sum = sum + ptr->path_cost;
-		ptr = ptr->next;
-	}
-	steps = sum / ways->path_number;
-	if (есть еще ВОЗМОЖНЫЕ пути && муравьев больше максимального потока)
-}
+//int	ft_check_ways(t_way	**old, t_way **new, size_t ants)
+//{
+//	t_way	*ptr;
+//	size_t	sum;
+//	size_t	steps_old;
+//	size_t	steps_new;
+//
+//	ptr = ways;
+//	sum = 0;
+//	while (ptr)
+//	{
+//		sum = sum + ptr->path_cost;
+//		ptr = ptr->next;
+//	}
+//	steps = sum / ways->path_number;
+//	if (есть еще ВОЗМОЖНЫЕ пути && муравьев больше максимального потока)
+//	очистка не нужного пути
+//}
 
 t_path	*ft_path(t_link *link, t_room *start, t_room *end, size_t *cost)
 {
@@ -135,8 +138,8 @@ int	ft_ways(t_data *data)
 		new_ways = ft_paths(data->start, data->end);
 		if (!data->ways)
 			data->ways = new_ways;
-		else
-			ft_check_ways(&data->ways, &new_ways);
+//		else
+//			ft_check_ways(&data->ways, &new_ways, data->ants);
 		//proverka na potoki
 		//proverka na kolichestvo putey
 	}
