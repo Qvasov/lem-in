@@ -49,8 +49,9 @@ static t_link	*ft_link_start(t_room *start)
 {
 	t_link	*ptr;
 
-	ptr = start->links->room->links;
-	start->cost = 0;
+	ptr = (start->links) ? start->links->room->links : NULL;
+	if (ptr)
+		start->cost = 0;
 	while (ptr)
 	{
 		if (ptr->room->name == start->name)

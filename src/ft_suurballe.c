@@ -145,11 +145,9 @@ static void	ft_direction(t_path *path)
 
 int 		ft_suurballe(t_data *data)
 {
-//	if ((ft_bfs(data)) < 0)
-//		return (error);
-//	if ((ft_bfs(data)) == 0) //netu korotkogo puti
-//
-	if ((ft_dijkstra(data)) > 0) // est put
+	int	d;
+
+	if ((d = ft_dijkstra(data)) > 0) // est put
 	{
 		//proverka na kolichestvo putey
 		//proverka na potoki
@@ -158,5 +156,8 @@ int 		ft_suurballe(t_data *data)
 			return (-1);
 		return (1);
 	}
+//	if (d == 0) //netu korotkogo puti
+	if (d < 0)
+		return (error);
 	return (0);
 }

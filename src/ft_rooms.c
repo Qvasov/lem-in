@@ -34,7 +34,7 @@ t_room			*ft_createroom(char *name)
 	room->next = NULL; //по возможности убрать. Сделать список комнат отдельно а не друг за другом
 	room->prev = NULL; //возможно не понадобится
 	room->ant = 0;
-	room->cost = 0x7FFFFFFF;0;
+	room->cost = 0x7FFFFFFF;
 	return (room);
 }
 
