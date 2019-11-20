@@ -21,6 +21,7 @@ static int	ft_zerodata(t_data *data)
 	data->rooms = NULL;
 	data->rooms_count = 0;
 	data->ways = NULL;
+	data->mod_ways = NULL;
 	data->ways_count = 0;
 	data->i_ants = 0;
 	data->i_rooms_start = 0;

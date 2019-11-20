@@ -35,24 +35,60 @@ static void	ft_number_of_paths(t_data *data)
 	data->ways_count = (data->ways_count < i) ? data->ways_count : i;
 }
 
-//int	ft_check_ways(t_way	**old, t_way **new, size_t ants)
-//{
-//	t_way	*ptr;
-//	size_t	sum;
-//	size_t	steps_old;
-//	size_t	steps_new;
-//
-//	ptr = ways;
-//	sum = 0;
-//	while (ptr)
-//	{
-//		sum = sum + ptr->path_cost;
-//		ptr = ptr->next;
-//	}
-//	steps = sum / ways->path_number;
-//	if (есть еще ВОЗМОЖНЫЕ пути && муравьев больше максимального потока)
-//	очистка не нужного пути
-//}
+int	ft_min_steps(t_way *way)
+{
+	size_t	min_cost;
+
+	min_cost = way->path_cost;
+	while (way)
+	{
+		if (way->path_cost < min_cost)
+			min_cost = way->path_cost;
+		way = way->next;
+	}
+
+}
+
+int	ft_check_ways(t_way	**old, t_way **new, size_t ants)
+{
+	t_way	*ptr;
+	size_t	steps_old;
+	size_t	steps_new;
+
+
+	ptr = ways;
+	sum = 0;
+	while (ptr)
+	{
+		sum = sum + ptr->path_cost;
+		ptr = ptr->next;
+	}
+	steps = sum / ways->path_number;
+	if (есть еще ВОЗМОЖНЫЕ пути && муравьев больше максимального потока)
+	очистка не нужного пути
+}
+
+void	ft_sort_ways_ascending(t_way **ways)
+{
+	size_t	min;
+	t_way	*ptr;
+	t_way	*tmp;
+
+	ptr = *ways;
+	min = ptr->path_cost;
+	while (ptr)
+	{
+		tmp = ptr;
+		while (tmp)
+		{
+			if (tmp->path_cost < min)
+				min = ptr->path_cost;
+			tmp = tmp->next;
+		}
+
+		ptr = ptr->next;
+	}
+}
 
 t_path	*ft_path(t_link *link, t_room *start, t_room *end, size_t *cost)
 {
@@ -115,11 +151,11 @@ t_way	*ft_paths(t_room *start, t_room *end)
 				return (NULL); // продумать очистку
 			way->path = path;
 			way->path_cost = cost;
-			way->prev = ways;
+			way->next = ways;
 			if (ways)
-				ways->next = way;
+				ways->prev = way;
 			way->path_number = ways ? ways->path_number + 1 : 1;
-			way->next = NULL;
+			way->prev = NULL;
 			ways = way;
 		}
 		link = link->next;
@@ -136,10 +172,14 @@ int	ft_ways(t_data *data)
 	while ((s = ft_suurballe(data)) > 0)
 	{
 		new_ways = ft_paths(data->start, data->end);
-		if (!data->ways)
-			data->ways = new_ways;
-//		else
-//			ft_check_ways(&data->ways, &new_ways, data->ants);
+		ft_sort_ways_ascending(&new_ways);
+		if (!data->mod_ways)
+		{
+			data->mod_ways = new_ways;
+			ft_min_steps(new_ways);
+		}
+		else
+			ft_check_ways(&data->mod_ways, &new_ways, data->ants);
 		//proverka na potoki
 		//proverka na kolichestvo putey
 	}

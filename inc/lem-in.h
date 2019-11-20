@@ -72,6 +72,7 @@ typedef struct		s_data
 	t_room			*rooms;
 	size_t			rooms_count;
 	t_way			*ways;
+	t_way			*mod_ways;
 	long			ways_count;
 	long			i_ants;
 	long			i_rooms_start;

@@ -14,7 +14,7 @@ int	ft_free_path(t_path **path)
 	return (0);
 }
 
-int	ft_path(t_link *tail, t_way **ways)
+static int	ft_path(t_link *tail, t_way **ways)
 {
 	t_way	*way;
 	t_path	*tmp;
@@ -35,12 +35,12 @@ int	ft_path(t_link *tail, t_way **ways)
 	if (!(way = (t_way *)malloc(sizeof(t_way))))
 		return (0);
 	way->path = path;
-	way->prev = *ways;
+	way->next = *ways;
 	if (*ways)
-		(*ways)->next = way;
+		(*ways)->prev = way;
 	way->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
 	way->path_cost = cost;
-	way->next = NULL;
+	way->prev = NULL;
 	*ways = way;
 	return (1);
 }
