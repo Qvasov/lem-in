@@ -42,6 +42,7 @@ static int	ft_duplicate_rooms(t_path *path)
 			if (link && link->room == path->room)
 			{
 				link->room = in;
+				link->room_src = out;
 				link->cost = 0;
 			}
 			else
