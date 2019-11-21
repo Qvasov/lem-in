@@ -280,7 +280,7 @@ int	ft_ways(t_data *data)
 	int	s;
 
 	ft_number_of_paths(data);
-	while ((s = ft_suurballe(data)) > 0)
+	while ((s = ft_suurballe(data)) > 0) //неправильно ссылки создаются в duplicate rooms
 	{
 		new_ways = ft_paths_ascending(data->start, data->end);
 //		ft_sort_ways_ascending(&new_ways);
