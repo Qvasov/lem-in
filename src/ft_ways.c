@@ -173,13 +173,10 @@ t_path	*ft_path(t_link *tail, size_t *cost, t_room *end)
 	path = NULL;
 	while (tail)
 	{
-		if (tail->turn_next)
-			tail->turn_next->parrent = NULL;
-		tail->turn_next = NULL;
 		tmp = path;
 		if (!(path = (t_path *)malloc(sizeof(t_path))))
 			return (NULL); //(ft_free_path(&tmp)); // продумать очистку
-		path->room = tail->room;
+		path->room = (tail->room->room_in) ? tail->room->room_in : tail->room;
 		if (!start_path)
 			start_path = path;
 		if (tmp)
@@ -247,7 +244,7 @@ t_way	*ft_paths_ascending(t_room *start, t_room *end)
 	}
 	while (turn_head)
 	{
-		link = turn_head->room->links;
+		link = (turn_head->room->room_in) ? turn_head->room->room_in->links : turn_head->room->links;
 		while (link)
 		{
 			while (link && link->cost != -1)
@@ -266,10 +263,19 @@ t_way	*ft_paths_ascending(t_room *start, t_room *end)
 				}
 				break;
 			}
-			else
-				link = turn_head->room->room_double->links;
 		}
 		turn_head = turn_head->turn_next;
+	}
+	//зануление turn;
+	turn_head = end->links;
+	while (turn_head && turn_head->cost != -1)
+		turn_head = turn_head->next;
+	while (turn_head)
+	{
+		turn_tail = turn_head->turn_next;
+		turn_head->turn_next = NULL;
+		turn_head->parrent = NULL;
+		turn_head = turn_tail;
 	}
 	return (ways_begin);
 }

@@ -57,7 +57,8 @@ typedef struct		s_room
 	size_t			x;
 	size_t			y;
 	t_link			*links;
-	struct s_room	*room_double;
+	struct s_room	*room_out;
+	struct s_room	*room_in;
 	size_t			ant;
 	long 			cost;
 	struct s_room	*next;

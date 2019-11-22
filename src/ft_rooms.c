@@ -30,7 +30,8 @@ t_room			*ft_createroom(char *name)
 	room->x = 0;
 	room->y = 0;
 	room->links = NULL;
-	room->room_double = NULL;
+	room->room_out = NULL;
+	room->room_in = NULL;
 	room->next = NULL; //по возможности убрать. Сделать список комнат отдельно а не друг за другом
 	room->prev = NULL; //возможно не понадобится
 	room->ant = 0;

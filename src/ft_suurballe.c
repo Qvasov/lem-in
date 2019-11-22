@@ -24,16 +24,17 @@ static int	ft_duplicate_rooms(t_path *path)
 			return (0);
 		in = path->next->room;
 		out = NULL;
-		if (!in->room_double && !(out = ft_createroom(in->name)))
+		if (!in->room_out && !in->room_in && !(out = ft_createroom(in->name)))
 			return (-1);
 		if (out)
 		{
-			if (!(link = ft_createlink(path->room->room_double ? path->room->room_double : path->room)))
+			in->room_out = out;
+			out->room_in = in;
+
+			if (!(link = ft_createlink(path->room->room_out ? path->room->room_out : path->room)))
 				return (-1); //зафришить out
 			link->cost = -1;
 			link->room_src = in;
-			in->room_double = out;
-			out->room_double = in;
 			out->links = in->links;
 			in->links = link;
 			link = out->links;
@@ -48,36 +49,37 @@ static int	ft_duplicate_rooms(t_path *path)
 			else
 				in->links = link;
 		}
-//		else
-//		{
-//			out = path->next->next->room;
-//			link = in->links;
-//			while (link && link->room != out)
-//				link = link->next;
-//			if (link && link->room == out)
-//			{
-//				if (link->prev)
-//					link->prev->next = link->next;
-//				else
-//					in->links = link->next;
-//				if (link->next)
-//					link->next->prev = link->prev;
-//				if (link->cost == 1)
-//					link->cost = -1;
-//				else
-//					return (123); //проверка на ошибку. Если путь будет через это же ребро это будет пиздец
-//				link->room = in;
-//				link->room_src = out;
-//				link->prev = NULL;
-//				link->next = out->links;
-//				if (out->links)
-//					out->links->prev = link;
-//				out->links = link;
-//			}
-//		}
+		else if (in->room_out && !path->room->room_in)
+		{
+			out = path->room;
+			link = in->links;
+			while (link && link->room != out)
+				link = link->next;
+			if (link && link->room == out)
+				link->room = out->room_out;
+		}
 		path = path->next;
 	}
 	return (0);
+}
+
+static void ft_delete_link(t_room *src, t_room *dst)
+{
+	t_link	*link;
+
+	link = dst->links;
+	while (link && link->room != src)
+		link = link->next;
+	if (link && link->room == src)
+	{
+		if (link->prev)
+			link->prev->next = link->next;
+		else
+			dst->links = link->next;
+		if (link->next)
+			link->next->prev = link->prev;
+		free(link);
+	}
 }
 
 static void	ft_direction(t_path *path)
@@ -85,41 +87,51 @@ static void	ft_direction(t_path *path)
 	t_room	*room_src;
 	t_room	*room_dst;
 	t_link	*link;
-	t_room	*src;
+//	t_room	*src;
 
 	while(path && path->next)
 	{
 		room_src = path->room;
-		src = room_src;
+//		src = room_src;
 		room_dst = path->next->room;
-		if (!room_src->room_double || !room_dst->room_double)
-		{
-			link = room_dst->links;
-			while (1) //можно f как флаг что отчистилось
-			{
-				if (!link && room_dst->room_double)
-					link = room_dst->room_double->links;
-				else if (!link && !room_dst->room_double)
-				{
-					src = room_src->room_double;
-					link = room_dst->links;
-				}
-				if (!link)
-					break;
-				if (link->room == src)
-				{
-					if (link->prev)
-						link->prev->next = link->next;
-					else
-						room_dst->links = link->next;
-					if (link->next)
-						link->next->prev = link->prev;
-					free(link);
-					break;
-				}
-				link = link->next;
-			}
-		}
+		if (!(room_src->room_in || room_src->room_out) && !(room_dst->room_in || room_dst->room_out))
+			ft_delete_link(room_src, room_dst);
+		else if (!(room_src->room_in || room_src->room_out) && room_dst->room_out)
+			ft_delete_link(room_src, room_dst->room_out);
+		else if (!(room_src->room_in || room_src->room_out) && room_dst->room_in)
+			ft_delete_link(room_src, room_dst->room_in);
+		else if (room_src->room_in && !(room_dst->room_in || room_dst->room_out))
+			ft_delete_link(room_src->room_in, room_dst);
+		else if (room_src->room_out && !(room_dst->room_in || room_dst->room_out))
+			ft_delete_link(room_src->room_out, room_dst);
+//		if (!(room_src->room_out || room_src->room_in)  || !(room_dst->room_in || room_dst->room_out))
+//		{
+//			link = room_dst->links;
+//			while (1) //можно f как флаг что отчистилось
+//			{
+//				if (!link && (room_dst->room_out || room_dst->room_in))
+//					link = room_dst->room_out->links;
+//				else if (!link && !(room_dst->room_out || room_dst->room_in))
+//				{
+//					src = (room_src->room_in) ? room_src->room_in : room_src->room_out;
+//					link = room_dst->links;
+//				}
+//				if (!link)
+//					break;
+//				if (link->room == src) //ili room_src
+//				{
+//					if (link->prev)
+//						link->prev->next = link->next;
+//					else
+//						room_dst->links = link->next;
+//					if (link->next)
+//						link->next->prev = link->prev;
+//					free(link);
+//					break;
+//				}
+//				link = link->next;
+//			}
+//		}
 		link = room_src->links;
 		while (link && link->room != room_dst)
 			link = link->next;
