@@ -22,6 +22,7 @@ static int	ft_zerodata(t_data *data)
 	data->rooms_count = 0;
 	data->ways = NULL;
 	data->mod_ways = NULL;
+	data->steps = 0;
 	data->ways_count = 0;
 	data->i_ants = 0;
 	data->i_rooms_start = 0;
@@ -51,7 +52,7 @@ int			main()
 		exit(ft_error(&data, NULL));
 
 	data.start->ant = data.ants;
-	ft_lem_in(data.ways, data.start, data.end);
+	ft_lem_in(data.mod_ways, data.steps, data.start, data.end);
 	//while v valid links
 	//error sdelat normalniy
 }

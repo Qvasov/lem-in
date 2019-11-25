@@ -102,5 +102,6 @@ int			ft_ways(t_data *data)
 	}
 	if (s < 0)
 		return (-1);
+	data->steps = steps;
 	return (0);
 }

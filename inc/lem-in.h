@@ -74,6 +74,7 @@ typedef struct		s_data
 	size_t			rooms_count;
 	t_way			*ways;
 	t_way			*mod_ways;
+	size_t			steps;
 	long			ways_count;
 	long			i_ants;
 	long			i_rooms_start;
@@ -98,7 +99,7 @@ int					ft_suurballe(t_data *data);
 int					ft_dijkstra(t_data* data);
 t_way				*ft_paths_ascending(t_room *start, t_room *end);
 
-void				ft_lem_in(t_way *ways, t_room *start, t_room *end);
+void				ft_lem_in(t_way *ways, size_t steps, t_room *start, t_room *end);
 
 void				ft_free_str_split(char **str_split);
 void				ft_free_data(t_data *data);
