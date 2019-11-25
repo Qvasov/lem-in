@@ -94,14 +94,17 @@ int					ft_links(t_data *data, char *str);
 t_link				*ft_createlink(t_room *room);
 int					ft_findrooms(t_data *data, char *link, t_room **room1, t_room **room2);
 int					ft_ways(t_data *data);
-
 int					ft_suurballe(t_data *data);
 int					ft_dijkstra(t_data* data);
+t_way				*ft_paths_ascending(t_room *start, t_room *end);
+
 void				ft_lem_in(t_way *ways, t_room *start, t_room *end);
 
 void				ft_free_str_split(char **str_split);
 void				ft_free_data(t_data *data);
 void				ft_free_links(t_link *links);
+void				ft_free_way(t_way *way);
+int					ft_free_path(t_path *path);
 int					ft_error(t_data *data, char **str_split);
 
 #endif

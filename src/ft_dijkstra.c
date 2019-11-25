@@ -1,18 +1,6 @@
 #include "inc/lem-in.h"
 
-int	ft_free_path(t_path **path)
-{
-	t_path	*tmp;
 
-	while (*path)
-	{
-		tmp = *path;
-		(*path) = (*path)->next;
-		free(tmp);
-	}
-	free(path);
-	return (0);
-}
 
 static int	ft_path(t_link *tail, t_way **ways)
 {
@@ -27,13 +15,13 @@ static int	ft_path(t_link *tail, t_way **ways)
 	{
 		tmp = path;
 		if (!(path = (t_path *)malloc(sizeof(t_path))))
-			return (ft_free_path(&tmp)); // продумать очистку
+			return (ft_free_path(tmp));
 		path->room = tail->room;
 		path->next = tmp;
 		tail = tail->parrent;
 	}
 	if (!(way = (t_way *)malloc(sizeof(t_way))))
-		return (0);
+		return (ft_free_path(path));
 	way->path = path;
 	way->next = *ways;
 	if (*ways)
@@ -100,7 +88,7 @@ int	ft_dijkstra(t_data* data)
 	}
 	if (end)
 	{
-		if (!ft_path(end, &data->ways)) //попробовать удалить если есть ft_mod_way
+		if (!ft_path(end, &data->ways))
 			return (-1);
 		while (turn_tail)
 		{

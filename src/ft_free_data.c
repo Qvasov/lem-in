@@ -18,23 +18,16 @@ void	ft_free_data(t_data *data)
 
 	if (!data->rooms)
 		return;
-	while (data->rooms->next)
+	while (data->rooms)
 	{
 		tmp = data->rooms;
 		data->rooms = data->rooms->next;
 		free(tmp->name);
 		ft_free_links(tmp->links);
+		ft_free_links(tmp->room_out->links);
+		free(tmp->room_out);
 		free(tmp);
 	}
-	free(data->rooms->name);
-	ft_free_links(data->rooms->links);
-	free(data->rooms);
-
-	t_way	*ptr;
-	while (data->ways)
-	{
-		ptr = data->ways;
-		data->ways = data->ways->next;
-		free(ptr);
-	}
+	ft_free_way(data->ways);
+	ft_free_way(data->mod_ways);
 }

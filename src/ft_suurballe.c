@@ -30,9 +30,8 @@ static int	ft_duplicate_rooms(t_path *path)
 		{
 			in->room_out = out;
 			out->room_in = in;
-
 			if (!(link = ft_createlink(path->room->room_out ? path->room->room_out : path->room)))
-				return (-1); //зафришить out
+				return (-1);
 			link->cost = -1;
 			link->room_src = in;
 			out->links = in->links;
@@ -160,15 +159,14 @@ int 		ft_suurballe(t_data *data)
 {
 	int	d;
 
-	if ((d = ft_dijkstra(data)) > 0) // est put
+	if ((d = ft_dijkstra(data)) > 0)
 	{
 		ft_direction(data->ways->path);
 		if ((ft_duplicate_rooms(data->ways->path)) < 0)
 			return (-1);
 		return (1);
 	}
-//	if (d == 0) //netu korotkogo puti
-//	if (d < 0)
-//		return (error);
+	if (d < 0)
+		return (-1);
 	return (0);
 }

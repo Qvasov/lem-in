@@ -45,10 +45,10 @@ int			main()
 	ft_zerodata(&data);
 	if (ft_valid(&data, str_split) < 0)
 		exit (ft_error(NULL, str_split));
-	ft_parse(&data, str_split);
-
-	if (ft_ways(&data) < 0)
+	if (ft_parse(&data, str_split) < 0)
 		exit(ft_error(&data, str_split));
+	if (ft_ways(&data) < 0)
+		exit(ft_error(&data, NULL));
 
 	data.start->ant = data.ants;
 	ft_lem_in(data.ways, data.start, data.end);

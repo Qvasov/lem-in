@@ -55,7 +55,8 @@ static t_room	*ft_createroom_xy(char *line)
 //		return (NULL);
 //	}
 //	i = i + 1;
-	room = ft_createroom(line);
+	if (!(room = ft_createroom(line)))
+		return (NULL);
 	i = ft_strlen(room->name) + 1;
 	room->x = ft_atoll(&line[i]);
 	while (line[i] != ' ')

@@ -21,8 +21,8 @@ int	ft_parse(t_data *data, char **strings)
 	while (i <= data->i_rooms_end)
 	{
 		if (strings[i][0] != '#')
-			if (ft_rooms(data, strings[i]))
-				exit(ft_error(data, strings));
+			if (ft_rooms(data, strings[i]) < 0)
+				return (-1);
 		if (i == data->i_start)
 			data->start = data->rooms;
 		if (i == data->i_end)
@@ -33,8 +33,8 @@ int	ft_parse(t_data *data, char **strings)
 	while (i <= data->i_links_end)
 	{
 		if (strings[i][0] != '#')
-			if (ft_links(data, strings[i]))
-				exit(ft_error(data, strings));
+			if (ft_links(data, strings[i]) < 0)
+				return (-1);
 		++i;
 	}
 	return (0);

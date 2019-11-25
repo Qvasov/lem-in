@@ -18,5 +18,5 @@ int	ft_error(t_data *data, char **str_split)
 		ft_free_data(data);
 	if (str_split)
 		ft_free_str_split(str_split);
-	return (0);
+	return (-1);
 }
