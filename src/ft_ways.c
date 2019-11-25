@@ -12,156 +12,93 @@
 
 #include "inc/lem-in.h"
 
-static void	ft_number_of_paths(t_data *data)
+void	ft_free_old_way(t_way **old)
+{
+	t_path	*ptr_p;
+	t_path	*path;
+	t_way	*ptr_w;
+
+	while (*old)
+	{
+		path = (*old)->path;
+		while (path)
+		{
+			ptr_p = path;
+			path = path->next;
+			free(ptr_p);
+		}
+		ptr_w = *old;
+		*old = (*old)->next;
+		free(ptr_w);
+	}
+}
+
+static long	ft_number_of_paths(t_room *start, t_room *end)
 {
 	long	i;
+	long	j;
 	t_link	*ptr;
 
 	i = 0;
-	ptr = data->start->links;
+	ptr = start->links;
 	while (ptr)
 	{
 		++i;
 		ptr = ptr->next;
 	}
-	data->ways_count = i;
-	i = 0;
-	ptr = data->end->links;
+	j = 0;
+	ptr = end->links;
 	while (ptr)
 	{
-		++i;
+		++j;
 		ptr = ptr->next;
 	}
-	data->ways_count = (data->ways_count < i) ? data->ways_count : i;
+	return (j < i ? j : i);
 }
 
-int	ft_min_steps(t_way *way)
+int	ft_min_steps_for_ants(t_way *way, size_t ants)
 {
-	size_t	min_cost;
+	size_t	steps;
+	size_t	frac;
+	size_t	tmp;
 
-	min_cost = way->path_cost;
+	steps = 0;
+	frac = 0;
 	while (way)
 	{
-		if (way->path_cost < min_cost)
-			min_cost = way->path_cost;
+		if (!way->prev)
+			steps = way->path_cost + ants - 1;
+		else if (steps > way->path_cost)
+		{
+			tmp = steps - (way->path_cost - 1);
+			steps = steps - tmp;
+			tmp = (frac) ? tmp - frac : tmp;
+			steps += ((tmp * (way->path_number - 1) + frac) % way->path_number) ?
+					 (tmp * (way->path_number - 1) + frac) / way->path_number + 1 :
+					 (tmp * (way->path_number - 1) + frac) / way->path_number;
+			frac = (tmp * (way->path_number - 1) + frac) % way->path_number;
+		}
+		else if (steps <= way->path_cost)
+			break;
 		way = way->next;
 	}
-	return (123);
+	return (steps);
 }
 
-//int	ft_check_ways(t_way	**old, t_way **new, size_t ants)
-//{
-//	t_way	*ptr;
-//	size_t	steps_old;
-//	size_t	steps_new;
-//
-//
-//	ptr = ways;
-//	sum = 0;
-//	while (ptr)
-//	{
-//		sum = sum + ptr->path_cost;
-//		ptr = ptr->next;
-//	}
-//	steps = sum / ways->path_number;
-//	if (есть еще ВОЗМОЖНЫЕ пути && муравьев больше максимального потока)
-//	очистка не нужного пути
-//}
+int	ft_cmp_ways(t_way **old, t_way **new, size_t *steps_old, size_t ants)
+{
+	size_t	steps_new;
 
-//void	ft_sort_ways_ascending(t_way **ways)
-//{
-//	size_t	min;
-//	t_way	*ptr;
-//	t_way	*tmp;
-//
-//	ptr = *ways;
-//	min = ptr->path_cost;
-//	while (ptr)
-//	{
-//		tmp = ptr;
-//		while (tmp)
-//		{
-//			if (tmp->path_cost < min)
-//				min = ptr->path_cost;
-//			tmp = tmp->next;
-//		}
-//
-//		ptr = ptr->next;
-//	}
-//}
-
-//t_path	*ft_path(t_link *link, t_room *start, t_room *end, size_t *cost)
-//{
-//	t_path	*path;
-//	t_path	*tmp;
-//	t_link	*ptr;
-//
-//	path = NULL;
-//	tmp = path;
-//	if (!(path = (t_path *)malloc(sizeof(t_path))))
-//		return (NULL); //(ft_free_path(&tmp)); // продумать очистку
-//	path->room = end;
-//	path->next = tmp;
-//	end = link->room;
-//	++(*cost);
-//	while (end != start)
-//	{
-//		link = end->links;
-//		ptr = link;
-//		while (link)
-//		{
-//			if (link->cost < ptr->cost)
-//				ptr = link;
-//			link = link->next;
-//		}
-//		tmp = path;
-//		if (!(path = (t_path *)malloc(sizeof(t_path))))
-//			return (NULL); //(ft_free_path(&tmp)); // продумать очистку
-//		path->room = ptr->room_src;
-//		path->next = tmp;
-//		end = ptr->room;
-//		++(*cost);
-//	}
-//	tmp = path;
-//	if (!(path = (t_path *)malloc(sizeof(t_path))))
-//		return (NULL); //(ft_free_path(&tmp)); // продумать очистку
-//	path->room = end;
-//	path->next = tmp;
-//	return (path);
-//}
-
-//t_way	*ft_paths(t_room *start, t_room *end)
-//{
-//	t_path	*path;
-//	t_link	*link;
-//	t_way	*ways;
-//	t_way	*way;
-//	size_t	cost;
-//
-//	ways = NULL;
-//	link = end->links;
-//	while (link)
-//	{
-//		if (link->cost == -1)
-//		{
-//			cost = 0;
-//			if (!(path = ft_path(link, start, end, &cost)))
-//				return (NULL);
-//			if (!(way = (t_way *)malloc(sizeof(t_way))))
-//				return (NULL); // продумать очистку
-//			way->path = path;
-//			way->path_cost = cost;
-//			way->next = ways;
-//			if (ways)
-//				ways->prev = way;
-//			way->path_number = ways ? ways->path_number + 1 : 1;
-//			way->prev = NULL;
-//			ways = way;
-//		}
-//		link = link->next;
-//	}
-//	return (ways);
-//}
+	steps_new = ft_min_steps_for_ants(*new, ants);
+	if (steps_new < *steps_old)
+	{
+		ft_free_old_way(old);
+		*steps_old = steps_new;
+		*old = *new;
+		return (1);
+	}
+	return (0);
+}
 
 t_path	*ft_path(t_link *tail, size_t *cost, t_room *end)
 {
@@ -283,22 +220,22 @@ t_way	*ft_paths_ascending(t_room *start, t_room *end)
 int	ft_ways(t_data *data)
 {
 	t_way	*new_ways;
+	size_t	steps;
 	int	s;
 
-	ft_number_of_paths(data);
-	while ((s = ft_suurballe(data)) > 0) //неправильно ссылки создаются в duplicate rooms
+	steps = 0;
+	data->ways_count = ft_number_of_paths(data->start, data->end);
+	while (data->ways_count > 0 && (s = ft_suurballe(data)) > 0)
 	{
+		--data->ways_count;
 		new_ways = ft_paths_ascending(data->start, data->end);
-//		ft_sort_ways_ascending(&new_ways);
 		if (!data->mod_ways)
 		{
 			data->mod_ways = new_ways;
-			ft_min_steps(new_ways);
+			steps = ft_min_steps_for_ants(new_ways, data->ants);
 		}
-//		else
-//			ft_check_ways(&data->mod_ways, &new_ways, data->ants);
-		//proverka na potoki
-		//proverka na kolichestvo putey
+		else if (!ft_cmp_ways(&data->mod_ways, &new_ways, &steps, data->ants))
+			break;
 	}
 	if (s < 0)
 		return (-1);
