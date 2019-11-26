@@ -3,57 +3,45 @@
 void	ft_lem_in(t_way *ways, size_t steps, t_room *start, t_room *end)
 {
 	t_way	*ptr_way;
-	t_path	*ptr_path;
+	t_path	*path;
 	size_t	ant;
-	size_t	ant_turn;
+	int		space;
 
 	ant = 0;
-	ant_turn = 0;
 	while (steps)
 	{
+		space = 0;
 		ptr_way = ways;
 		while (ptr_way)
 		{
-			ptr_path = ptr_way->path;
-			while (ptr_path)
+			path = ptr_way->path;
+			while (path)
 			{
-				if (ptr_path->room == start && (steps >= ptr_way->path_cost || ptr_way->path_number == 1)
+				if (path->room == start && (steps >= ptr_way->path_cost || ptr_way->path_number == 1)
 				&& start->ant)
 				{
-					++ant_turn;
-					ant = ant_turn;
+					++ant;
 					--start->ant;
+					(space) ? write(1, " ", 1) : (space = 1);
+					ft_printf("L%llu-%s", ant, path->prev->room->name);
+					path->prev->room->ant = (path->prev->room != end) ?
+							ant : path->prev->room->ant + 1;
 				}
-				else if (ptr_path->room == end && ant)
+				else if (path->room->ant && path->room != start && path->room != end)
 				{
-					ant = 0;
-					++end->ant;
+					(space) ? write(1, " ", 1) : (space = 1);
+					ft_printf("L%llu-%s", path->room->ant, path->prev->room->name);
+					path->prev->room->ant = (path->prev->room != end) ?
+							path->room->ant : path->prev->room->ant + 1;
+					path->room->ant = 0;
 				}
-				else if (ptr_path->room->ant && ant && ptr_path->room != end && ptr_path->room != start)
-				{
-
-					ptr_path->room->ant = ant;
-					ant = 0;
-					ft_printf("L%llu-%s", ptr_path->room->ant, ptr_path->room->name);
-				}
-				else if (!ptr_path->room->ant && ant && ptr_path->room != end && ptr_path->room != start)
-				{
-					ptr_path->room->ant = ant;
-					ant = 0;
-					ft_printf("L%llu-%s", ptr_path->room->ant, ptr_path->room->name);
-				}
-				else if (ptr_path->room->ant && !ant && ptr_path->room != start && ptr_path->room != end)
-				{
-					ptr_path->room->ant = 0;
-					ant = ptr_path->room->ant;
-				}
-				ptr_path = ptr_path->next;
+				path = path->next;
 			}
 			ptr_way = ptr_way->next;
 		}
 		write(1, "\n", 1);
 		--steps;
 	}
-	if (start->ant == 0 && end->ant == 9 && ant == 0)
+	if (start->ant == 0 && end->ant == 8)
 		write(1, "OK", 2);
 }

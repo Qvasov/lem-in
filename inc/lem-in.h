@@ -27,6 +27,7 @@ typedef struct 		s_path
 {
 	struct s_room	*room;
 	struct s_path	*next;
+	struct s_path	*prev;
 }					t_path;
 
 typedef struct 		s_way

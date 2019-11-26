@@ -4,9 +4,7 @@ static t_path	*ft_path(t_link *tail, size_t *cost, t_room *end)
 {
 	t_path	*path;
 	t_path	*tmp;
-	t_path	*start_path;
 
-	start_path = NULL;
 	path = NULL;
 	while (tail)
 	{
@@ -14,10 +12,9 @@ static t_path	*ft_path(t_link *tail, size_t *cost, t_room *end)
 		if (!(path = (t_path *)malloc(sizeof(t_path))))
 			return ((void *)ft_free_path(tmp));
 		path->room = (tail->room->room_in) ? tail->room->room_in : tail->room;
-		if (!start_path)
-			start_path = path;
+		path->next = tmp;
 		if (tmp)
-			tmp->next = path;
+			tmp->prev = path;
 		++(*cost);
 		tail = tail->parrent;
 	}
@@ -25,10 +22,11 @@ static t_path	*ft_path(t_link *tail, size_t *cost, t_room *end)
 	if (!(path = (t_path *)malloc(sizeof(t_path))))
 		return ((void *)ft_free_path(tmp));
 	path->room = end;
-	path->next = NULL;
+	path->next = tmp;
+	path->prev = NULL;
 	if (tmp)
-		tmp->next = path;
-	return (start_path);
+		tmp->prev = path;
+	return (path);
 }
 
 static t_way	*ft_add_path(t_link *tail, t_way *ways, t_room *end)
@@ -79,6 +77,7 @@ t_way			*ft_paths_ascending(t_room *start, t_room *end)
 		}
 		link = link->next;
 	}
+
 	while (turn_head)
 	{
 		link = (turn_head->room->room_in) ? turn_head->room->room_in->links : turn_head->room->links;

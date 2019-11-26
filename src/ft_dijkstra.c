@@ -18,6 +18,9 @@ static int	ft_path(t_link *tail, t_way **ways)
 			return (ft_free_path(tmp));
 		path->room = tail->room;
 		path->next = tmp;
+		path->prev = NULL;
+		if (tmp)
+			tmp->prev = path;
 		tail = tail->parrent;
 	}
 	if (!(way = (t_way *)malloc(sizeof(t_way))))
