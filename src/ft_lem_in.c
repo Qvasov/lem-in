@@ -42,6 +42,4 @@ void	ft_lem_in(t_way *ways, size_t steps, t_room *start, t_room *end)
 		write(1, "\n", 1);
 		--steps;
 	}
-	if (start->ant == 0 && end->ant == 8)
-		write(1, "OK", 2);
 }

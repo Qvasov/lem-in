@@ -16,15 +16,14 @@ void	ft_free_data(t_data *data)
 {
 	t_room	*tmp;
 
-	if (!data->rooms)
-		return;
 	while (data->rooms)
 	{
 		tmp = data->rooms;
 		data->rooms = data->rooms->next;
 		free(tmp->name);
 		ft_free_links(tmp->links);
-		ft_free_links(tmp->room_out->links);
+		if (tmp->room_out)
+			ft_free_links(tmp->room_out->links);
 		free(tmp->room_out);
 		free(tmp);
 	}
