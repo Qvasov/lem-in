@@ -12,6 +12,34 @@
 
 #include "inc/lem-in.h"
 
+static int	ft_out(t_room *in, t_room *out, t_room *room)
+{
+	t_link	*link;
+
+	if (!(out = ft_createroom(in->name)))
+		return (-1);
+	in->room_out = out;
+	out->room_in = in;
+	if (!(link = ft_createlink(room->room_out ? room->room_out : room)))
+		return (-1);
+	link->cost = -1;
+	link->room_src = in;
+	out->links = in->links;
+	in->links = link;
+	link = out->links;
+	while (link && link->room != room)
+		link = link->next;
+	if (link && link->room == room)
+	{
+		link->room = in;
+		link->room_src = out;
+		link->cost = 0;
+	}
+	else
+		in->links = link;
+	return (0);
+}
+
 static int	ft_duplicate_rooms(t_path *path)
 {
 	t_room	*in;
@@ -24,30 +52,8 @@ static int	ft_duplicate_rooms(t_path *path)
 			return (0);
 		in = path->next->room;
 		out = NULL;
-		if (!in->room_out && !in->room_in && !(out = ft_createroom(in->name)))
-			return (-1);
-		if (out)
-		{
-			in->room_out = out;
-			out->room_in = in;
-			if (!(link = ft_createlink(path->room->room_out ? path->room->room_out : path->room)))
-				return (-1);
-			link->cost = -1;
-			link->room_src = in;
-			out->links = in->links;
-			in->links = link;
-			link = out->links;
-			while (link && link->room != path->room)
-				link = link->next;
-			if (link && link->room == path->room)
-			{
-				link->room = in;
-				link->room_src = out;
-				link->cost = 0;
-			}
-			else
-				in->links = link;
-		}
+		if (!in->room_out && !in->room_in)
+			return (ft_out(in, out, path->room));
 		else if (in->room_out && !path->room->room_in)
 		{
 			out = path->room;
@@ -62,70 +68,7 @@ static int	ft_duplicate_rooms(t_path *path)
 	return (0);
 }
 
-static void ft_delete_link(t_room *src, t_room *dst)
-{
-	t_link	*link;
-
-	link = dst->links;
-	while (link && link->room != src)
-		link = link->next;
-	if (link && link->room == src)
-	{
-		if (link->prev)
-			link->prev->next = link->next;
-		else
-			dst->links = link->next;
-		if (link->next)
-			link->next->prev = link->prev;
-		free(link);
-	}
-}
-
-static void	ft_direction(t_path *path)
-{
-	t_room	*room_src;
-	t_room	*room_dst;
-	t_link	*link;
-
-	while(path && path->next)
-	{
-		room_src = path->room;
-		room_dst = path->next->room;
-		if (!(room_src->room_in || room_src->room_out) && !(room_dst->room_in || room_dst->room_out))
-			ft_delete_link(room_src, room_dst);
-		else if (!(room_src->room_in || room_src->room_out) && room_dst->room_out)
-			ft_delete_link(room_src, room_dst->room_out);
-		else if (!(room_src->room_in || room_src->room_out) && room_dst->room_in)
-			ft_delete_link(room_src, room_dst->room_in);
-		else if (room_src->room_in && !(room_dst->room_in || room_dst->room_out))
-			ft_delete_link(room_src->room_in, room_dst);
-		else if (room_src->room_out && !(room_dst->room_in || room_dst->room_out))
-			ft_delete_link(room_src->room_out, room_dst);
-		link = room_src->links;
-		while (link && link->room != room_dst)
-			link = link->next;
-		if (link && link->room == room_dst)
-		{
-			if (link->prev)
-				link->prev->next = link->next;
-			else
-				room_src->links = link->next;
-			if (link->next)
-				link->next->prev = link->prev;
-			link->cost = (link->cost == -1) ? 1 : -1;
-			link->room = room_src;
-			link->room_src = room_dst;
-			link->prev = NULL;
-			link->next = room_dst->links;
-			if (room_dst->links)
-				room_dst->links->prev = link;
-			room_dst->links = link;
-		}
-		path = path->next;
-	}
-}
-
-int 		ft_suurballe(t_data *data)
+int			ft_suurballe(t_data *data)
 {
 	int		d;
 
