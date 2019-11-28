@@ -51,6 +51,20 @@ static t_way	*ft_add_path(t_link *tail, t_way *ways, t_room *end)
 	return (ways);
 }
 
+static void		ft_null(t_link *turn_head, t_link *turn_tail, t_room *end)
+{
+	turn_head = end->links;
+	while (turn_head && turn_head->cost != -1)
+		turn_head = turn_head->next;
+	while (turn_head)
+	{
+		turn_tail = turn_head->turn_next;
+		turn_head->turn_next = NULL;
+		turn_head->parrent = NULL;
+		turn_head = turn_tail;
+	}
+}
+
 t_way			*ft_paths_ascending(t_room *start, t_room *end)
 {
 	t_link	*turn_head;
@@ -97,21 +111,22 @@ t_way			*ft_paths_ascending(t_room *start, t_room *end)
 					if (!ways_begin)
 						ways_begin = ways;
 				}
-				break;
+				break ;
 			}
 		}
 		turn_head = turn_head->turn_next;
 	}
 	//зануление turn;
-	turn_head = end->links;
-	while (turn_head && turn_head->cost != -1)
-		turn_head = turn_head->next;
-	while (turn_head)
-	{
-		turn_tail = turn_head->turn_next;
-		turn_head->turn_next = NULL;
-		turn_head->parrent = NULL;
-		turn_head = turn_tail;
-	}
+	ft_null(turn_head, turn_tail, end);
+//	turn_head = end->links;
+//	while (turn_head && turn_head->cost != -1)
+//		turn_head = turn_head->next;
+//	while (turn_head)
+//	{
+//		turn_tail = turn_head->turn_next;
+//		turn_head->turn_next = NULL;
+//		turn_head->parrent = NULL;
+//		turn_head = turn_tail;
+//	}
 	return (ways_begin);
 }

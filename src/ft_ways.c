@@ -91,7 +91,7 @@ int			ft_ways(t_data *data)
 	while (data->ways_count > 0 && (s = ft_suurballe(data)) > 0)
 	{
 		--data->ways_count;
-		if (!(new_ways = ft_patgiths_ascending(data->start, data->end)))
+		if (!(new_ways = ft_paths_ascending(data->start, data->end)))
 			return (-1);
 		if (!data->mod_ways)
 		{
