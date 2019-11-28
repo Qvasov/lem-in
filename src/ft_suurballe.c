@@ -86,12 +86,10 @@ static void	ft_direction(t_path *path)
 	t_room	*room_src;
 	t_room	*room_dst;
 	t_link	*link;
-//	t_room	*src;
 
 	while(path && path->next)
 	{
 		room_src = path->room;
-//		src = room_src;
 		room_dst = path->next->room;
 		if (!(room_src->room_in || room_src->room_out) && !(room_dst->room_in || room_dst->room_out))
 			ft_delete_link(room_src, room_dst);
@@ -103,34 +101,6 @@ static void	ft_direction(t_path *path)
 			ft_delete_link(room_src->room_in, room_dst);
 		else if (room_src->room_out && !(room_dst->room_in || room_dst->room_out))
 			ft_delete_link(room_src->room_out, room_dst);
-//		if (!(room_src->room_out || room_src->room_in)  || !(room_dst->room_in || room_dst->room_out))
-//		{
-//			link = room_dst->links;
-//			while (1) //можно f как флаг что отчистилось
-//			{
-//				if (!link && (room_dst->room_out || room_dst->room_in))
-//					link = room_dst->room_out->links;
-//				else if (!link && !(room_dst->room_out || room_dst->room_in))
-//				{
-//					src = (room_src->room_in) ? room_src->room_in : room_src->room_out;
-//					link = room_dst->links;
-//				}
-//				if (!link)
-//					break;
-//				if (link->room == src) //ili room_src
-//				{
-//					if (link->prev)
-//						link->prev->next = link->next;
-//					else
-//						room_dst->links = link->next;
-//					if (link->next)
-//						link->next->prev = link->prev;
-//					free(link);
-//					break;
-//				}
-//				link = link->next;
-//			}
-//		}
 		link = room_src->links;
 		while (link && link->room != room_dst)
 			link = link->next;
@@ -157,7 +127,7 @@ static void	ft_direction(t_path *path)
 
 int 		ft_suurballe(t_data *data)
 {
-	int	d;
+	int		d;
 
 	if ((d = ft_dijkstra(data)) > 0)
 	{

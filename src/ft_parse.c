@@ -16,7 +16,7 @@ int	ft_parse(t_data *data, char **strings)
 {
 	long	i;
 
-	ft_ants(data, strings);
+	data->ants = ft_atoll(strings[data->i_ants]); //ft_ants
 	i = data->i_rooms_start;
 	while (i <= data->i_rooms_end)
 	{

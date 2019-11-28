@@ -23,7 +23,10 @@ void	ft_free_data(t_data *data)
 		free(tmp->name);
 		ft_free_links(tmp->links);
 		if (tmp->room_out)
+		{
+			free(tmp->room_out->name);
 			ft_free_links(tmp->room_out->links);
+		}
 		free(tmp->room_out);
 		free(tmp);
 	}

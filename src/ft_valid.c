@@ -48,13 +48,16 @@ int	ft_valid_links(char *str)
 int	ft_valid_ants(char *str)
 {
 	long	i;
+	char	*tmp;
 
 	i = -1;
 	while (str[++i])
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			return (-1);
-	if (ft_strcmp(ft_lltoa(ft_atoll(str)), str)) //если больше чем long long //ft_isnum(str, 0)
+	tmp = ft_lltoa(ft_atoll(str));
+	if (ft_strcmp(tmp, str)) //если больше чем long long //ft_isnum(str, 0)
 		return (-1);
+	free(tmp);
 	return (0);
 }
 

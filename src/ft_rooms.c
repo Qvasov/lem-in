@@ -33,7 +33,6 @@ t_room			*ft_createroom(char *name)
 	room->room_out = NULL;
 	room->room_in = NULL;
 	room->next = NULL; //по возможности убрать. Сделать список комнат отдельно а не друг за другом
-	room->prev = NULL; //возможно не понадобится
 	room->ant = 0;
 	room->cost = 0x7FFFFFFF;
 	return (room);
@@ -43,18 +42,7 @@ static t_room	*ft_createroom_xy(char *line)
 {
 	size_t	i;
 	t_room	*room;
-//
-//	if (!(room = (t_room *)malloc(sizeof(t_room))))
-//		return (NULL);
-//	i = 1;
-//	while (line[i] != ' ')
-//		++i;
-//	if (!(room->name = ft_strsub(line, 0, i)))
-//	{
-//		free(room);
-//		return (NULL);
-//	}
-//	i = i + 1;
+
 	if (!(room = ft_createroom(line)))
 		return (NULL);
 	i = ft_strlen(room->name) + 1;
@@ -63,12 +51,6 @@ static t_room	*ft_createroom_xy(char *line)
 		++i;
 	i = i + 1;
 	room->y = ft_atoll(&line[i]);
-//	room->links = NULL;
-//	room->room_out = NULL;
-//	room->next = NULL;
-//	room->prev = NULL; //возможно не понадобится
-//	room->turn_in = 0;
-//	room->ant = 0;
 	return (room);
 }
 

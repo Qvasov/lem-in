@@ -15,11 +15,11 @@
 static int	ft_min_steps_for_ants(t_way *way, size_t ants)
 {
 	size_t	steps;
-	size_t	frac;
+	size_t	ost;
 	size_t	tmp;
 
 	steps = 0;
-	frac = 0;
+	ost = 0;
 	while (way)
 	{
 		if (!way->prev)
@@ -28,20 +28,21 @@ static int	ft_min_steps_for_ants(t_way *way, size_t ants)
 		{
 			tmp = steps - (way->path_cost - 1);
 			steps = steps - tmp;
-			tmp = (frac) ? tmp - frac : tmp;
-			steps += ((tmp * (way->path_number - 1) + frac) % way->path_number) ?
-					 (tmp * (way->path_number - 1) + frac) / way->path_number + 1 :
-					 (tmp * (way->path_number - 1) + frac) / way->path_number;
-			frac = (tmp * (way->path_number - 1) + frac) % way->path_number;
+			tmp = (ost) ? tmp - ost : tmp;
+			steps += ((tmp * (way->path_number - 1) + ost) % way->path_number) ?
+				(tmp * (way->path_number - 1) + ost) / way->path_number + 1 :
+				(tmp * (way->path_number - 1) + ost) / way->path_number;
+			ost = (tmp * (way->path_number - 1) + ost) % way->path_number;
 		}
 		else if (steps <= way->path_cost)
-			break;
+			break ;
 		way = way->next;
 	}
 	return (steps);
 }
 
-static int	ft_cmp_ways(t_way **old, t_way **new, size_t *steps_old, size_t ants)
+static int	ft_cmp_ways(t_way **old, t_way **new, size_t *steps_old,
+		size_t ants)
 {
 	size_t	steps_new;
 
@@ -83,7 +84,7 @@ int			ft_ways(t_data *data)
 {
 	t_way	*new_ways;
 	size_t	steps;
-	int	s;
+	int		s;
 
 	steps = 0;
 	data->ways_count = ft_number_of_paths(data->start, data->end);
@@ -98,7 +99,7 @@ int			ft_ways(t_data *data)
 			steps = ft_min_steps_for_ants(new_ways, data->ants);
 		}
 		else if (!ft_cmp_ways(&data->mod_ways, &new_ways, &steps, data->ants))
-			break;
+			break ;
 	}
 	if (s < 0)
 		return (-1);

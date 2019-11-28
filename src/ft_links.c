@@ -12,7 +12,7 @@
 
 #include "inc/lem-in.h"
 
-t_link	*ft_createlink(t_room *room)
+t_link			*ft_createlink(t_room *room)
 {
 	t_link	*link;
 

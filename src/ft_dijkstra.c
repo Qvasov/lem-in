@@ -1,16 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_dijkstra.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/28 18:06:35 by dbennie           #+#    #+#             */
+/*   Updated: 2019/11/28 18:06:36 by dbennie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/lem-in.h"
 
-
-
-static int	ft_path(t_link *tail, t_way **ways)
+static int		ft_create_way(t_path *path, size_t path_cost, t_way **ways)
 {
 	t_way	*way;
+
+	if (!(way = (t_way *)malloc(sizeof(t_way))))
+		return (ft_free_path(path));
+	way->path = path;
+	way->next = *ways;
+	if (*ways)
+		(*ways)->prev = way;
+	way->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
+	way->path_cost = path_cost;
+	way->prev = NULL;
+	*ways = way;
+	return (1);
+}
+
+static int		ft_path(t_link *tail, t_way **ways)
+{
 	t_path	*tmp;
 	t_path	*path;
-	size_t	cost;
+	size_t	path_cost;
 
 	path = NULL;
-	cost = tail->room->cost;
+	path_cost = tail->room->cost;
 	while (tail)
 	{
 		tmp = path;
@@ -23,22 +49,14 @@ static int	ft_path(t_link *tail, t_way **ways)
 			tmp->prev = path;
 		tail = tail->parrent;
 	}
-	if (!(way = (t_way *)malloc(sizeof(t_way))))
-		return (ft_free_path(path));
-	way->path = path;
-	way->next = *ways;
-	if (*ways)
-		(*ways)->prev = way;
-	way->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
-	way->path_cost = cost;
-	way->prev = NULL;
-	*ways = way;
+	if (!(ft_create_way(path, path_cost, ways)))
+		return (0);
 	return (1);
 }
 
 static t_link	*ft_link_start(t_room *start)
 {
-	t_link	*ptr;
+	t_link		*ptr;
 
 	ptr = (start->links) ? start->links->room->links : NULL;
 	if (ptr)
@@ -52,11 +70,10 @@ static t_link	*ft_link_start(t_room *start)
 	return (NULL);
 }
 
-int	ft_dijkstra(t_data* data)
+int				ft_dijkstra(t_data *data)
 {
 	t_link	*turn_head;
 	t_link	*turn_tail;
-	t_link	*link;
 	t_link	*end;
 
 	turn_head = ft_link_start(data->start);
@@ -64,45 +81,15 @@ int	ft_dijkstra(t_data* data)
 	end = NULL;
 	while (turn_head)
 	{
-		if 	(turn_head->room->links && turn_head->room != data->end)
-		{
-			link = turn_head->room->links;
-			while (link)
-			{
-				if ((turn_head->room->cost + link->cost < link->room->cost) && \
-				(!turn_head->parrent || link->room != turn_head->parrent->room)) //
-				{
-					if (link->turn_in == 0)
-					{
-						turn_tail->turn_next = link;
-						link->turn_prev = turn_tail;
-						link->turn_in = 1;
-						turn_tail = turn_tail->turn_next;
-					}
-					link->parrent = turn_head;
-					link->room->cost = turn_head->room->cost + link->cost;
-					if (link->room == data->end)
-						end = link;
-				}
-				link = link->next;
-			}
-		}
+		if (turn_head->room->links && turn_head->room != data->end)
+			ft_turn(&turn_head, &turn_tail, &end, data->end);
 		turn_head = turn_head->turn_next;
 	}
 	if (end)
 	{
 		if (!ft_path(end, &data->ways))
 			return (-1);
-		while (turn_tail)
-		{
-			turn_tail->room->cost = 0x7FFFFFFF;
-			turn_tail->turn_in = 0;
-			turn_tail->parrent = NULL;
-			if (turn_tail->turn_next)
-				turn_tail->turn_next->turn_prev = NULL;
-			turn_tail->turn_next = NULL;
-			turn_tail = turn_tail->turn_prev;
-		}
+		ft_turn_null(turn_tail);
 		return (1);
 	}
 	return (0);

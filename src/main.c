@@ -48,6 +48,7 @@ int			main()
 		exit (ft_error(NULL, str_split));
 	if (ft_parse(&data, str_split) < 0)
 		exit(ft_error(&data, str_split));
+	ft_free_str_split(str_split);
 	if (ft_ways(&data) < 0)
 		exit(ft_error(&data, NULL));
 	data.start->ant = data.ants;

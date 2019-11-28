@@ -63,7 +63,6 @@ typedef struct		s_room
 	size_t			ant;
 	long 			cost;
 	struct s_room	*next;
-	struct s_room	*prev;
 }					t_room;
 
 typedef struct		s_data
@@ -89,7 +88,6 @@ typedef struct		s_data
 int					ft_read(int fd, char ***data);
 int					ft_valid(t_data *data, char **strings);
 int					ft_parse(t_data *data, char **str_split);
-int					ft_ants(t_data *data, char **strings);
 int					ft_rooms(t_data *data, char *str);
 t_room				*ft_createroom(char *line);
 int					ft_links(t_data *data, char *str);
@@ -98,6 +96,8 @@ int					ft_findrooms(t_data *data, char *link, t_room **room1, t_room **room2);
 int					ft_ways(t_data *data);
 int					ft_suurballe(t_data *data);
 int					ft_dijkstra(t_data* data);
+void				ft_turn(t_link **head, t_link **tail, t_link **end, t_room *e);
+void				ft_turn_null(t_link *turn_tail);
 t_way				*ft_paths_ascending(t_room *start, t_room *end);
 
 void				ft_lem_in(t_way *ways, size_t steps, t_room *start, t_room *end);
