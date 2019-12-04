@@ -100,6 +100,7 @@ void				ft_direction(t_path *path);
 void				ft_turn(t_link **head, t_link **tail, t_link **end, t_room *e);
 void				ft_turn_null(t_link *turn_tail);
 t_way				*ft_paths_ascending(t_room *start, t_room *end);
+t_way				*ft_ways_ascending(t_link *turn_head, t_link *turn_tail, t_room *start, t_room *end);
 void				ft_lem_in(t_way *ways, size_t steps, t_room *start, t_room *end);
 void				ft_free_str_split(char **str_split);
 void				ft_free_data(t_data *data);

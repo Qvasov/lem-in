@@ -33,7 +33,7 @@ void	ft_turn(t_link **head, t_link **tail, t_link **end, t_room *e)
 	link = (*head)->room->links;
 	while (link)
 	{
-		if (((*head)->room->cost + link->cost < link->room->cost) && \
+		if (((*head)->room->cost + link->cost < link->room->cost) &&
 			(!(*head)->parrent || link->room != (*head)->parrent->room)) //
 		{
 			if (link->turn_in == 0)
