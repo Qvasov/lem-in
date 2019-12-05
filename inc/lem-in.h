@@ -25,6 +25,13 @@
 
 # define BUFF_SIZE	2048
 
+typedef struct		s_buf
+{
+	char			str[BUFF_SIZE];
+	int				i;
+	int				space;
+}					t_buf;
+
 typedef struct 		s_path
 {
 	struct s_room	*room;
@@ -103,7 +110,9 @@ void				ft_turn(t_link **head, t_link **tail, t_link **end, t_room *e);
 void				ft_turn_null(t_link *turn_tail);
 t_way				*ft_paths_ascending(t_room *start, t_room *end);
 t_way				*ft_ways_ascending(t_link *turn_head, t_link *turn_tail, t_room *start, t_room *end);
-void				ft_lem_in(t_way *ways, size_t steps, t_room *start, t_room *end);
+void				ft_lem_in(t_data *data, size_t steps);
+void				ft_copy_char(char *str, int *i, char c);
+void				ft_copy_num(char *str, int *i, size_t ant);
 void				ft_free_str_split(char **str_split);
 void				ft_free_data(t_data *data);
 void				ft_free_links(t_link *links);

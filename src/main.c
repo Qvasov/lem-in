@@ -54,7 +54,7 @@ int			main()
 	if (!data.mod_ways)
 		exit(ft_error(&data, NULL));
 	data.start->ant = data.ants;
-	ft_lem_in(data.mod_ways, data.steps, data.start, data.end);
+	ft_lem_in(&data, data.steps);
 	ft_free_data(&data);
 	return (0);
 	//while v valid links

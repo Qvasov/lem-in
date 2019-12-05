@@ -12,7 +12,7 @@
 
 #include "inc/lem-in.h"
 
-int		ft_name_equ(char *name_room, char *name_link, int direction)
+int	ft_name_equ(char *name_room, char *name_link, int direction)
 {
 	long	i;
 	long	j;

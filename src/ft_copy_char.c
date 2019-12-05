@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_way.c                                      :+:      :+:    :+:   */
+/*   ft_copy_char.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 19:24:53 by dbennie           #+#    #+#             */
-/*   Updated: 2019/12/05 19:24:54 by dbennie          ###   ########.fr       */
+/*   Created: 2019/12/05 19:16:39 by dbennie           #+#    #+#             */
+/*   Updated: 2019/12/05 19:16:41 by dbennie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/lem-in.h"
 
-int		ft_free_path(t_path *path)
+void	ft_copy_char(char *str, int *i, char c)
 {
-	t_path	*tmp;
-
-	while (path)
+	if (*i == BUFF_SIZE - 1)
 	{
-		tmp = path;
-		path = path->next;
-		free(tmp);
+		write(1, str, *i + 1);
+		ft_bzero(str, BUFF_SIZE);
+		*i = -1;
 	}
-	return (0);
-}
-
-void	ft_free_way(t_way *way)
-{
-	t_path	*path;
-	t_way	*ptr;
-
-	while (way)
-	{
-		ptr = way;
-		way = way->next;
-		path = ptr->path;
-		ft_free_path(path);
-		free(ptr);
-	}
+	str[++*i] = c;
 }
