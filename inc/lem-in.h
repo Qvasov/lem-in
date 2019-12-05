@@ -16,12 +16,14 @@
 # include "libft/libft.h"
 # include <stdio.h>
 
-# define ANTS	flag[0]
-# define ROOMS	flag[1]
-# define LINKS	flag[2]
-# define START	flag[3]
-# define END	flag[4]
-# define SE		flag[5]
+# define ANTS		flag[0]
+# define ROOMS		flag[1]
+# define LINKS		flag[2]
+# define START		flag[3]
+# define END		flag[4]
+# define SE			flag[5]
+
+# define BUFF_SIZE	2048
 
 typedef struct 		s_path
 {

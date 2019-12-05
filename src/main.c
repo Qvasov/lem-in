@@ -51,6 +51,8 @@ int			main()
 	ft_free_str_split(str_split);
 	if (ft_ways(&data) < 0)
 		exit(ft_error(&data, NULL));
+	if (!data.mod_ways)
+		exit(ft_error(&data, NULL));
 	data.start->ant = data.ants;
 	ft_lem_in(data.mod_ways, data.steps, data.start, data.end);
 	ft_free_data(&data);

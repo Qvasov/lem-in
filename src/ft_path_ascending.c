@@ -26,17 +26,17 @@ static void		ft_null(t_link *turn_head, t_link *turn_tail, t_room *end)
 	}
 }
 
-static void		ft_link_end(t_link *turn_head, t_link *turn_tail)
+static void		ft_link_end(t_link **turn_head, t_link **turn_tail)
 {
 	t_link	*link;
 
-	link = turn_head->next;
+	link = (*turn_head)->next;
 	while (link)
 	{
 		if (link->cost == -1)
 		{
-			turn_tail->turn_next = link;
-			turn_tail = turn_tail->turn_next;
+			(*turn_tail)->turn_next = link;
+			*turn_tail = (*turn_tail)->turn_next;
 		}
 		link = link->next;
 	}
@@ -54,7 +54,7 @@ t_way			*ft_paths_ascending(t_room *start, t_room *end)
 	if (!turn_head)
 		return (NULL);
 	turn_tail = turn_head;
-	ft_link_end(turn_head, turn_tail);
+	ft_link_end(&turn_head, &turn_tail);
 	if (!(ways_begin = ft_ways_ascending(turn_head, turn_tail, start, end)))
 		return (NULL);
 	ft_null(turn_head, turn_tail, end);
