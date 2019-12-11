@@ -68,7 +68,7 @@ int		ft_valid_duplicates_links(t_data *data, char **strings)
 	{
 		j = i;
 		while (++j <= data->i_links_end)
-			ft_linkcmp(strings[i], strings[j]))
+			ft_linkcmp(strings[i], strings[j]);
 	}
 	return (0);
 }
