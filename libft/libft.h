@@ -91,9 +91,11 @@ t_list				*ft_strlsplit(char const *s, char c);
 size_t				ft_lstsize(t_list *lst);
 void				ft_lstrev(t_list **beginlst);
 long long			ft_atoll(const char *str);
+unsigned long long	ft_atoull(const char *str);
 int					get_next_line(const int fd, char **line);
 int					ft_printf(const char *format, ...);
 int					ft_isnum(char *str, int c);
 char				*ft_lltoa(long long n);
+char				*ft_ulltoa(unsigned long long n);
 
 #endif

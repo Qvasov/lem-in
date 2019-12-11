@@ -57,6 +57,7 @@ int			main()
 	ft_lem_in(&data, data.steps);
 	ft_free_data(&data);
 	return (0);
+	//exit mozhmo ispolzovat
 	//while v valid links
 	//error sdelat normalniy
 }
