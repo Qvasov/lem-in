@@ -12,7 +12,7 @@
 
 #include "inc/lem-in.h"
 
-int	ft_valid_ants(char *str)
+int	ft_valid_ants(char *str, int *flag, t_data *data, long j)
 {
 	long	i;
 	char	*tmp;
@@ -25,5 +25,7 @@ int	ft_valid_ants(char *str)
 	if (ft_strcmp(tmp, str))
 		exit(1);
 	free(tmp);
+	ANTS = 1;
+	data->i_ants = j;
 	return (0);
 }

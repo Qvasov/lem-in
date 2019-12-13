@@ -12,7 +12,7 @@
 
 #include "inc/lem-in.h"
 
-int	ft_valid_links(char *str)
+int	ft_valid_links(char *str, int *flag, t_data *data, long j)
 {
 	long	i;
 
@@ -21,7 +21,13 @@ int	ft_valid_links(char *str)
 		exit(3);
 	while (str[++i])
 		if (str[i] == '-' && str[i + 1])
+		{
+			LINKS = 1;
+			if (!data->i_links_start)
+				data->i_links_start = j;
+			data->i_links_end = j;
 			return (0);
+		}
 	exit(3);
 }
 

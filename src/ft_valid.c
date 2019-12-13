@@ -12,7 +12,7 @@
 
 #include "inc/lem-in.h"
 
-void	ft_zero_flag(int *flag)
+static void	ft_zero_flag(int *flag)
 {
 	flag[0] = 0;
 	flag[1] = 0;
@@ -22,7 +22,7 @@ void	ft_zero_flag(int *flag)
 	flag[5] = 0;
 }
 
-int	ft_valid(t_data *data, char **strings)
+int			ft_valid(t_data *data, char **strings)
 {
 	long	i;
 	int		flag[6];
@@ -31,37 +31,16 @@ int	ft_valid(t_data *data, char **strings)
 	i = -1;
 	while (strings[++i])
 	{
-//		if (strings[i][0] == '\0' || strings[i][0] == 'L') //nuzhen li \0
-//			exit(1);
-		if (strings[i][0] == '#')
+		if (strings[i][0] == '\0' || strings[i][0] == 'L')
+			exit(1);
+		else if (strings[i][0] == '#')
 			ft_valid_hash(strings[i], flag);
 		else if (!ANTS)
-		{
-			ft_valid_ants(strings[i]);
-			ANTS = 1;
-			data->i_ants = i;
-		}
+			ft_valid_ants(strings[i], flag, data, i);
 		else if (ANTS && !LINKS && ft_strchr(strings[i], ' '))
-		{
-			ft_valid_rooms(strings[i]);
-			ROOMS = 1;
-			if (!data->i_rooms_start)
-				data->i_rooms_start = i;
-			data->i_rooms_end = i;
-			if (!data->i_start && START && DEF_SE)
-				data->i_start = i;
-			else if (!data->i_end && END && DEF_SE)
-				data->i_end = i;
-			DEF_SE = 0;
-		}
+			ft_valid_rooms(strings[i], flag, data, i);
 		else if (ROOMS && ANTS && START && END && !DEF_SE)
-		{
-			ft_valid_links(strings[i]);
-			LINKS = 1;
-			if (!data->i_links_start)
-				data->i_links_start = i;
-			data->i_links_end = i;
-		}
+			ft_valid_links(strings[i], flag, data, i);
 		else
 			exit(5);
 	}

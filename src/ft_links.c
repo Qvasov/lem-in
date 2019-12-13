@@ -12,7 +12,7 @@
 
 #include "inc/lem-in.h"
 
-t_link			*ft_createlink(t_room *room)
+t_link		*ft_createlink(t_room *room)
 {
 	t_link	*link;
 
@@ -30,7 +30,7 @@ t_link			*ft_createlink(t_room *room)
 	return (link);
 }
 
-static int		ft_connectlink(t_room *room_src, t_room *room_dst)
+static int	ft_connectlink(t_room *room_src, t_room *room_dst)
 {
 	t_link	*link;
 	t_link	*tmp;
@@ -50,14 +50,14 @@ static int		ft_connectlink(t_room *room_src, t_room *room_dst)
 	return (1);
 }
 
-int				ft_links(t_data *data, char *str)
+int			ft_links(t_data *data, char *link_str)
 {
 	t_room	*room1;
 	t_room	*room2;
 
 	room1 = NULL;
 	room2 = NULL;
-	if (ft_findrooms(data, str, &room1, &room2))
+	if (ft_findrooms(data, link_str, &room1, &room2))
 		return (-1);
 	if (!ft_connectlink(room1, room2) || !ft_connectlink(room2, room1))
 		return (-1);

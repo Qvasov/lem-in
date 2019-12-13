@@ -22,7 +22,7 @@ static int	ft_roomcmp(char *room1, char *room2)
 		if (room1[i] != room2[i])
 			break ;
 	if (room1[i] == room2[i])
-		exit(2);
+		return (1);
 	--i;
 	j = i;
 	while (room1[++i] && room1[i] != ' ')
@@ -32,7 +32,7 @@ static int	ft_roomcmp(char *room1, char *room2)
 	while (room1[++i] && room2[++j])
 		if (room1[i] != room2[i])
 			return (0);
-	exit(2);
+	return (1);
 }
 
 int			ft_valid_duplicates_rooms(t_data *data, char **strings)
@@ -45,7 +45,8 @@ int			ft_valid_duplicates_rooms(t_data *data, char **strings)
 	{
 		j = i;
 		while (++j <= data->i_rooms_end)
-			ft_roomcmp(strings[i], strings[j]);
+			if (ft_roomcmp(strings[i], strings[j]))
+				exit(2);
 	}
 	return (0);
 }

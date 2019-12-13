@@ -12,15 +12,13 @@
 
 #include "inc/lem-in.h"
 
-int	ft_valid_rooms(char *str)
+int	ft_valid_rooms(char *str, int *flag, t_data *data, long j)
 {
 	long	i;
 	int		space;
 
 	i = 0;
 	space = 0;
-	if (str[i] == 'L')
-		exit(2);
 	while (str[i] && space == 0)
 		if (str[++i] == ' ')
 			space = 1;
@@ -31,5 +29,14 @@ int	ft_valid_rooms(char *str)
 			space = 2;
 	if (!str[i] || !ft_isnum(&str[++i], '\0'))
 		exit(2);
+	ROOMS = 1;
+	if (!data->i_rooms_start)
+		data->i_rooms_start = j;
+	data->i_rooms_end = j;
+	if (!data->i_start && START && DEF_SE)
+		data->i_start = j;
+	else if (!data->i_end && END && DEF_SE)
+		data->i_end = j;
+	DEF_SE = 0;
 	return (0);
 }

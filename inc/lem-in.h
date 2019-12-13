@@ -21,7 +21,7 @@
 # define LINKS		flag[2]
 # define START		flag[3]
 # define END		flag[4]
-# define DEF_SE	flag[5]
+# define DEF_SE		flag[5]
 
 # define BUFF_SIZE	2048
 
@@ -97,9 +97,9 @@ typedef struct		s_data
 int					ft_read(int fd, char ***data);
 int					ft_valid(t_data *data, char **strings);
 int					ft_valid_hash(char *str, int *flag);
-int					ft_valid_ants(char *str);
-int					ft_valid_rooms(char *str);
-int					ft_valid_links(char *str);
+int					ft_valid_ants(char *str, int *flag, t_data *data, long j);
+int					ft_valid_rooms(char *str, int *flag, t_data *data, long j);
+int					ft_valid_links(char *str, int *flag, t_data *data, long j);
 int					ft_valid_duplicates_rooms(t_data *data, char **strings);
 int					ft_valid_duplicates_links(t_data *data, char **strings);
 int					ft_parse(t_data *data, char **str_split);
