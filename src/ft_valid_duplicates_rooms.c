@@ -43,10 +43,14 @@ int			ft_valid_duplicates_rooms(t_data *data, char **strings)
 	i = data->i_rooms_start - 1;
 	while (++i <= data->i_rooms_end)
 	{
-		j = i;
-		while (++j <= data->i_rooms_end)
-			if (ft_roomcmp(strings[i], strings[j]))
-				exit(2);
+		if (strings[i][0] != '#')
+		{
+			j = i;
+			while (++j <= data->i_rooms_end)
+				if (strings[j][0] != '#')
+					if (ft_roomcmp(strings[i], strings[j]))
+						exit(2);
+		}
 	}
 	return (0);
 }

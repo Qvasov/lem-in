@@ -27,7 +27,7 @@ static int	ft_linkcmp(char *link1, char *link2)
 			while (link2[j] && link2[j] != '-')
 				++j;
 			if (link1[i] == '-' && link2[j] == '-' && \
-			ft_linkcmp(link1, &link2[j]) && ft_linkcmp(link2, &link1[i]))
+			ft_linkcmp(link1, &link2[j + 1]) && ft_linkcmp(link2, &link1[i + 1]))
 				return (1);
 			return (0);
 		}
@@ -42,10 +42,14 @@ int		ft_valid_duplicates_links(t_data *data, char **strings)
 	i = data->i_links_start - 1;
 	while (++i <= data->i_links_end)
 	{
-		j = i;
-		while (++j <= data->i_links_end)
-			if (ft_linkcmp(strings[i], strings[j]))
-				exit(3);
+		if (strings[i][0] != '#')
+		{
+			j = i;
+			while (++j <= data->i_links_end)
+				if (strings[j][0] != '#')
+					if (ft_linkcmp(strings[i], strings[j]))
+						exit(3);
+		}
 	}
 	return (0);
 }

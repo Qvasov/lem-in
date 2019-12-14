@@ -17,7 +17,7 @@ static int	ft_count(long long n)
 	int	i;
 
 	i = 0;
-	if (n == 0x8000000000000000)
+	if ((unsigned long long)n == 0x8000000000000000)
 		return (20);
 	if (n == 0)
 		return (1);
@@ -45,9 +45,9 @@ char		*ft_lltoa(long long n)
 	r[i--] = '\0';
 	if (n == 0)
 		r[i] = 48;
-	if (n == 0x8000000000000000)
+	if ((unsigned long long)n == 0x8000000000000000)
 	{
-		r[i--] = n % 10 + 48;
+		r[i--] = '8';
 		n = n / 10;
 	}
 	if (n < 0)
