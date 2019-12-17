@@ -12,7 +12,7 @@
 
 #include "inc/lem-in.h"
 
-int		ft_free_path(t_path *path)
+void	*ft_free_path(t_path *path)
 {
 	t_path	*tmp;
 
@@ -22,7 +22,7 @@ int		ft_free_path(t_path *path)
 		path = path->next;
 		free(tmp);
 	}
-	return (0);
+	return (NULL);
 }
 
 void	ft_free_way(t_way *way)

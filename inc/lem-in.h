@@ -123,7 +123,7 @@ void				ft_free_str_split(char **str_split);
 void				ft_free_data(t_data *data);
 void				ft_free_links(t_link *links);
 void				ft_free_way(t_way *way);
-int					ft_free_path(t_path *path);
+void				*ft_free_path(t_path *path);
 int					ft_error(t_data *data, char **str_split);
 
 #endif

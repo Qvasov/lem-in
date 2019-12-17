@@ -12,21 +12,21 @@
 
 #include "inc/lem-in.h"
 
-static int		ft_create_way(t_path *path, size_t path_cost, t_way **ways)
+static t_way	*ft_create_way(t_path *path, size_t path_cost, t_way **ways)
 {
 	t_way	*way;
 
 	if (!(way = (t_way *)malloc(sizeof(t_way))))
 		return (ft_free_path(path));
 	way->path = path;
-	way->next = *ways;
-	if (*ways)
-		(*ways)->prev = way;
 	way->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
 	way->path_cost = path_cost;
 	way->prev = NULL;
+	way->next = *ways;
+	if (*ways)
+		(*ways)->prev = way;
 	*ways = way;
-	return (1);
+	return (way);
 }
 
 static int		ft_path(t_link *tail, t_way **ways)
@@ -41,7 +41,10 @@ static int		ft_path(t_link *tail, t_way **ways)
 	{
 		tmp = path;
 		if (!(path = (t_path *)malloc(sizeof(t_path))))
-			return (ft_free_path(tmp));
+		{
+			ft_free_path(tmp);
+			return (0);
+		}
 		path->room = tail->room;
 		path->next = tmp;
 		path->prev = NULL;

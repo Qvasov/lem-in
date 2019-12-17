@@ -1,63 +1,81 @@
-NAME = push_swap
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: shunt <marvin@42.fr>                       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/08/10 13:25:42 by shunt             #+#    #+#              #
+#    Updated: 2019/12/14 18:35:21 by shunt            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-FLAGS = -Wall -Wextra -Werror
+DEF				=	\033[0m
+BOLD			=	\033[1m
+UNDERLINE		=	\033[4m
+REV				=	\033[7m
+BLACK			=	\033[30m
+RED				=	\033[31m
+GREEN			=	\033[32m
+YELLOW			=	\033[33m
+BLUE			=	\033[34m
+PINK			=	\033[35m
+CYAN			=	\033[36m
+GREY			=	\033[37m
+BLACK_B			=	\033[40m
+RED_B			=	\033[41m
+GREEN_B			=	\033[42m
+YELLOW_B		=	\033[43m
+BLUE_B			=	\033[44m
+PINK_B			=	\033[45m
+CYAN_B			=	\033[46m
+GREY_B			=	\033[47m
 
-LIBFT = libft/libft.a
+NAME			=	lem-in
 
-DIR_S = src/
+LIB_PATH		=	libft/
+LIB_INC_PATH	=	libft/
 
-DIR_O = obj/
+LIB_NAME		=	libft.a
 
-DIR_LIB = libft/
+LIB				=	$(addprefix $(LIB_PATH), $(LIB_NAME))
+LIB_INC			=	$(addprefix -I, $(LIB_INC_PATH))
 
-INCLUDES = inc/push_swap.h
+SRC_PATH		=	src/
+INC_PATH		=	inc/
 
-SOURCES =	ft_checkdouble.c\
-			ft_checker.c\
-			ft_convert.c\
-			ft_cost.c\
-			ft_errors.c\
-			ft_find_num_with_min_cost.c\
-			ft_flags_checker.c\
-			ft_flags_push_swap.c\
-			ft_frees.c\
-			ft_instructions.c\
-			ft_issort.c\
-			ft_move.c\
-			ft_op.c\
-			ft_quicksort.c\
-			ft_push.c\
-			ft_push_swap.c\
-			ft_rotate.c\
-			ft_revrotate.c\
-			ft_sort.c\
-			ft_split.c\
-			ft_swaps.c\
-			ft_visualisation.c\
-			ft_zero.c\
+SRC_NAME		=	ft_copy_char.c ft_read.c ft_copy_num.c ft_rooms.c\
+					ft_dijkstra.c ft_suurballe.c ft_direction.c ft_turn.c\
+					ft_error.c ft_valid.c ft_findrooms.c ft_valid_ants.c\
+					ft_free_data.c ft_valid_duplicates_links.c ft_free_links.c\
+					ft_valid_duplicates_rooms.c ft_free_str_split.c\
+					ft_valid_hash.c ft_free_way.c ft_valid_links.c ft_lem_in.c\
+					ft_valid_rooms.c ft_links.c ft_ways.c ft_parse.c\
+					ft_ways_ascending.c ft_path_ascending.c main.c
 
-SRCS = $(addprefix $(DIR_S),$(SOURCES))
+SRC             =	$(addprefix $(SRC_PATH), $(SRC_NAME))
+INC				=	$(addprefix -I, $(INC_PATH))
 
-OBJS = $(addprefix $(DIR_O),$(SOURCES:.c=.o))
+all:				$(NAME)
 
-all: $(NAME)
+$(NAME):			$(LIB)
+	@gcc -Wall -Wextra -Werror $(INC) $(LIB_INC) -o $(NAME) $(SRC) -L libft -lft
+	@echo "🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜"
+	@echo "🐜                     🐜"
+	@echo "🐜     $(RED)LEM-IN READY    🐜"
+	@echo "🐜                     🐜"
+	@echo "🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜"
+	@echo ""
 
-$(NAME): $(OBJS) obj/checker.o obj/push_swap.o
-	make -C libft/
-	$(CC) $(FLAGS) -o checker obj/checker.o $(OBJS) -L. $(LIBFT)
-	$(CC) $(FLAGS) -o push_swap obj/push_swap.o $(OBJS) -L. $(LIBFT)
-
-$(DIR_O)%.o: $(DIR_S)%.c
-	@mkdir -p $(DIR_O)
-	$(CC) $(FLAGS) -I $(DIR_S) -o $@ -c $<
+$(LIB):
+	@make -C libft
 
 clean:
-	@rm -rf $(DIR_O)
-	@make clean -C $(DIR_LIB)
+	@make -C libft clean
 
-fclean: clean
-	@rm -f push_swap
-	@rm -f checker
-	@make fclean -C $(DIR_LIB)
+fclean:				clean
+	@rm -rf $(NAME)
+	@make -C libft fclean
+	@echo "$(BOLD)$(GREEN)BINARY DELETED ✅"
 
 re: fclean all

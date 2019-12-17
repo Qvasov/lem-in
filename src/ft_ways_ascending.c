@@ -22,7 +22,7 @@ static t_path	*ft_path(t_link *tail, size_t *cost, t_room *end)
 	{
 		tmp = path;
 		if (!(path = (t_path *)malloc(sizeof(t_path))))
-			return ((void *)ft_free_path(tmp));
+			return (ft_free_path(tmp));
 		path->room = (tail->room->room_in) ? tail->room->room_in : tail->room;
 		path->next = tmp;
 		if (tmp)
@@ -32,7 +32,7 @@ static t_path	*ft_path(t_link *tail, size_t *cost, t_room *end)
 	}
 	tmp = path;
 	if (!(path = (t_path *)malloc(sizeof(t_path))))
-		return ((void *)ft_free_path(tmp));
+		return (ft_free_path(tmp));
 	path->room = end;
 	path->next = tmp;
 	path->prev = NULL;
@@ -51,7 +51,7 @@ static t_way	*ft_add_path(t_link *tail, t_way *ways, t_room *end)
 	if (!(path = ft_path(tail, &cost, end)))
 		return (NULL);
 	if (!(way = (t_way *)malloc(sizeof(t_way))))
-		return ((void *)ft_free_path(path));
+		return (ft_free_path(path));
 	way->path = path;
 	way->path_cost = cost;
 	if (ways)
