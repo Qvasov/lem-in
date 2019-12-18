@@ -57,5 +57,5 @@ int			main()
 	ft_free_data(&data);
 	return (0);
 	//exit mozhmo ispolzovat
-	//error sdelat normalniy
+	//error sdelat normalni
 }
