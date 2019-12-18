@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 int	ft_error(t_data *data, char **str_split)
 {

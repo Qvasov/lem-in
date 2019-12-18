@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 t_room			*ft_createroom(char *name)
 {
@@ -32,7 +32,7 @@ t_room			*ft_createroom(char *name)
 	room->links = NULL;
 	room->room_out = NULL;
 	room->room_in = NULL;
-	room->next = NULL; //по возможности убрать. Сделать список комнат отдельно а не друг за другом
+	room->next = NULL;
 	room->ant = 0;
 	room->cost = 0x7FFFFFFF;
 	return (room);

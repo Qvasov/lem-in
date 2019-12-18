@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 t_link		*ft_createlink(t_room *room)
 {

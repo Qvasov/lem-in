@@ -55,12 +55,12 @@ $(NAME): $(OBJS)
 
 $(DIR_O)%.o: $(DIR_S)%.c
 	@mkdir -p $(DIR_O)
-	$(CC) $(FLAGS) -I $(DIR_S) -o $@ -c $<
+	@$(CC) $(FLAGS) -I $(DIR_S) -o $@ -c $<
 
 clean:
-	rm -rf $(DIR_O)
+	@rm -rf $(DIR_O)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

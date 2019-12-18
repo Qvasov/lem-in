@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 void	ft_free_str_split(char **str_split)
 {

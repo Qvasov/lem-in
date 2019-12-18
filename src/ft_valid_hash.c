@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 int	ft_valid_hash(char *str, int *flag)
 {

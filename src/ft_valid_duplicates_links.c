@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 static int	ft_linkcmp(char *link1, char *link2)
 {
@@ -26,15 +26,16 @@ static int	ft_linkcmp(char *link1, char *link2)
 				++i;
 			while (link2[j] && link2[j] != '-')
 				++j;
-			if (link1[i] == '-' && link2[j] == '-' && \
-			ft_linkcmp(link1, &link2[j + 1]) && ft_linkcmp(link2, &link1[i + 1]))
+			if (link1[i] == '-' && link2[j] == '-' &&
+			ft_linkcmp(link1, &link2[j + 1]) &&
+			ft_linkcmp(link2, &link1[i + 1]))
 				return (1);
 			return (0);
 		}
 	return (1);
 }
 
-int		ft_valid_duplicates_links(t_data *data, char **strings)
+int			ft_valid_duplicates_links(t_data *data, char **strings)
 {
 	long	i;
 	long	j;

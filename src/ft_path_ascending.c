@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 static void		ft_null(t_link *turn_head, t_link *turn_tail, t_room *end)
 {

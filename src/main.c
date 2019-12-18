@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 static int	ft_zerodata(t_data *data)
 {
@@ -45,7 +44,7 @@ int			main()
 		return (0);
 	ft_zerodata(&data);
 	if (ft_valid(&data, str_split) < 0)
-		exit (ft_error(NULL, str_split));
+		exit(ft_error(NULL, str_split));
 	if (ft_parse(&data, str_split) < 0)
 		exit(ft_error(&data, str_split));
 	ft_free_str_split(str_split);
@@ -58,6 +57,5 @@ int			main()
 	ft_free_data(&data);
 	return (0);
 	//exit mozhmo ispolzovat
-	//while v valid links
 	//error sdelat normalniy
 }

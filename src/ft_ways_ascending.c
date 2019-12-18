@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 static t_path	*ft_path(t_link *tail, size_t *cost, t_room *end)
 {

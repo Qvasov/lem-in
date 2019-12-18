@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 int	ft_parse(t_data *data, char **strings)
 {
 	long	i;
 
-	data->ants = ft_atoll(strings[data->i_ants]); //ft_ants
+	data->ants = ft_atoull(strings[data->i_ants]);
 	i = data->i_rooms_start;
 	while (i <= data->i_rooms_end)
 	{

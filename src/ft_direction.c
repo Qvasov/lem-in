@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
-static void ft_redirection_link(t_room *src, t_room *dst)
+static void	ft_redirection_link(t_room *src, t_room *dst)
 {
 	t_link	*link;
 
@@ -38,7 +38,7 @@ static void ft_redirection_link(t_room *src, t_room *dst)
 	}
 }
 
-static void ft_delete_link(t_room *src, t_room *dst)
+static void	ft_delete_link(t_room *src, t_room *dst)
 {
 	t_link	*link;
 
@@ -62,19 +62,24 @@ void		ft_direction(t_path *path)
 	t_room	*room_src;
 	t_room	*room_dst;
 
-	while(path && path->next)
+	while (path && path->next)
 	{
 		room_src = path->room;
 		room_dst = path->next->room;
-		if (!(room_src->room_in || room_src->room_out) && !(room_dst->room_in || room_dst->room_out))
+		if (!(room_src->room_in || room_src->room_out) &&
+		!(room_dst->room_in || room_dst->room_out))
 			ft_delete_link(room_src, room_dst);
-		else if (!(room_src->room_in || room_src->room_out) && room_dst->room_out)
+		else if (!(room_src->room_in || room_src->room_out) &&
+		room_dst->room_out)
 			ft_delete_link(room_src, room_dst->room_out);
-		else if (!(room_src->room_in || room_src->room_out) && room_dst->room_in)
+		else if (!(room_src->room_in || room_src->room_out) &&
+		room_dst->room_in)
 			ft_delete_link(room_src, room_dst->room_in);
-		else if (room_src->room_in && !(room_dst->room_in || room_dst->room_out))
+		else if (room_src->room_in &&
+		!(room_dst->room_in || room_dst->room_out))
 			ft_delete_link(room_src->room_in, room_dst);
-		else if (room_src->room_out && !(room_dst->room_in || room_dst->room_out))
+		else if (room_src->room_out &&
+		!(room_dst->room_in || room_dst->room_out))
 			ft_delete_link(room_src->room_out, room_dst);
 		ft_redirection_link(room_src, room_dst);
 		path = path->next;

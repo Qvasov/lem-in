@@ -56,9 +56,9 @@ SRC_NAME		=	ft_copy_char.c ft_read.c ft_copy_num.c ft_rooms.c\
 SRC             =	$(addprefix $(SRC_PATH), $(SRC_NAME))
 INC				=	$(addprefix -I, $(INC_PATH))
 
-all:				$(NAME)
+all:		$(NAME)
 
-$(NAME):			$(LIB)
+$(NAME):	$(LIB)
 	@gcc -Wall -Wextra -Werror $(INC) $(LIB_INC) -o $(NAME) $(SRC) -L libft -lft
 	@echo "🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜"
 	@echo "🐜                     🐜"
@@ -73,7 +73,7 @@ $(LIB):
 clean:
 	@make -C libft clean
 
-fclean:				clean
+fclean:		clean
 	@rm -rf $(NAME)
 	@make -C libft fclean
 	@echo "$(BOLD)$(GREEN)BINARY DELETED ✅"

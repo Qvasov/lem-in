@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 void	ft_turn_null(t_link *turn_tail)
 {
@@ -34,7 +34,7 @@ void	ft_turn(t_link **head, t_link **tail, t_link **end, t_room *e)
 	while (link)
 	{
 		if (((*head)->room->cost + link->cost < link->room->cost) &&
-			(!(*head)->parrent || link->room != (*head)->parrent->room)) //
+			(!(*head)->parrent || link->room != (*head)->parrent->room))
 		{
 			if (link->turn_in == 0)
 			{

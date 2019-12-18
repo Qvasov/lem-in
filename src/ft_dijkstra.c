@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 static t_way	*ft_create_way(t_path *path, size_t path_cost, t_way **ways)
 {

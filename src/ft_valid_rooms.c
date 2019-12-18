@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 int	ft_valid_rooms(char *str, int *flag, t_data *data, long j)
 {

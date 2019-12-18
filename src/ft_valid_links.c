@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 int	ft_valid_links(char *str, int *flag, t_data *data, long j)
 {
@@ -30,4 +30,3 @@ int	ft_valid_links(char *str, int *flag, t_data *data, long j)
 		}
 	exit(3);
 }
-

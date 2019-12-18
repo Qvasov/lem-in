@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/lem-in.h"
+#include "lemin.h"
 
 static int	ft_min_steps_for_ants(t_way *way, size_t ants)
 {
