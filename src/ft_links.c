@@ -50,6 +50,20 @@ static int	ft_connectlink(t_room *room_src, t_room *room_dst)
 	return (1);
 }
 
+static int	ft_check_duplicate_link(t_room *room1 , t_room *room2)
+{
+	t_link	*link;
+
+	link = room1->links;
+	while (link)
+	{
+		if (link->room == room2)
+			return (1);
+		link = link->next;
+	}
+	return (0);
+}
+
 int			ft_links(t_data *data, char *link_str)
 {
 	t_room	*room1;
@@ -59,7 +73,8 @@ int			ft_links(t_data *data, char *link_str)
 	room2 = NULL;
 	if (ft_findrooms(data, link_str, &room1, &room2))
 		return (-1);
-	if (!ft_connectlink(room1, room2) || !ft_connectlink(room2, room1))
-		return (-1);
+	if (!ft_check_duplicate_link(room1, room2))
+		if (!ft_connectlink(room1, room2) || !ft_connectlink(room2, room1))
+			return (-1);
 	return (0);
 }

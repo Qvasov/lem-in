@@ -45,6 +45,6 @@ int			ft_valid(t_data *data, char **strings)
 			exit(5);
 	}
 	ft_valid_duplicates_rooms(data, strings);
-	ft_valid_duplicates_links(data, strings);
+//	ft_valid_duplicates_links(data, strings);
 	return (0);
 }

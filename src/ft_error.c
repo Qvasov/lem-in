@@ -14,9 +14,6 @@
 
 int	ft_error(t_data *data, char **str_split)
 {
-	if (data)
-		ft_free_data(data);
-	if (str_split)
-		ft_free_str_split(str_split);
+	write (1, "ERROR", 5);
 	return (-1);
 }
