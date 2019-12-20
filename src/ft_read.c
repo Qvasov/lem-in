@@ -25,16 +25,12 @@ int	ft_read(int fd, char ***str_split)
 	{
 		buf[ret] = '\0';
 		trash = tmp;
-		tmp = ft_strjoin(tmp, buf);
+		if (!(tmp = ft_strjoin(tmp, buf)))
+			exit(-1);
 		free(trash);
-		if (!tmp)
-			return (-1);
 	}
 	if (ret < 0 || !(*str_split = ft_strsplit(tmp, '\n')))
-	{
-		free(tmp);
-		return (-1);
-	}
+		exit(-1);
 	free(tmp);
 	return (0);
 }

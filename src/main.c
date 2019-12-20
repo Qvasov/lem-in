@@ -40,8 +40,7 @@ int			main()
 	char	**str_split;
 
 	int fd = open("3", O_RDONLY);
-	if (ft_read(fd, &str_split) < 0)
-		return (0);
+	ft_read(fd, &str_split);
 	ft_zerodata(&data);
 	if (ft_valid(&data, str_split) < 0)
 		exit(ft_error(NULL, str_split));
