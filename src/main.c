@@ -39,7 +39,7 @@ int			main()
 	t_data	data;
 	char	**str_split;
 
-	int fd = open("3", O_RDONLY);
+	int fd = open("3", O_RDONLY); //
 	ft_read(fd, &str_split);
 	ft_zerodata(&data);
 	ft_valid(&data, str_split);
