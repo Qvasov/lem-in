@@ -23,12 +23,12 @@ int	ft_valid_rooms(char *str, int *flag, t_data *data, long j)
 		if (str[++i] == ' ')
 			space = 1;
 	if (!str[i] || !ft_isnum(&str[++i], ' '))
-		exit(2);
+		ft_error(2);
 	while (str[i] && space == 1)
 		if (str[++i] == ' ')
 			space = 2;
 	if (!str[i] || !ft_isnum(&str[++i], '\0'))
-		exit(2);
+		ft_error(2);
 	ROOMS = 1;
 	if (!data->i_rooms_start)
 		data->i_rooms_start = j;

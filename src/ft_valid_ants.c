@@ -20,10 +20,10 @@ int	ft_valid_ants(char *str, int *flag, t_data *data, long j)
 	i = -1;
 	while (str[++i])
 		if (!(str[i] >= '0' && str[i] <= '9') || i >= 20)
-			exit(1);
+			ft_error(1);
 	tmp = ft_ulltoa(ft_atoull(str));
 	if (ft_strcmp(tmp, str))
-		exit(1);
+		ft_error(1);
 	free(tmp);
 	ANTS = 1;
 	data->i_ants = j;

@@ -100,10 +100,10 @@ int					ft_valid(t_data *data, char **strings);
 int					ft_valid_hash(char *str, int *flag);
 int					ft_valid_ants(char *str, int *flag, t_data *data, long j);
 int					ft_valid_rooms(char *str, int *flag, t_data *data, long j);
-int					ft_valid_links(char *str, int *flag, t_data *data, long j);
+void				ft_valid_links(char *str, int *flag, t_data *data, long j);
 int					ft_valid_duplicates_rooms(t_data *data, char **strings);
-int					ft_valid_duplicates_links(t_data *data, char **strings);
-int					ft_parse(t_data *data, char **str_split);
+//int					ft_valid_duplicates_links(t_data *data, char **strings);
+int					ft_parse_data(t_data *data, char **str_split);
 int					ft_rooms(t_data *data, char *str);
 t_room				*ft_createroom(char *line);
 int					ft_links(t_data *data, char *str);
@@ -128,6 +128,6 @@ void				ft_free_data(t_data *data);
 void				ft_free_links(t_link *links);
 void				ft_free_way(t_way *way);
 void				*ft_free_path(t_path *path);
-int					ft_error(t_data *data, char **str_split);
+void				ft_error(int id);
 
 #endif

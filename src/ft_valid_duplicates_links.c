@@ -49,7 +49,7 @@ int			ft_valid_duplicates_links(t_data *data, char **strings)
 			while (++j <= data->i_links_end)
 				if (strings[j][0] != '#')
 					if (ft_linkcmp(strings[i], strings[j]))
-						exit(3);
+						ft_error(3);
 		}
 	}
 	return (0);

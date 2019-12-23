@@ -12,13 +12,11 @@
 
 #include "lemin.h"
 
-int	ft_valid_links(char *str, int *flag, t_data *data, long j)
+void	ft_valid_links(char *str, int *flag, t_data *data, long j)
 {
 	long	i;
 
 	i = 0;
-	if (str[i] == 'L')
-		exit(3);
 	while (str[++i])
 		if (str[i] == '-' && str[i + 1])
 		{
@@ -26,7 +24,7 @@ int	ft_valid_links(char *str, int *flag, t_data *data, long j)
 			if (!data->i_links_start)
 				data->i_links_start = j;
 			data->i_links_end = j;
-			return (0);
+			return ;
 		}
-	exit(3);
+	ft_error(3);
 }

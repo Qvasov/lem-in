@@ -22,7 +22,7 @@ int	ft_valid_hash(char *str, int *flag)
 			DEF_SE = 1;
 		}
 		else
-			exit(4);
+			ft_error(4);
 	}
 	else if (ft_strequ(str, "##end"))
 	{
@@ -32,7 +32,7 @@ int	ft_valid_hash(char *str, int *flag)
 			DEF_SE = 1;
 		}
 		else
-			exit(4);
+			ft_error(4);
 	}
 	return (0);
 }

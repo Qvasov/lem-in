@@ -32,7 +32,7 @@ int			ft_valid(t_data *data, char **strings)
 	while (strings[++i])
 	{
 		if (strings[i][0] == '\0' || strings[i][0] == 'L')
-			exit(1);
+			ft_error(1);
 		else if (strings[i][0] == '#')
 			ft_valid_hash(strings[i], flag);
 		else if (!ANTS)
@@ -42,7 +42,7 @@ int			ft_valid(t_data *data, char **strings)
 		else if (ROOMS && ANTS && START && END && !DEF_SE)
 			ft_valid_links(strings[i], flag, data, i);
 		else
-			exit(5);
+			ft_error(5);
 	}
 	ft_valid_duplicates_rooms(data, strings);
 //	ft_valid_duplicates_links(data, strings);

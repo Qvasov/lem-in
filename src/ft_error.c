@@ -12,8 +12,8 @@
 
 #include "lemin.h"
 
-int	ft_error(t_data *data, char **str_split)
+void	ft_error(int id)
 {
 	write (1, "ERROR", 5);
-	return (-1);
+	exit(id);
 }

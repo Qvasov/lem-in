@@ -49,7 +49,7 @@ int			ft_valid_duplicates_rooms(t_data *data, char **strings)
 			while (++j <= data->i_rooms_end)
 				if (strings[j][0] != '#')
 					if (ft_roomcmp(strings[i], strings[j]))
-						exit(2);
+						ft_error(2);
 		}
 	}
 	return (0);

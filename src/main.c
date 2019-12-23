@@ -42,19 +42,17 @@ int			main()
 	int fd = open("3", O_RDONLY);
 	ft_read(fd, &str_split);
 	ft_zerodata(&data);
-	if (ft_valid(&data, str_split) < 0)
-		exit(ft_error(NULL, str_split));
-	if (ft_parse(&data, str_split) < 0)
-		exit(ft_error(&data, str_split));
+	ft_valid(&data, str_split);
+	if (ft_parse_data(&data, str_split) < 0)
+		exit(-1);
 	ft_free_str_split(str_split);
 	if (ft_ways(&data) < 0)
-		exit(ft_error(&data, NULL));
+		exit(-1);
 	if (!data.mod_ways)
-		exit(ft_error(&data, NULL));
+		exit(-1);
 	data.start->ant = data.ants;
 	ft_lem_in(&data, data.steps);
 	ft_free_data(&data);
 	return (0);
-	//exit mozhmo ispolzovat
-	//error sdelat normalniy
+	//(46)esli pshibka malloca to che togda sprosit u dimasa (poka chto prosto exit(-1))
 }
