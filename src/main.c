@@ -34,12 +34,6 @@ static int	ft_zerodata(t_data *data)
 	return (1);
 }
 
-int			ft_perror(char *s)
-{
-	perror(s);
-	return (0);
-}
-
 int			main(int ac, char **av)
 {
 	t_data	data;

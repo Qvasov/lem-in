@@ -17,3 +17,9 @@ void	ft_error(int id)
 	write (1, "ERROR", 5);
 	exit(id);
 }
+
+int		ft_perror(char *s)
+{
+	perror(s);
+	return (0);
+}
