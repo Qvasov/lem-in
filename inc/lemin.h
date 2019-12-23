@@ -95,6 +95,12 @@ typedef struct		s_data
 	long			i_end;
 }					t_data;
 
+typedef struct		s_flags
+{
+	char			*fd_path;
+}					t_flags;
+
+void				ft_flags_lemin(t_flags *flags, int ac, char **av);
 int					ft_read(int fd, char ***data);
 int					ft_valid(t_data *data, char **strings);
 int					ft_valid_hash(char *str, int *flag);

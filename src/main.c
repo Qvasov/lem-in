@@ -34,12 +34,23 @@ static int	ft_zerodata(t_data *data)
 	return (1);
 }
 
-int			main()
+int			ft_perror(char *s)
+{
+	perror(s);
+	return (0);
+}
+
+int			main(int ac, char **av)
 {
 	t_data	data;
 	char	**str_split;
+	t_flags	flags;
+	int		fd;
 
-	int fd = open("3", O_RDONLY); //
+	ft_flags_lemin(&flags, ac, av);
+	(flags.fd_path) ? fd = open(flags.fd_path, O_RDONLY) : 0;
+	if (fd < 0)
+		return (ft_perror(av[0]));
 	ft_read(fd, &str_split);
 	ft_zerodata(&data);
 	ft_valid(&data, str_split);
@@ -55,4 +66,5 @@ int			main()
 	ft_free_data(&data);
 	return (0);
 	//(46)esli pshibka malloca to che togda sprosit u dimasa (poka chto prosto exit(-1))
+	//dobavit ft_perror v libu
 }

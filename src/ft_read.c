@@ -26,10 +26,11 @@ int	ft_read(int fd, char ***str_split)
 		buf[ret] = '\0';
 		trash = str;
 		if (!(str = ft_strjoin(str, buf)))
-			exit(-1);
+			break; //
 		free(trash);
 	}
-	if (ret < 0 || !(*str_split = ft_strsplit(str, '\n')))
+	close(fd);
+	if (ret > 0 || ret < 0 || !(*str_split = ft_strsplit(str, '\n')))
 		exit(-1);
 	free(str);
 	return (0);
