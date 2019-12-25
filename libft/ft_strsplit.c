@@ -50,7 +50,7 @@ static size_t	ft_arrstrs(char **r, const char *s, char c)
 		while (s[i] && s[i] != c)
 			i++;
 		if (!(r[k] = (char *)malloc(sizeof(char) * (i - f + 1))))
-			return (-1);
+			return (1);
 		r[k][i - f] = '\0';
 		j = 0;
 		while (s[f] && s[f] != c)
@@ -71,7 +71,7 @@ char			**ft_strsplit(char const *s, char c)
 	if (!(r = (char **)malloc(sizeof(char *) * (j + 1))))
 		return (NULL);
 	r[j] = NULL;
-	if (ft_arrstrs(r, s, c) < 0)
+	if (ft_arrstrs(r, s, c) > 0)
 		return (NULL);
 	return (r);
 }
