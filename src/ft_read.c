@@ -15,13 +15,13 @@
 int	ft_read(int fd, char ***str_split)
 {
 	int		ret;
-	char	buf[5120];
+	char	buf[16385];
 	char	*str;
 	char	*trash;
 
 	if (str_split == NULL || !(str = ft_strnew(0)))
 		return (-1);
-	while ((ret = read(fd, &buf, 5119)) > 0)
+	while ((ret = read(fd, &buf, 16384)) > 0)
 	{
 		buf[ret] = '\0';
 		trash = str;

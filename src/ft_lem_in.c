@@ -65,7 +65,7 @@ void		ft_lem_in(t_data *data, size_t steps)
 	ant = 0;
 	ft_bzero(buf.str, BUFF_SIZE);
 	buf.i = -1;
-	while (steps && data->start->ant >= 0)
+	while (steps)
 	{
 		ft_step(data, &ant, &buf);
 		ft_copy_char(buf.str, &buf.i, '\n');

@@ -24,7 +24,7 @@ void	ft_flags_lemin(t_flags *flags, int ac, char **av)
 	i = 0;
 	while (++i < ac)
 	{
-		if (ft_strequ(av[i], "-fd"))
+		if (ft_strequ(av[i], "-f"))
 			ft_descriptor(&flags->fd_path, ac, av, &i);
 		else
 			ft_usage();
