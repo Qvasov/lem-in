@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-int	ft_valid_ants(char *str, int *flag, t_data *data, long j)
+int	ft_valid_ants(char *str, int *flag, t_data *data, long j)//LONG long
 {
 	long	i;
 	char	*tmp;
@@ -21,10 +21,10 @@ int	ft_valid_ants(char *str, int *flag, t_data *data, long j)
 	while (str[++i])
 		if (!(str[i] >= '0' && str[i] <= '9') || i >= 20)
 			ft_error(1);
-	tmp = ft_ulltoa(ft_atoull(str));
+	tmp = ft_ulltoa(ft_atoull(str));//too complex
 	if (ft_strcmp(tmp, str))
 		ft_error(1);
-	free(tmp);
+	free(tmp);//and save results?
 	ANTS = 1;
 	data->i_ants = j;
 	return (0);

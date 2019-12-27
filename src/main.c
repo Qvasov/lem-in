@@ -42,10 +42,10 @@ int			main(int ac, char **av)
 	int		fd;
 
 	ft_flags_lemin(&flags, ac, av);
-	(flags.fd_path) ? fd = open(flags.fd_path, O_RDONLY) : 0;
+	(flags.fd_path) ? fd = open(flags.fd_path, O_RDONLY) : 0;//init fd if condition is false?
 	if (fd < 0)
 		return (ft_perror(av[0]));
-	ft_read(fd, &str_split);
+	ft_lemin_read(fd, &str_split);
 	ft_zerodata(&data);
 	ft_valid(&data, str_split);
 	if (ft_parse_data(&data, str_split) < 0)

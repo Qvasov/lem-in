@@ -12,14 +12,14 @@
 
 #include "lemin.h"
 
-int	ft_read(int fd, char ***str_split)
+int	ft_lemin_read(int fd, char ***str_split)
 {
 	int		ret;
 	char	buf[16385];
 	char	*str;
 	char	*trash;
 
-	if (str_split == NULL || !(str = ft_strnew(0)))
+	if (/*str_split == NULL ??? || */!(str = ft_strnew(0)))
 		return (-1);
 	while ((ret = read(fd, &buf, 16384)) > 0)
 	{
@@ -30,8 +30,11 @@ int	ft_read(int fd, char ***str_split)
 		free(trash);
 	}
 	close(fd);
-	if (ret > 0 || ret < 0 || !(*str_split = ft_strsplit(str, '\n')))
+	if (ret > 0 || ret < 0 || !(*str_split = ft_strsplit(str, '\n')))//ret != 0
 		exit(-1);
 	free(str);
 	return (0);
 }
+// what about multiple \n case??
+// ft_strsplit costs a lot of resources, mb we can use only str
+// read and close must be preserved))

@@ -25,7 +25,7 @@ static void	ft_zero_flag(int *flag)
 int			ft_valid(t_data *data, char **strings)
 {
 	long	i;
-	int		flag[6];
+	int		flag[6];//let's do it on bits??
 
 	ft_zero_flag(flag);
 	i = -1;
@@ -35,7 +35,7 @@ int			ft_valid(t_data *data, char **strings)
 			ft_error(1);
 		else if (strings[i][0] == '#')
 			ft_valid_hash(strings[i], flag);
-		else if (!ANTS)
+		else if (!ANTS) //always false? (error 4 in prev function)
 			ft_valid_ants(strings[i], flag, data, i);
 		else if (ANTS && !LINKS && ft_strchr(strings[i], ' '))
 			ft_valid_rooms(strings[i], flag, data, i);
@@ -50,3 +50,4 @@ int			ft_valid(t_data *data, char **strings)
 //	ft_valid_duplicates_links(data, strings);
 	return (0);
 }
+//valid no minus

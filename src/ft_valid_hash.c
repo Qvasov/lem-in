@@ -14,9 +14,9 @@
 
 int	ft_valid_hash(char *str, int *flag)
 {
-	if (ft_strequ(str, "##start"))
+	if (ft_strequ(str, "##start")) //strcmp or strncmp
 	{
-		if (!START && ANTS && !LINKS && !DEF_SE)
+		if (!START && ANTS && !LINKS && !DEF_SE) //ANTS == 0?
 		{
 			START = 1;
 			DEF_SE = 1;
@@ -24,7 +24,7 @@ int	ft_valid_hash(char *str, int *flag)
 		else
 			ft_error(4);
 	}
-	else if (ft_strequ(str, "##end"))
+	else if (ft_strequ(str, "##end")) //strcmp or strncmp
 	{
 		if (!END && ANTS && !LINKS && !DEF_SE)
 		{
@@ -36,3 +36,4 @@ int	ft_valid_hash(char *str, int *flag)
 	}
 	return (0);
 }
+//#comments??

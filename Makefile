@@ -44,7 +44,7 @@ LIB_INC			=	$(addprefix -I, $(LIB_INC_PATH))
 SRC_PATH		=	src/
 INC_PATH		=	inc/
 
-SRC_NAME		=	ft_copy_char.c ft_read.c ft_copy_num.c ft_rooms.c\
+SRC_NAME		=	ft_copy_char.c ft_lemin_read.c ft_copy_num.c ft_rooms.c\
 					ft_dijkstra.c ft_suurballe.c ft_direction.c ft_turn.c\
 					ft_error.c ft_valid.c ft_findrooms.c ft_valid_ants.c\
 					ft_free_data.c ft_valid_duplicates_links.c ft_free_links.c\
