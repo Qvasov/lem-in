@@ -33,6 +33,7 @@ GREY_B			=	\033[47m
 
 NAME			=	lem-in
 
+INC_NAME        =   lemin.h
 LIB_PATH		=	libft/
 LIB_INC_PATH	=	libft/
 
@@ -50,32 +51,38 @@ SRC_NAME		=	ft_copy_char.c ft_lemin_read.c ft_copy_num.c ft_rooms.c\
 					ft_free_data.c ft_valid_duplicates_links.c ft_free_links.c\
 					ft_valid_duplicates_rooms.c ft_free_str_split.c\
 					ft_valid_hash.c ft_free_way.c ft_valid_links.c ft_lem_in.c\
-					ft_valid_rooms.c ft_links.c ft_ways.c ft_parse.c\
-					ft_ways_ascending.c ft_path_ascending.c main.c
+					ft_valid_rooms.c ft_links.c ft_ways.c ft_parse_data.c\
+					ft_ways_ascending.c ft_path_ascending.c main.c ft_flags_lemin.c\
 
 SRC             =	$(addprefix $(SRC_PATH), $(SRC_NAME))
-INC				=	$(addprefix -I, $(INC_PATH))
+INC             =   $(addprefix $(INC_PATH), $(INC_NAME))
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+IFLAGS = -I $(INC_PATH). -I $(LIB_PATH).
+LFLAGS = -L $(LIB_PATH) -lft
+
+.PHONY: all clean fclean re lib
+
+OBJ = $(SRC:.c=.o)
+
+LIB = make -C $(LIB_PATH)
+
+%.o: %.c $(INC)
+	$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
 all:		$(NAME)
 
-$(NAME):	$(LIB)
-	@gcc -Wall -Wextra -Werror $(INC) $(LIB_INC) -o $(NAME) $(SRC) -L libft -lft
-	@echo "🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜"
-	@echo "🐜                     🐜"
-	@echo "🐜     $(RED)LEM-IN READY    🐜"
-	@echo "🐜                     🐜"
-	@echo "🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜 🐜"
-	@echo ""
-
-$(LIB):
-	@make -C libft
+$(NAME):	$(OBJ)
+	$(LIB)
+	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $^ $(LFLAGS)
 
 clean:
-	@make -C libft clean
+	make clean -C $(LIB_PATH)
+	rm -f $(OBJ)
 
-fclean:		clean
-	@rm -rf $(NAME)
-	@make -C libft fclean
-	@echo "$(BOLD)$(GREEN)BINARY DELETED ✅"
+fclean: clean
+	make fclean -C $(LIB_PATH)
+	rm -f $(NAME)
 
 re: fclean all

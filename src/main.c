@@ -14,7 +14,7 @@
 
 static int	ft_zerodata(t_data *data)
 {
-	data->ants = 0;
+    data->ants = 0;
 	data->start = NULL;
 	data->end = NULL;
 	data->rooms = NULL;
@@ -42,9 +42,9 @@ int			main(int ac, char **av)
 	int		fd;
 
 	ft_flags_lemin(&flags, ac, av);
-	(flags.fd_path) ? fd = open(flags.fd_path, O_RDONLY) : 0;//init fd if condition is false?
+	fd = (flags.fd_path) ? open(flags.fd_path, O_RDONLY) : 0;
 	if (fd < 0)
-		return (ft_perror(av[0]));
+		ft_perror();
 	ft_lemin_read(fd, &str_split);
 	ft_zerodata(&data);
 	ft_valid(&data, str_split);

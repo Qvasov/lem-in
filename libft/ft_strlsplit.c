@@ -59,6 +59,7 @@ static size_t	ft_findword(char const *str, char c, size_t *i)
 static void		ft_del(void *content, size_t content_size)
 {
 	content_size = 0;
+	content_size -= 1;
 	free(content);
 }
 

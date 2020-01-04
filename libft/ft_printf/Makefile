@@ -23,7 +23,7 @@ SOURCES =	ft_addbuf.c \
 			ft_flags.c \
 			ft_width.c \
 			ft_precision.c \
-			ft_lemin_read.c \
+			ft_read.c \
 			ft_modificator.c \
 			ft_formcount.c \
 			ft_formstr.c \

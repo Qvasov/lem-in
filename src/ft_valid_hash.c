@@ -14,12 +14,12 @@
 
 int	ft_valid_hash(char *str, int *flag)
 {
-	if (ft_strequ(str, "##start")) //strcmp or strncmp
+	if (ft_strequ(str, "##start"))
 	{
-		if (!START && ANTS && !LINKS && !DEF_SE) //ANTS == 0?
+		if (!START && ANTS && !LINKS && !DEF_SE)
 		{
 			START = 1;
-			DEF_SE = 1;
+			DEF_SE = 1;//start/end definition flag
 		}
 		else
 			ft_error(4);

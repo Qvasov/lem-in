@@ -86,13 +86,13 @@ typedef struct		s_data
 	t_way			*mod_ways;
 	size_t			steps;
 	long			ways_count;
-	long			i_ants;
-	long			i_rooms_start;
-	long			i_rooms_end;
-	long			i_links_start;
-	long			i_links_end;
-	long			i_start;
-	long			i_end;
+	long			i_ants;//index where ants saved
+	long			i_rooms_start;//index where rooms begin
+	long			i_rooms_end;//index where roms end
+	long			i_links_start;//index where links begin
+	long			i_links_end;//index where links end
+	long			i_start;//index of room start
+	long			i_end;//index of room end
 }					t_data;
 
 typedef struct		s_flags
@@ -108,7 +108,9 @@ int					ft_valid_ants(char *str, int *flag, t_data *data, long j);
 int					ft_valid_rooms(char *str, int *flag, t_data *data, long j);
 void				ft_valid_links(char *str, int *flag, t_data *data, long j);
 int					ft_valid_duplicates_rooms(t_data *data, char **strings);
-//int					ft_valid_duplicates_links(t_data *data, char **strings);
+
+//int				ft_valid_duplicates_links(t_data *data, char **strings);
+
 int					ft_parse_data(t_data *data, char **str_split);
 int					ft_rooms(t_data *data, char *str);
 t_room				*ft_createroom(char *line);
@@ -135,6 +137,6 @@ void				ft_free_links(t_link *links);
 void				ft_free_way(t_way *way);
 void				*ft_free_path(t_path *path);
 void				ft_error(int id);
-int					ft_perror(char *s);
+void				ft_perror();
 
 #endif

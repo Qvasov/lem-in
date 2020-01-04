@@ -26,12 +26,13 @@ int	ft_lemin_read(int fd, char ***str_split)
 		buf[ret] = '\0';
 		trash = str;
 		if (!(str = ft_strjoin(str, buf)))
-			break; //
+			ft_perror();
 		free(trash);
 	}
-	close(fd);
-	if (ret > 0 || ret < 0 || !(*str_split = ft_strsplit(str, '\n')))//ret != 0
-		exit(-1);
+	if ((close(fd)) == -1)
+		ft_perror();
+	if (ret < 0 || !(*str_split = ft_strsplit(str, '\n')))//ret != 0
+		ft_perror();
 	free(str);
 	return (0);
 }

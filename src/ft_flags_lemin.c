@@ -8,7 +8,7 @@ static int	ft_usage()
 
 static void	ft_descriptor(char **fd, int ac, char **av, int *i)
 {
-	if (++*i < ac)
+	if (++(*i) < ac)
 		*fd = av[*i];
 	else
 		ft_usage();

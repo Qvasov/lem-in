@@ -54,7 +54,7 @@ t_way			*ft_paths_ascending(t_room *start, t_room *end)
 	if (!turn_head)
 		return (NULL);
 	turn_tail = turn_head;
-	ft_link_end(&turn_head, &turn_tail);
+	ft_link_end(&turn_head, &turn_tail);//rewrite
 	if (!(ways_begin = ft_ways_ascending(turn_head, turn_tail, start, end)))
 		return (NULL);
 	ft_null(turn_head, turn_tail, end);

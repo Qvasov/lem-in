@@ -41,21 +41,21 @@ HEADO = libft.h.gch
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@make -C $(PRINTF)
-	@cp ft_printf/ft_printf.a $(NAME)
-	@ar rc $(NAME) $(OBJS)
-	@ranlib $(NAME)
+	make -C $(PRINTF)
+	cp ft_printf/ft_printf.a $(NAME)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
 $(DIR_O)%.o: $(DIR_S)%.c
-	@mkdir -p $(DIR_O)
-	@$(CC) $(FLAGS) -o $@ -c $<
+	mkdir -p $(DIR_O)
+	$(CC) $(FLAGS) -o $@ -c $<
 
 clean:
-	@/bin/rm -rf $(DIR_O)
-	@make clean -C $(PRINTF)
+	/bin/rm -rf $(DIR_O)
+	make clean -C $(PRINTF)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
-	@make fclean -C $(PRINTF)
+	/bin/rm -f $(NAME)
+	make fclean -C $(PRINTF)
 
 re: fclean all

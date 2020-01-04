@@ -35,7 +35,7 @@ int			ft_valid(t_data *data, char **strings)
 			ft_error(1);
 		else if (strings[i][0] == '#')
 			ft_valid_hash(strings[i], flag);
-		else if (!ANTS) //always false? (error 4 in prev function)
+		else if (!ANTS)
 			ft_valid_ants(strings[i], flag, data, i);
 		else if (ANTS && !LINKS && ft_strchr(strings[i], ' '))
 			ft_valid_rooms(strings[i], flag, data, i);

@@ -32,7 +32,7 @@ int	ft_parse_data(t_data *data, char **strings)
 	i = data->i_links_start;
 	while (i <= data->i_links_end)
 	{
-		if (strings[i][0] != '#')
+		if (strings[i][0] != '#') //continue ;
 			if (ft_links(data, strings[i]) < 0)
 				return (-1);
 		++i;
