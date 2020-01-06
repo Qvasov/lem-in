@@ -12,19 +12,21 @@
 
 #include "lemin.h"
 
-void	ft_valid_links(char *str, int *flag, t_data *data, long j)
+void	ft_valid_links(char *str, int *f, t_data *data, long j)
 {
 	long	i;
 
-	i = 0;
-	while (str[++i])
+	i = -1;
+	while (str[++i] && str[i] != '-' && str[i] != ' ')
 		if (str[i] == '-' && str[i + 1])
 		{
-			LINKS = 1;
+			ft_bit_on(f, LINKS);//if all is OK
 			if (!data->i_links_start)
 				data->i_links_start = j;
 			data->i_links_end = j;
 			return ;
 		}
+//	data->i_links_end = j;//
 	ft_error(3);
 }
+//rewrite with - and space

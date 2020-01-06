@@ -75,7 +75,7 @@ typedef union			u_double
 {
 	struct
 	{
-		unsigned long	m: 64;
+		unsigned long long	m: 64;
 		unsigned int	e: 15;
 		unsigned int	s: 1;
 	}					bits;

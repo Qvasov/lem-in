@@ -2,13 +2,13 @@
 
 static int	ft_usage()
 {
-	write(1, "tut dolzhen bit usage\n", 22);
+	write(1, "usage: ./lem-in [-f <path>] [<number_of_ants> <the_rooms> <the_links>]\n", 72);//
 	exit(0);
 }
 
 static void	ft_descriptor(char **fd, int ac, char **av, int *i)
 {
-	if (++*i < ac)
+	if (++(*i) < ac)
 		*fd = av[*i];
 	else
 		ft_usage();
