@@ -17,7 +17,7 @@ int	ft_valid_rooms(char *str, int *f, t_data *data, long j)
 	long	i;
 	int		space;
 
-	i = -1;
+	i = 0;
 	space = 0;
 	while (str[i] && space == 0 && str[i] != '-')
 		if (str[++i] == ' ')

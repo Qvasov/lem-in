@@ -16,17 +16,19 @@ void	ft_valid_links(char *str, int *f, t_data *data, long j)
 {
 	long	i;
 
-	i = -1;
-	while (str[++i] && str[i] != '-' && str[i] != ' ')
-		if (str[i] == '-' && str[i + 1])
-		{
-			ft_bit_on(f, LINKS);//if all is OK
-			if (!data->i_links_start)
-				data->i_links_start = j;
-			data->i_links_end = j;
-			return ;
-		}
-//	data->i_links_end = j;//
-	ft_error(3);
+	i = 0;
+	while (str[i] && str[i] != '-' && str[i] != ' ')//condition for valid symbols
+		i++;
+	if (str[i] == '-' && str[i + 1])
+	{
+		ft_bit_on(f, LINKS);
+		if (!data->i_links_start)
+			data->i_links_start = j;
+		data->i_links_end = j;
+		i++;
+	}
+	while (str[i] && str[i] != '-' && str[i] != ' ')//condition for valid symbols
+		i++;
+	(str[i] || !(ft_bit_check(*f, LINKS))) ? ft_error(3) : 1;
 }
 //rewrite with - and space
