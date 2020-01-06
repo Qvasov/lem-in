@@ -12,23 +12,23 @@
 
 #include "lemin.h"
 
-static t_path	*ft_path(t_link *tail, size_t *cost, t_room *end)
+static t_path	*ft_path(t_link *head, size_t *cost, t_room *end)
 {
 	t_path	*path;
 	t_path	*tmp;
 
 	path = NULL;
-	while (tail)
+	while (head)
 	{
 		tmp = path;
 		if (!(path = (t_path *)malloc(sizeof(t_path))))
 			return (ft_free_path(tmp));
-		path->room = (tail->room->room_in) ? tail->room->room_in : tail->room;
+		path->room = (head->room->room_in) ? head->room->room_in : head->room;
 		path->next = tmp;
 		if (tmp)
 			tmp->prev = path;
 		++(*cost);
-		tail = tail->parrent;
+		head = head->parrent;
 	}
 	tmp = path;
 	if (!(path = (t_path *)malloc(sizeof(t_path))))
@@ -41,14 +41,14 @@ static t_path	*ft_path(t_link *tail, size_t *cost, t_room *end)
 	return (path);
 }
 
-static t_way	*ft_add_path(t_link *tail, t_way *ways, t_room *end)
+static t_way	*ft_add_path(t_link *head, t_way *ways, t_room *end)
 {
 	t_path	*path;
 	t_way	*way;
 	size_t	cost;
 
 	cost = 0;
-	if (!(path = ft_path(tail, &cost, end)))
+	if (!(path = ft_path(head, &cost, end)))
 		return (NULL);
 	if (!(way = (t_way *)malloc(sizeof(t_way))))
 		return (ft_free_path(path));
@@ -83,11 +83,11 @@ t_way			*ft_ways_ascending(t_link *head, t_link *tail,
 			tail->turn_next = link;
 			link->parrent = head;
 			tail = tail->turn_next;
-			if (tail->room == start && !(ways = ft_add_path(tail, ways, end)))
-				return (NULL);
-			if (!ways_begin)
-				ways_begin = ways;
 		}
+		if (head->room == start && !(ways = ft_add_path(head, ways, end)))
+			return (NULL);
+		if (!ways_begin && ways)
+			ways_begin = ways;
 		head = head->turn_next;
 	}
 	return (ways_begin);

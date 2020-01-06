@@ -57,7 +57,7 @@ static int	ft_cmp_ways(t_way **old, t_way **new, size_t *steps_old,
 	return (0);
 }
 
-static long	ft_number_of_paths(t_room *start, t_room *end)
+static long	number_of_paths(t_room *start, t_room *end)
 {
 	long	i;
 	long	j;
@@ -84,13 +84,13 @@ int			ft_ways(t_data *data)
 {
 	t_way	*new_ways;
 	size_t	steps;
-	int		s;
+	int		suur;
 
 	steps = 0;
-	data->ways_count = ft_number_of_paths(data->start, data->end);
-	while (data->ways_count > 0 && (s = ft_suurballe(data)) > 0)
+	data->ways_count = number_of_paths(data->start, data->end); //находит ВОЗМОЖНОЕ наибольшее кол-во непересекающихся путей
+	while (data->ways_count > 0 && (suur = ft_suurballe(data)) > 0) //находит короткий путь и "блокирует его"
 	{
-		--data->ways_count;
+		--data->ways_count; //Удаление из возможнных
 		if (!(new_ways = ft_paths_ascending(data->start, data->end)))
 			return (-1);
 		if (!data->mod_ways)
@@ -101,7 +101,7 @@ int			ft_ways(t_data *data)
 		else if (!ft_cmp_ways(&data->mod_ways, &new_ways, &steps, data->ants))
 			break ;
 	}
-	if (s < 0)
+	if (suur < 0)
 		return (-1);
 	data->steps = steps;
 	return (0);

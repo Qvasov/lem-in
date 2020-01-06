@@ -18,8 +18,8 @@ void	ft_error(int id)
 	exit(id);
 }
 
-int		ft_perror(char *s)
+void	ft_perror()
 {
-	perror(s);
-	return (0);
+	perror("lem-in:");
+	exit(1);
 }

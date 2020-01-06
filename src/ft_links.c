@@ -71,10 +71,9 @@ int			ft_links(t_data *data, char *link_str)
 
 	room1 = NULL;
 	room2 = NULL;
-	if (ft_findrooms(data, link_str, &room1, &room2))
-		return (-1);
+	ft_findrooms(data, link_str, &room1, &room2);
 	if (!ft_check_duplicate_link(room1, room2))
 		if (!ft_connectlink(room1, room2) || !ft_connectlink(room2, room1))
-			return (-1);
+			ft_perror();
 	return (0);
 }

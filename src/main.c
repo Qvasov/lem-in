@@ -42,14 +42,13 @@ int			main(int ac, char **av)
 	int		fd;
 
 	ft_flags_lemin(&flags, ac, av);
-	(flags.fd_path) ? fd = open(flags.fd_path, O_RDONLY) : 0;
+	fd = (flags.fd_path) ? open(flags.fd_path, O_RDONLY) : 0;
 	if (fd < 0)
-		return (ft_perror(av[0]));
+		ft_perror();
 	ft_read(fd, &str_split);
 	ft_zerodata(&data);
 	ft_valid(&data, str_split);
-	if (ft_parse_data(&data, str_split) < 0)
-		exit(-1);
+	ft_parse_data(&data, str_split);
 	ft_free_str_split(str_split);
 	if (ft_ways(&data) < 0)
 		exit(-1);

@@ -135,6 +135,6 @@ void				ft_free_links(t_link *links);
 void				ft_free_way(t_way *way);
 void				*ft_free_path(t_path *path);
 void				ft_error(int id);
-int					ft_perror(char *s);
+void				ft_perror();
 
 #endif

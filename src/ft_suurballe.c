@@ -72,7 +72,7 @@ int			ft_suurballe(t_data *data)
 {
 	int		d;
 
-	if ((d = ft_dijkstra(data)) > 0)
+	if ((d = ft_dijkstra(data)) > 0) //поиск в ширину 1 - нашёл, 0 - не нашёл, -1 - ошибка
 	{
 		ft_direction(data->ways->path);
 		if ((ft_duplicate_rooms(data->ways->path)) < 0)
