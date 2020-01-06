@@ -12,14 +12,25 @@
 
 #include "lemin.h"
 
-void	ft_error(int id)
+static void	set_err_status(char *err)
 {
-	write (1, "ERROR", 5);
-	exit(id);
+	ft_strcpy(err, "no links");
+	ft_strcpy(err + 20, "no links");
+	return ;
 }
 
-void	ft_perror()
+void	ft_error(int id)
 {
-	perror("lem-in:");
+	char err_status[5][20];
+
+	set_err_status(&err_status[0][0]);
+	//
+	write (1, "ERROR", 5);
 	exit(1);
+}
+
+void ft_perror()
+{
+	perror("lem-in: ");
+	exit (1);
 }

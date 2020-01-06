@@ -29,7 +29,7 @@ int	ft_parse_data(t_data *data, char **strings)
 	}
 	i = data->i_links_start - 1;
 	while (++i <= data->i_links_end)
-		if (strings[i][0] != '#')
+		if (strings[i][0] != '#') //continue ;
 			ft_links(data, strings[i]);
 	return (0);
 }

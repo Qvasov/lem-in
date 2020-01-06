@@ -12,26 +12,63 @@
 
 #include "lemin.h"
 
-int	ft_read(int fd, char ***str_split)
+static void	init_str(char **str)
+{
+	*str = (char *)malloc(1);
+	**str = 0;
+}
+
+static char	**str_data_match(char *str, char c)
+{
+	int i;
+	char **ptr;
+
+	i = ft_strchr_count(str, c);
+	i < 5 ? ft_error(1) : 1;//or 6?
+	if (!(ptr = (char **)malloc(sizeof(char *) * (i + 1))))
+		ft_perror();
+	i = 0;
+	while (*str)
+	{
+		ptr[i] = str;
+		i++;
+		while (*str != c && *str)
+			str++;
+		if (*str == c)
+		{
+			*str = 0;
+			str++;
+		}
+		else
+			*(str - 1) == 0 ? 1 : ft_error(1);
+
+	}
+	ptr[i] = NULL;
+	return (ptr);
+}
+
+int	ft_lemin_read(t_flags *flags, char ***str_split)
 {
 	int		ret;
 	char	buf[16385];
 	char	*str;
 	char	*trash;
+	int		fd;
 
-	if (str_split == NULL || !(str = ft_strnew(0)))
-		return (-1);
-	while ((ret = read(fd, &buf, 16384)) > 0)
+	fd = (flags->fd_path) ? open(flags->fd_path, O_RDONLY) : 0;
+	(fd < 0) ? ft_perror() : 1;
+	init_str(&str);
+	while ((ret = read(fd, buf, 16384)) > 0)
 	{
 		buf[ret] = '\0';
 		trash = str;
 		if (!(str = ft_strjoin(str, buf)))
-			break; //
+			ft_perror();
 		free(trash);
 	}
-	close(fd);
-	if (ret > 0 || ret < 0 || !(*str_split = ft_strsplit(str, '\n')))
-		exit(-1);
-	free(str);
+	(ret < 0) ? ft_perror() : 1;
+	if (fd > 2)
+		((close(fd)) < 0) ? ft_perror() : 1;
+	*str_split = str_data_match(str, '\n');
 	return (0);
 }

@@ -32,7 +32,7 @@ void		ft_modificator(t_format *form, const char *s, long long *i)
 				form->mod[0] = s[(*i)++];
 				ft_hhll(form, s, i);
 			}
-			else if (L && form->mod[0] != 'j' && form->mod[0] != 'z')
+			else if ((L) && form->mod[0] != 'j' && form->mod[0] != 'z')
 			{
 				form->mod[0] = s[(*i)++];
 				ft_hhll(form, s, i);

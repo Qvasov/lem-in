@@ -14,7 +14,7 @@
 
 static void	ft_zerodata(t_data *data)
 {
-	data->ants = 0;
+    data->ants = 0;
 	data->start = NULL;
 	data->end = NULL;
 	data->rooms = NULL;
@@ -38,17 +38,13 @@ int			main(int ac, char **av)
 	t_data	data;
 	char	**str_split;
 	t_flags	flags;
-	int		fd;
 
 	ft_flags_lemin(&flags, ac, av);
-	fd = (flags.fd_path) ? open(flags.fd_path, O_RDONLY) : 0;
-	if (fd < 0)
-		ft_perror();
-	ft_read(fd, &str_split);
+	ft_lemin_read(&flags, &str_split);
 	ft_zerodata(&data);
 	ft_valid(&data, str_split);
 	ft_parse_data(&data, str_split);
-	ft_free_str_split(str_split);
+	ft_free_str_split(&str_split);
 	ft_ways(&data);
 	if (!data.old_ways)
 		ft_error(1);
