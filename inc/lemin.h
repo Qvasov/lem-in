@@ -47,6 +47,7 @@ typedef struct		s_way
 	size_t			path_cost;
 	struct s_way	*next;
 	struct s_way	*prev;
+	size_t			steps;
 }					t_way;
 
 typedef struct		s_link
@@ -83,7 +84,7 @@ typedef struct		s_data
 	t_room			*rooms;
 	size_t			rooms_count;
 	t_way			*ways;
-	t_way			*mod_ways;
+	t_way			*old_ways;
 	size_t			steps;
 	long			ways_count;
 	long			i_ants;
@@ -110,13 +111,13 @@ void				ft_valid_links(char *str, int *flag, t_data *data, long j);
 int					ft_valid_duplicates_rooms(t_data *data, char **strings);
 //int					ft_valid_duplicates_links(t_data *data, char **strings);
 int					ft_parse_data(t_data *data, char **str_split);
-int					ft_rooms(t_data *data, char *str);
+void				ft_rooms(t_data *data, char *str);
 t_room				*ft_createroom(char *line);
-int					ft_links(t_data *data, char *str);
+void				ft_links(t_data *data, char *str);
 t_link				*ft_createlink(t_room *room);
 int					ft_findrooms(t_data *data, char *link, t_room **room1,
 															t_room **room2);
-int					ft_ways(t_data *data);
+void				ft_ways(t_data *data);
 int					ft_suurballe(t_data *data);
 int					ft_dijkstra(t_data *data);
 void				ft_direction(t_path *path);

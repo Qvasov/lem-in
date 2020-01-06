@@ -41,16 +41,11 @@ static int	ft_min_steps_for_ants(t_way *way, size_t ants)
 	return (steps);
 }
 
-static int	ft_cmp_ways(t_way **old, t_way **new, size_t *steps_old,
-		size_t ants)
+static int	ft_cmp_ways(t_way **old, t_way **new)
 {
-	size_t	steps_new;
-
-	steps_new = ft_min_steps_for_ants(*new, ants);
-	if (steps_new < *steps_old)
+	if ((*new)->steps < (*old)->steps)
 	{
 		ft_free_way(*old);
-		*steps_old = steps_new;
 		*old = *new;
 		return (1);
 	}
@@ -80,29 +75,21 @@ static long	number_of_paths(t_room *start, t_room *end)
 	return (j < i ? j : i);
 }
 
-int			ft_ways(t_data *data)
+void		ft_ways(t_data *data)
 {
 	t_way	*new_ways;
-	size_t	steps;
-	int		suur;
 
-	steps = 0;
 	data->ways_count = number_of_paths(data->start, data->end); //находит ВОЗМОЖНОЕ наибольшее кол-во непересекающихся путей
-	while (data->ways_count > 0 && (suur = ft_suurballe(data)) > 0) //находит короткий путь и "блокирует его"
+	while (data->ways_count > 0 && ft_suurballe(data)) //находит короткий путь и "блокирует" его
 	{
 		--data->ways_count; //Удаление из возможнных
-		if (!(new_ways = ft_paths_ascending(data->start, data->end)))
-			return (-1);
-		if (!data->mod_ways)
-		{
-			data->mod_ways = new_ways;
-			steps = ft_min_steps_for_ants(new_ways, data->ants);
-		}
-		else if (!ft_cmp_ways(&data->mod_ways, &new_ways, &steps, data->ants))
+		new_ways = ft_paths_ascending(data->start, data->end);
+		if (new_ways)
+			new_ways->steps = ft_min_steps_for_ants(new_ways, data->ants); //sprosit u dimasa pro segu
+		if (!data->old_ways)
+			data->old_ways = new_ways;
+		else if (!ft_cmp_ways(&data->old_ways, &new_ways))
 			break ;
 	}
-	if (suur < 0)
-		return (-1);
-	data->steps = steps;
-	return (0);
+	data->steps = data->old_ways->steps;
 }

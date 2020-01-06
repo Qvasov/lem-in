@@ -55,8 +55,7 @@ t_way			*ft_paths_ascending(t_room *start, t_room *end)
 		return (NULL); //
 	turn_tail = turn_head;
 	ft_link_end(&turn_head, &turn_tail);
-	if (!(ways_begin = ft_ways_ascending(turn_head, turn_tail, start, end))) //много путей сразу ищет
-		return (NULL);
+	ways_begin = ft_ways_ascending(turn_head, turn_tail, start, end); //много путей сразу ищет
 	ft_null(turn_head, turn_tail, end);
 	return (ways_begin);
 }

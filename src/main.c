@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static int	ft_zerodata(t_data *data)
+static void	ft_zerodata(t_data *data)
 {
 	data->ants = 0;
 	data->start = NULL;
@@ -20,7 +20,7 @@ static int	ft_zerodata(t_data *data)
 	data->rooms = NULL;
 	data->rooms_count = 0;
 	data->ways = NULL;
-	data->mod_ways = NULL;
+	data->old_ways = NULL;
 	data->steps = 0;
 	data->ways_count = 0;
 	data->i_ants = 0;
@@ -31,7 +31,6 @@ static int	ft_zerodata(t_data *data)
 	data->i_links_end = 0;
 	data->i_start = 0;
 	data->i_end = 0;
-	return (1);
 }
 
 int			main(int ac, char **av)
@@ -50,10 +49,9 @@ int			main(int ac, char **av)
 	ft_valid(&data, str_split);
 	ft_parse_data(&data, str_split);
 	ft_free_str_split(str_split);
-	if (ft_ways(&data) < 0)
-		exit(-1);
-	if (!data.mod_ways)
-		exit(-1);
+	ft_ways(&data);
+	if (!data.old_ways)
+		ft_error(1);
 	data.start->ant = data.ants;
 	ft_lem_in(&data, data.steps);
 	ft_free_data(&data);

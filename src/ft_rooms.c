@@ -50,7 +50,7 @@ static t_room	*ft_createroom_xy(char *line)
 	return (room);
 }
 
-int				ft_rooms(t_data *data, char *str)
+void			ft_rooms(t_data *data, char *str)
 {
 	t_room	*room;
 
@@ -58,5 +58,4 @@ int				ft_rooms(t_data *data, char *str)
 	room->next = data->rooms;
 	data->rooms = room;
 	++data->rooms_count;
-	return (0);
 }

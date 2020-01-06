@@ -12,24 +12,24 @@
 
 #include "lemin.h"
 
-static t_way	*ft_create_way(t_path *path, size_t path_cost, t_way **ways)
+static void		ft_create_way(t_path *path, size_t path_cost, t_way **ways)
 {
 	t_way	*way;
 
 	if (!(way = (t_way *)malloc(sizeof(t_way))))
-		return (ft_free_path(path));
+		ft_perror();
 	way->path = path;
 	way->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
 	way->path_cost = path_cost;
 	way->prev = NULL;
 	way->next = *ways;
+	way->steps = 0;
 	if (*ways)
 		(*ways)->prev = way;
 	*ways = way;
-	return (way);
 }
 
-static int		ft_path(t_link *tail, t_way **ways)
+static void		ft_path(t_link *tail, t_way **ways)
 {
 	t_path	*tmp;
 	t_path	*path;
@@ -41,10 +41,7 @@ static int		ft_path(t_link *tail, t_way **ways)
 	{
 		tmp = path;
 		if (!(path = (t_path *)malloc(sizeof(t_path))))
-		{
-			ft_free_path(tmp);
-			return (0);
-		}
+			ft_perror();
 		path->room = tail->room;
 		path->next = tmp;
 		path->prev = NULL;
@@ -52,9 +49,7 @@ static int		ft_path(t_link *tail, t_way **ways)
 			tmp->prev = path;
 		tail = tail->parrent;
 	}
-	if (!(ft_create_way(path, path_cost, ways)))
-		return (0);
-	return (1);
+	ft_create_way(path, path_cost, ways);
 }
 
 static t_link	*ft_link_start(t_room *start)
@@ -90,8 +85,7 @@ int				ft_dijkstra(t_data *data)
 	}
 	if (end)
 	{
-		if (!ft_path(end, &data->ways))
-			return (-1);
+		ft_path(end, &data->ways);
 		ft_turn_null(turn_tail);
 		return (1);
 	}
