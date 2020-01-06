@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static int	ft_zerodata(t_data *data)
+static void	ft_zerodata(t_data *data)
 {
     data->ants = 0;
 	data->start = NULL;
@@ -31,7 +31,6 @@ static int	ft_zerodata(t_data *data)
 	data->i_links_end = 0;
 	data->i_start = 0;
 	data->i_end = 0;
-	return (1);
 }
 
 int			main(int ac, char **av)
@@ -39,18 +38,14 @@ int			main(int ac, char **av)
 	t_data	data;
 	char	**str_split;
 	t_flags	flags;
-	int		fd;
 
 	ft_flags_lemin(&flags, ac, av);
-	fd = (flags.fd_path) ? open(flags.fd_path, O_RDONLY) : 0;
-	if (fd < 0)
-		ft_perror();
-	ft_lemin_read(fd, &str_split);
+	ft_lemin_read(&flags, &str_split);
 	ft_zerodata(&data);
 	ft_valid(&data, str_split);
 	if (ft_parse_data(&data, str_split) < 0)
 		exit(-1);
-	ft_free_str_split(str_split);
+	ft_free_str_split(&str_split);
 	if (ft_ways(&data) < 0)
 		exit(-1);
 	if (!data.mod_ways)

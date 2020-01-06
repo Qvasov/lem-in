@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-int	ft_valid_ants(char *str, int *flag, t_data *data, long j)//LONG long
+int	ft_valid_ants(char *str, int *f, t_data *data, long j)//LONG long
 {
 	long	i;
 	char	*tmp;
@@ -25,7 +25,7 @@ int	ft_valid_ants(char *str, int *flag, t_data *data, long j)//LONG long
 	if (ft_strcmp(tmp, str))
 		ft_error(1);
 	free(tmp);//and save results?
-	ANTS = 1;
+	ft_bit_on(f, ANTS);
 	data->i_ants = j;
 	return (0);
 }

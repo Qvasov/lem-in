@@ -17,12 +17,12 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-# define ANTS		flag[0]
-# define ROOMS		flag[1]
-# define LINKS		flag[2]
-# define START		flag[3]
-# define END		flag[4]
-# define DEF_SE		flag[5]
+# define ANTS		0
+# define ROOMS		1
+# define LINKS		2
+# define START		3
+# define END		4
+# define DEF_SE		5
 
 # define BUFF_SIZE	2048
 
@@ -101,12 +101,12 @@ typedef struct		s_flags
 }					t_flags;
 
 void				ft_flags_lemin(t_flags *flags, int ac, char **av);
-int					ft_lemin_read(int fd, char ***data);
+int					ft_lemin_read(t_flags *flags, char ***data);
 int					ft_valid(t_data *data, char **strings);
 int					ft_valid_hash(char *str, int *flag);
-int					ft_valid_ants(char *str, int *flag, t_data *data, long j);
-int					ft_valid_rooms(char *str, int *flag, t_data *data, long j);
-void				ft_valid_links(char *str, int *flag, t_data *data, long j);
+int					ft_valid_ants(char *str, int *f, t_data *data, long j);
+int					ft_valid_rooms(char *str, int *f, t_data *data, long j);
+void				ft_valid_links(char *str, int *f, t_data *data, long j);
 int					ft_valid_duplicates_rooms(t_data *data, char **strings);
 
 //int				ft_valid_duplicates_links(t_data *data, char **strings);
@@ -131,7 +131,7 @@ t_way				*ft_ways_ascending(t_link *turn_head, t_link *turn_tail,
 void				ft_lem_in(t_data *data, size_t steps);
 void				ft_copy_char(char *str, int *i, char c);
 void				ft_copy_num(char *str, int *i, size_t ant);
-void				ft_free_str_split(char **str_split);
+void				ft_free_str_split(char ***str_split);
 void				ft_free_data(t_data *data);
 void				ft_free_links(t_link *links);
 void				ft_free_way(t_way *way);
