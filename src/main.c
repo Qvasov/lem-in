@@ -20,7 +20,7 @@ static void	ft_zerodata(t_data *data)
 	data->rooms = NULL;
 	data->rooms_count = 0;
 	data->ways = NULL;
-	data->mod_ways = NULL;
+	data->old_ways = NULL;
 	data->steps = 0;
 	data->ways_count = 0;
 	data->i_ants = 0;
@@ -43,13 +43,11 @@ int			main(int ac, char **av)
 	ft_lemin_read(&flags, &str_split);
 	ft_zerodata(&data);
 	ft_valid(&data, str_split);
-	if (ft_parse_data(&data, str_split) < 0)
-		exit(-1);
+	ft_parse_data(&data, str_split);
 	ft_free_str_split(&str_split);
-	if (ft_ways(&data) < 0)
-		exit(-1);
-	if (!data.mod_ways)
-		exit(-1);
+	ft_ways(&data);
+	if (!data.old_ways)
+		ft_error(1);
 	data.start->ant = data.ants;
 	ft_lem_in(&data, data.steps);
 	ft_free_data(&data);

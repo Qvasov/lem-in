@@ -39,7 +39,7 @@ static void	ft_step(t_data *data, size_t *ant, t_buf *buf)
 	t_path	*path;
 
 	buf->space = 0;
-	way = data->mod_ways;
+	way = data->old_ways;
 	while (way)
 	{
 		path = way->path;

@@ -31,5 +31,5 @@ void	ft_free_data(t_data *data)
 		free(tmp);
 	}
 	ft_free_way(data->ways);
-	ft_free_way(data->mod_ways);
+	ft_free_way(data->old_ways);
 }

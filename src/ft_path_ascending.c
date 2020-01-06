@@ -52,11 +52,10 @@ t_way			*ft_paths_ascending(t_room *start, t_room *end)
 	while (turn_head && turn_head->cost != -1)
 		turn_head = turn_head->next;
 	if (!turn_head)
-		return (NULL);
+		return (NULL); //
 	turn_tail = turn_head;
-	ft_link_end(&turn_head, &turn_tail);//rewrite
-	if (!(ways_begin = ft_ways_ascending(turn_head, turn_tail, start, end)))
-		return (NULL);
+	ft_link_end(&turn_head, &turn_tail);
+	ways_begin = ft_ways_ascending(turn_head, turn_tail, start, end); //много путей сразу ищет
 	ft_null(turn_head, turn_tail, end);
 	return (ways_begin);
 }
