@@ -46,8 +46,6 @@ int			main(int ac, char **av)
 	ft_parse_data(&data, str_split);
 	ft_free_str_split(&str_split);
 	ft_ways(&data);
-	if (!data.old_ways)
-		ft_error(1);
 	data.start->ant = data.ants;
 	ft_lem_in(&data, data.steps);
 	ft_free_data(&data);
