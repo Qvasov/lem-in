@@ -91,5 +91,6 @@ void		ft_ways(t_data *data)
 		else if (!ft_cmp_ways(&data->old_ways, &new_ways))
 			break ;
 	}
+	data->old_ways == NULL ? ft_error(10) : 1;//added condition to avoid SEG when no ways found
 	data->steps = data->old_ways->steps;
 }
