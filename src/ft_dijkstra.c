@@ -37,7 +37,7 @@ static void		ft_path(t_link *tail, t_way **ways)
 
 	path = NULL;
 	path_cost = tail->room->cost;
-	while (tail)
+	while (tail)//loop of the cycle on loop_check when ways_count == 17
 	{
 		tmp = path;
 		if (!(path = (t_path *)malloc(sizeof(t_path))))

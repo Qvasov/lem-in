@@ -83,7 +83,7 @@ void		ft_ways(t_data *data)
 
 	new_steps = 0;
 	data->ways_count = number_of_paths(data->start, data->end); //находит ВОЗМОЖНОЕ наибольшее кол-во непересекающихся путей
-	while (data->ways_count > 0 && ft_suurballe(data)) //находит короткий путь и "блокирует" его
+	while (data->ways_count > 0 && ft_suurballe(data)) //находит короткий путь и "блокирует" его //loop_test loops when ways_count == 17
 	{
 		--data->ways_count; //Удаление из возможнных
 		if ((new_ways = ft_paths_ascending(data->start, data->end)))
