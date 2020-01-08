@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static int	ft_roomcmp(char *room1, char *room2)
+static int	ft_roomcmp(char *room1, char *room2)//(start 0 1) && (100 100 100) --> duplicates??
 {
 	int		i;
 	int		j;
@@ -30,7 +30,7 @@ static int	ft_roomcmp(char *room1, char *room2)
 	while (room2[++j] && room2[j] != ' ')
 		;
 	while (room1[++i] && room2[++j])
-		if (room1[i] != room2[i])
+		if (room1[i] != room2[j])
 			return (0);
 	return (1);
 }
