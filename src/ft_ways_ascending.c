@@ -57,7 +57,6 @@ static t_way	*ft_add_path(t_link *head, t_way *ways, t_room *end)
 		ways->next = way;
 	way->prev = ways;
 	way->next = NULL;
-	way->steps = 0;
 	way->path_number = (ways) ? ways->path_number + 1 : 1;
 	ways = way;
 	return (ways);

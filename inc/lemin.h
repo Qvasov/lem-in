@@ -128,7 +128,7 @@ void				ft_turn_null(t_link *turn_tail);
 t_way				*ft_paths_ascending(t_room *start, t_room *end);
 t_way				*ft_ways_ascending(t_link *turn_head, t_link *turn_tail,
 												t_room *start, t_room *end);
-void				ft_lem_in(t_data *data, size_t steps);
+void				ft_lem_in(t_data *data);
 void				ft_copy_char(char *str, int *i, char c);
 void				ft_copy_num(char *str, int *i, size_t ant);
 void				ft_free_str_split(char ***str_split);

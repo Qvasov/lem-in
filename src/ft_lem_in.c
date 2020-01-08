@@ -45,11 +45,11 @@ static void	ft_step(t_data *data, size_t *ant, t_buf *buf)
 		path = way->path;
 		while (path)
 		{
-			if (path->room == data->start && (data->steps >= way->path_cost ||
-					way->path_number == 1) && data->start->ant)
+			if (path->room == data->start && (way->path_cost <= data->old_steps
+					|| way->path_number == 1) && data->start->ant)
 				ft_copy(data, path, buf, ++*ant);
-			else if (path->room->ant && path->room != data->start &&
-					path->room != data->end)
+			else if (path->room != data->start && path->room != data->end &&
+					path->room->ant)
 				ft_copy(data, path, buf, path->room->ant);
 			path = path->next;
 		}
@@ -57,7 +57,7 @@ static void	ft_step(t_data *data, size_t *ant, t_buf *buf)
 	}
 }
 
-void		ft_lem_in(t_data *data, size_t steps)
+void		ft_lem_in(t_data *data)
 {
 	size_t	ant;
 	t_buf	buf;
@@ -65,12 +65,11 @@ void		ft_lem_in(t_data *data, size_t steps)
 	ant = 0;
 	ft_bzero(buf.str, BUFF_SIZE);
 	buf.i = -1;
-	//steps = 7;
-	while (steps)
+	while (data->old_steps)
 	{
 		ft_step(data, &ant, &buf);
 		ft_copy_char(buf.str, &buf.i, '\n');
-		--steps;
+		--data->old_steps;
 	}
 	write(1, buf.str, buf.i + 1);
 }

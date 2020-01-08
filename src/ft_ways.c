@@ -19,20 +19,19 @@ static int	ft_min_steps_for_ants(t_way *way, size_t ants)
 	size_t	tmp;
 
 	steps = 0;
-	ost = 0;
+	ost = 0; //переменная для остатка шагов
 	while (way)
 	{
 		if (!way->prev)
 			steps = way->path_cost + ants - 1;
 		else if (steps > way->path_cost)
 		{
-			tmp = steps - (way->path_cost - 1);
-			steps = steps - tmp;
-			tmp = (ost) ? tmp - ost : tmp;
-			steps += ((tmp * (way->path_number - 1) + ost) % way->path_number) ?
-				(tmp * (way->path_number - 1) + ost) / way->path_number + 1 :
-				(tmp * (way->path_number - 1) + ost) / way->path_number;
-			ost = (tmp * (way->path_number - 1) + ost) % way->path_number;
+			tmp = steps - (way->path_cost - 1); //кол-во шагов подлежащие пересмотру
+			steps = steps - tmp;	//кол-во шагов которые не подлежащие пересмотру
+			tmp = (ost) ? tmp - 1: tmp;
+			steps += ((tmp * (way->path_number - 1)) + ost) / way->path_number; //новое кол-во шагов для иекущего пути
+			ost = (tmp * (way->path_number - 1) + ost) % way->path_number; //кол-во муравьев в остатке (в неполном шаге)
+			steps = (ost) ? steps + 1 : steps;
 		}
 		else if (steps <= way->path_cost)
 			break ;

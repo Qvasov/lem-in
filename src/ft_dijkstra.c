@@ -23,7 +23,6 @@ static void		ft_create_way(t_path *path, size_t path_cost, t_way **ways)
 	way->path_cost = path_cost;
 	way->prev = NULL;
 	way->next = *ways;
-	way->steps = 0;
 	if (*ways)
 		(*ways)->prev = way;
 	*ways = way;
