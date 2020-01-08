@@ -47,7 +47,6 @@ typedef struct		s_way
 	size_t			path_cost;
 	struct s_way	*next;
 	struct s_way	*prev;
-	size_t			steps;
 }					t_way;
 
 typedef struct		s_link
@@ -85,7 +84,7 @@ typedef struct		s_data
 	size_t			rooms_count;
 	t_way			*ways;
 	t_way			*old_ways;
-	size_t			steps;
+	size_t			old_steps;
 	long			ways_count;
 	long			i_ants;//index where ants saved
 	long			i_rooms_start;//index where rooms begin

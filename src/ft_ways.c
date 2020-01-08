@@ -41,12 +41,13 @@ static int	ft_min_steps_for_ants(t_way *way, size_t ants)
 	return (steps);
 }
 
-static int	ft_cmp_ways(t_way **old, t_way **new)
+static int	ft_cmp_ways(t_data *data, t_way **new_way, size_t new_steps)
 {
-	if ((*new)->steps < (*old)->steps)
+	if (new_steps < data->old_steps)
 	{
-		ft_free_way(*old);
-		*old = *new;
+		ft_free_way(data->old_ways);
+		data->old_ways = *new_way;
+		data->old_steps = new_steps;
 		return (1);
 	}
 	return (0);
@@ -78,19 +79,22 @@ static long	number_of_paths(t_room *start, t_room *end)
 void		ft_ways(t_data *data)
 {
 	t_way	*new_ways;
+	size_t	new_steps;
 
+	new_steps = 0;
 	data->ways_count = number_of_paths(data->start, data->end); //находит ВОЗМОЖНОЕ наибольшее кол-во непересекающихся путей
 	while (data->ways_count > 0 && ft_suurballe(data)) //находит короткий путь и "блокирует" его
 	{
 		--data->ways_count; //Удаление из возможнных
-		new_ways = ft_paths_ascending(data->start, data->end);
-		if (new_ways)
-			new_ways->steps = ft_min_steps_for_ants(new_ways, data->ants); //sprosit u dimasa pro segu
+		if ((new_ways = ft_paths_ascending(data->start, data->end)))
+			new_steps = ft_min_steps_for_ants(new_ways, data->ants); //sprosit u dimasa pro segu
 		if (!data->old_ways)
+		{
 			data->old_ways = new_ways;
-		else if (!ft_cmp_ways(&data->old_ways, &new_ways))
+			data->old_steps = new_steps;
+		}
+		else if (!ft_cmp_ways(data, &new_ways, new_steps))
 			break ;
 	}
 	data->old_ways == NULL ? ft_error(10) : 1;//added condition to avoid SEG when no ways found
-	data->steps = data->old_ways->steps;
 }
