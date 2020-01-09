@@ -71,20 +71,20 @@ int				ft_dijkstra(t_data *data)
 {
 	t_link	*turn_head;
 	t_link	*turn_tail;
-	t_link	*end;
+	t_link	*turn_end;
 
 	turn_head = ft_link_start(data->start);
 	turn_tail = turn_head;
-	end = NULL;
+	turn_end = NULL;
 	while (turn_head)
 	{
 		if (turn_head->room->links && turn_head->room != data->end)
-			ft_turn(&turn_head, &turn_tail, &end, data->end);
+			ft_turn(&turn_head, &turn_tail, &turn_end, data);
 		turn_head = turn_head->turn_next;
 	}
-	if (end)
+	if (turn_end)
 	{
-		ft_path(end, &data->ways);
+		ft_path(turn_end, &data->ways);
 		ft_turn_null(turn_tail);
 		return (1);
 	}

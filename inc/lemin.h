@@ -123,7 +123,7 @@ int					ft_suurballe(t_data *data);
 int					ft_dijkstra(t_data *data);
 void				ft_direction(t_path *path);
 void				ft_turn(t_link **head, t_link **tail, t_link **end,
-																t_room *e);
+																t_data *data);
 void				ft_turn_null(t_link *turn_tail);
 t_way				*ft_paths_ascending(t_room *start, t_room *end);
 t_way				*ft_ways_ascending(t_link *turn_head, t_link *turn_tail,

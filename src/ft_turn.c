@@ -26,7 +26,7 @@ void	ft_turn_null(t_link *turn_tail)
 	}
 }
 
-void	ft_turn(t_link **head, t_link **tail, t_link **end, t_room *e)
+void	ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
 {
 	t_link	*link;
 
@@ -34,7 +34,8 @@ void	ft_turn(t_link **head, t_link **tail, t_link **end, t_room *e)
 	while (link)
 	{
 		if (((*head)->room->cost + link->cost < link->room->cost) &&
-			(!(*head)->parrent || link->room != (*head)->parrent->room))
+			(!(*head)->parrent || link->room != (*head)->parrent->room) &&
+			link->room != data->start)
 		{
 			if (link->turn_in == 0)
 			{
@@ -45,7 +46,7 @@ void	ft_turn(t_link **head, t_link **tail, t_link **end, t_room *e)
 			}
 			link->parrent = *head;
 			link->room->cost = (*head)->room->cost + link->cost;
-			if (link->room == e)
+			if (link->room == data->end)
 				*end = link;
 		}
 		link = link->next;
