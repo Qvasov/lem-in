@@ -14,8 +14,8 @@
 
 static int	ft_linkcmp(char *link1, char *link2)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (link1[++i] && link2[i])
@@ -37,8 +37,8 @@ static int	ft_linkcmp(char *link1, char *link2)
 
 int			ft_valid_duplicates_links(t_data *data, char **strings)
 {
-	long	i;
-	long	j;
+	int	i;
+	int	j;
 
 	i = data->i_links_start - 1;
 	while (++i <= data->i_links_end)

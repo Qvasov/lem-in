@@ -14,7 +14,7 @@
 
 static void	ft_join_text(t_buf *buf, size_t ant, char *name)
 {
-	long	j;
+	int		j;
 
 	j = -1;
 	ft_copy_char(buf->str, &buf->i, 'L');

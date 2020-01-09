@@ -55,7 +55,7 @@ int	ft_lemin_read(t_flags *flags, char ***str_split)
 	char	*trash;
 	int		fd;
 
-	fd = (flags->fd_path) ? open(flags->fd_path, O_RDONLY) : 0;
+	fd = (flags->fd_path) ? open(flags->fd_path, O_RDONLY) : 0; //fd = 1?
 	(fd < 0) ? ft_perror() : 1;
 	init_str(&str);
 	while ((ret = read(fd, buf, 16384)) > 0)

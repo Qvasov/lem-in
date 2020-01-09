@@ -52,10 +52,10 @@ static int	ft_cmp_ways(t_data *data, t_way **new_way, size_t new_steps)
 	return (0);
 }
 
-static long	number_of_paths(t_room *start, t_room *end)
+static int	number_of_paths(t_room *start, t_room *end)
 {
-	long	i;
-	long	j;
+	int		i;
+	int		j;
 	t_link	*ptr;
 
 	i = 0;

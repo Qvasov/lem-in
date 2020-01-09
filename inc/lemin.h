@@ -51,7 +51,7 @@ typedef struct		s_way
 
 typedef struct		s_link
 {
-	long			cost;
+	int				cost;
 	struct s_room	*room_src;
 	struct s_room	*room;
 	struct s_link	*next;
@@ -71,7 +71,7 @@ typedef struct		s_room
 	struct s_room	*room_out;
 	struct s_room	*room_in;
 	size_t			ant;
-	long			cost;
+	int				cost;
 	struct s_room	*next;
 }					t_room;
 
@@ -85,14 +85,14 @@ typedef struct		s_data
 	t_way			*ways;
 	t_way			*old_ways;
 	size_t			old_steps;
-	long			ways_count;
-	long			i_ants;//index where ants saved
-	long			i_rooms_start;//index where rooms begin
-	long			i_rooms_end;//index where roms end
-	long			i_links_start;//index where links begin
-	long			i_links_end;//index where links end
-	long			i_start;//index of room start
-	long			i_end;//index of room end
+	int				ways_count;
+	int				i_ants;//index where ants saved
+	int				i_rooms_start;//index where rooms begin
+	int				i_rooms_end;//index where roms end
+	int				i_links_start;//index where links begin
+	int				i_links_end;//index where links end
+	int				i_start;//index of room start
+	int				i_end;//index of room end
 }					t_data;
 
 typedef struct		s_flags
@@ -104,9 +104,9 @@ void				ft_flags_lemin(t_flags *flags, int ac, char **av);
 int					ft_lemin_read(t_flags *flags, char ***data);
 int					ft_valid(t_data *data, char **strings);
 int					ft_valid_hash(char *str, int *flag);
-int					ft_valid_ants(char *str, int *f, t_data *data, long j);
-int					ft_valid_rooms(char *str, int *f, t_data *data, long j);
-void				ft_valid_links(char *str, int *f, t_data *data, long j);
+int					ft_valid_ants(char *str, int *f, t_data *data, int j);
+int					ft_valid_rooms(char *str, int *f, t_data *data, int j);
+void				ft_valid_links(char *str, int *f, t_data *data, int j);
 int					ft_valid_duplicates_rooms(t_data *data, char **strings);
 
 //int				ft_valid_duplicates_links(t_data *data, char **strings);

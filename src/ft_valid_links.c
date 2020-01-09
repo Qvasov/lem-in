@@ -12,9 +12,9 @@
 
 #include "lemin.h"
 
-void	ft_valid_links(char *str, int *f, t_data *data, long j)
+void	ft_valid_links(char *str, int *f, t_data *data, int j)
 {
-	long	i;
+	int	i;
 
 	i = 0;
 	while (str[i] && str[i] != '-' && str[i] != ' ')//condition for valid symbols

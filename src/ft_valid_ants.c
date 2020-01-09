@@ -12,9 +12,9 @@
 
 #include "lemin.h"
 
-int	ft_valid_ants(char *str, int *f, t_data *data, long j)//LONG long
+int	ft_valid_ants(char *str, int *f, t_data *data, int j)//LONG long
 {
-	long	i;
+	int		i;
 	char	*tmp;
 
 	i = -1;

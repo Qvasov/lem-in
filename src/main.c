@@ -49,6 +49,5 @@ int			main(int ac, char **av)
 	ft_lem_in(&data);
 	ft_free_data(&data);
 	return (0);
-	//(46)esli pshibka malloca to che togda sprosit u dimasa (poka chto prosto exit(-1))
 	//dobavit ft_perror v libu
 }

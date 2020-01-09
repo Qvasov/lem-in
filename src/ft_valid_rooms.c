@@ -12,9 +12,9 @@
 
 #include "lemin.h"
 
-int	ft_valid_rooms(char *str, int *f, t_data *data, long j)
+int	ft_valid_rooms(char *str, int *f, t_data *data, int j)
 {
-	long	i;
+	int		i;
 	int		space;
 
 	i = 0;

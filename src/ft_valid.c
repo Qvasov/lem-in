@@ -24,8 +24,8 @@ static void	flg(int f, int offset)
 */
 int			ft_valid(t_data *data, char **strings)
 {
-	long	i;
-	int		f;//let's do it on bits??
+	int	i;
+	int	f;//let's do it on bits??
 
 	f = 0;
 	i = -1;

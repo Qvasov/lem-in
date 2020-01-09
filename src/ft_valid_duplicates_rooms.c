@@ -37,8 +37,8 @@ static int	ft_roomcmp(char *room1, char *room2)//(start 0 1) && (100 100 100) --
 
 int			ft_valid_duplicates_rooms(t_data *data, char **strings)
 {
-	long	i;
-	long	j;
+	int	i;
+	int	j;
 
 	i = data->i_rooms_start - 1;
 	while (++i <= data->i_rooms_end)

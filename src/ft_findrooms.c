@@ -14,7 +14,7 @@
 
 int	ft_name_equ_room1(char *name_room, char *name_link)
 {
-	long	i;
+	int		i;
 
 	i = -1;
 	while (name_room[++i] && name_link[i] && name_link[i] != '-')
@@ -27,8 +27,8 @@ int	ft_name_equ_room1(char *name_room, char *name_link)
 
 int	ft_name_equ_room2(char *name_room, char *name_link)
 {
-	long	i;
-	long	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
