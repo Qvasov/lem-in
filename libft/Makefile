@@ -39,6 +39,8 @@ OBJS = $(addprefix $(DIR_O),$(SRC:.c=.o))
 
 HEADO = libft.h.gch
 
+CC = gcc
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -48,7 +50,7 @@ $(NAME): $(OBJS)
 	ranlib $(NAME)
 
 $(DIR_O)%.o: $(DIR_S)%.c
-	mkdir -p $(DIR_O)
+	@mkdir -p $(DIR_O)
 	$(CC) $(FLAGS) -o $@ -c $<
 
 clean:

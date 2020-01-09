@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: shunt <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: dbennie <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/08/10 13:25:42 by shunt             #+#    #+#              #
-#    Updated: 2019/12/14 18:35:21 by shunt            ###   ########.fr        #
+#    Created: 2020/01/09 19:21:40 by dbennie           #+#    #+#              #
+#    Updated: 2020/01/09 19:21:46 by dbennie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ LIB_INC			=	$(addprefix -I, $(LIB_INC_PATH))
 
 SRC_PATH		=	src/
 INC_PATH		=	inc/
+OBJ_PATH		=	obj/
 
 SRC_NAME		=	ft_copy_char.c ft_lemin_read.c ft_copy_num.c ft_rooms.c\
 					ft_dijkstra.c ft_suurballe.c ft_direction.c ft_turn.c\
@@ -64,22 +65,24 @@ LFLAGS = -L $(LIB_PATH) -lft
 
 .PHONY: all clean fclean re lib
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(addprefix $(OBJ_PATH), $(SRC_NAME:.c=.o))
 
 LIB = make -C $(LIB_PATH)
 
-%.o: %.c $(INC)
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC)
+	@mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
+
 	$(LIB)
 	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $^ $(LFLAGS)
 
 clean:
 	make clean -C $(LIB_PATH)
-	rm -f $(OBJ)
+	rm -rf $(OBJ_PATH)
 
 fclean: clean
 	make fclean -C $(LIB_PATH)
