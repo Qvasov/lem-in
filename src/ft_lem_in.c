@@ -63,7 +63,7 @@ void		ft_lem_in(t_data *data)
 	t_buf	buf;
 
 	ant = 0;
-	ft_bzero(buf.str, BUFF_SIZE);
+	//ft_bzero(buf.str, BUFF_SIZE); konsultating s dimasom
 	buf.i = -1;
 	while (data->old_steps)
 	{
