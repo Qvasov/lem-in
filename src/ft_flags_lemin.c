@@ -2,7 +2,8 @@
 
 static int	ft_usage()
 {
-	write(1, "usage: ./lem-in [-f <path>] [<number_of_ants> <the_rooms> <the_links>]\n", 72);//
+	write(1, "usage: ./lem-in [-flags] < <lem-in_map>\n", 40);
+	write(1, "-f <lem-in_map> - put the map as an argument\n", 45);
 	exit(0);
 }
 

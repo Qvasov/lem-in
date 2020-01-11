@@ -101,5 +101,6 @@ char				*ft_ulltoa(unsigned long long n);
 int					ft_bit_check(int flag, int position);
 void				ft_bit_on(int *flag, int position);
 void				ft_bit_off(int *flag, int position);
+int					ft_satoi(const char *str, int *i);
 
 #endif

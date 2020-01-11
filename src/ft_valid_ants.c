@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-int	ft_valid_ants(char *str, int *f, t_data *data, int j)//LONG long
+int	ft_valid_ants(char *str, int *f, t_data *data, int j)
 {
 	int		i;
 	char	*tmp;

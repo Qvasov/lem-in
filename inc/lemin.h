@@ -101,7 +101,7 @@ typedef struct		s_flags
 }					t_flags;
 
 void				ft_flags_lemin(t_flags *flags, int ac, char **av);
-int					ft_lemin_read(t_flags *flags, char ***data);
+char				*ft_lemin_read(t_flags *flags, char ***str_split);
 int					ft_valid(t_data *data, char **strings);
 int					ft_valid_hash(char *str, int *flag);
 int					ft_valid_ants(char *str, int *f, t_data *data, int j);

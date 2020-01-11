@@ -24,7 +24,7 @@ static char	**str_data_match(char *str, char c)
 	char **ptr;
 
 	i = ft_strchr_count(str, c);
-	i < 5 ? ft_error(1) : 1;//or 6?
+	i < 5 ? ft_error(1) : 1;
 	if (!(ptr = (char **)malloc(sizeof(char *) * (i + 1))))
 		ft_perror();
 	i = 0;
@@ -47,7 +47,7 @@ static char	**str_data_match(char *str, char c)
 	return (ptr);
 }
 
-int	ft_lemin_read(t_flags *flags, char ***str_split)
+char *ft_lemin_read(t_flags *flags, char ***str_split)
 {
 	int		ret;
 	char	buf[16385];
@@ -55,7 +55,7 @@ int	ft_lemin_read(t_flags *flags, char ***str_split)
 	char	*trash;
 	int		fd;
 
-	fd = (flags->fd_path) ? open(flags->fd_path, O_RDONLY) : 0; //fd = 1?
+	fd = (flags->fd_path) ? open(flags->fd_path, O_RDONLY) : 0;
 	(fd < 0) ? ft_perror() : 1;
 	init_str(&str);
 	while ((ret = read(fd, buf, 16384)) > 0)
@@ -69,6 +69,8 @@ int	ft_lemin_read(t_flags *flags, char ***str_split)
 	(ret < 0) ? ft_perror() : 1;
 	if (fd > 2)
 		((close(fd)) < 0) ? ft_perror() : 1;
+	if (!(trash = ft_strdup(str)))
+		ft_perror();
 	*str_split = str_data_match(str, '\n');
-	return (0);
+	return (trash);
 }

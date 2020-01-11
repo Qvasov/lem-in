@@ -12,6 +12,13 @@
 
 #include "lemin.h"
 
+static void	print_n_free_map_data(char **map_data)
+{
+	ft_printf("%s\n", *map_data);
+	free(*map_data);
+	*map_data = NULL;
+}
+
 static void	ft_zerodata(t_data *data)
 {
     data->ants = 0;
@@ -36,16 +43,18 @@ int			main(int ac, char **av)
 {
 	t_data	data;
 	char	**str_split;
+	char 	*map_data;
 	t_flags	flags;
 
 	ft_flags_lemin(&flags, ac, av);
-	ft_lemin_read(&flags, &str_split);
+	map_data = ft_lemin_read(&flags, &str_split);
 	ft_zerodata(&data);
 	ft_valid(&data, str_split);
 	ft_parse_data(&data, str_split);
 	ft_free_str_split(&str_split);
 	ft_ways(&data);
 	data.start->ant = data.ants;
+	print_n_free_map_data(&map_data);
 	ft_lem_in(&data);
 	ft_free_data(&data);
 	return (0);

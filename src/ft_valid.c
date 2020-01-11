@@ -11,21 +11,11 @@
 /* ************************************************************************** */
 
 #include "lemin.h"
-/*
-static void	flg(int f, int offset)
-{
-	flag[0] = 0;
-	flag[1] = 0;
-	flag[2] = 0;
-	flag[3] = 0;
-	flag[4] = 0;
-	flag[5] = 0;
-}
-*/
+
 int			ft_valid(t_data *data, char **strings)
 {
 	int	i;
-	int	f;//let's do it on bits??
+	int	f;
 
 	f = 0;
 	i = -1;
