@@ -17,7 +17,7 @@ void	ft_valid_links(char *str, int *f, t_data *data, int j)
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != '-' && str[i] != ' ')//condition for valid symbols
+	while (str[i] && str[i] != '-' && str[i] != ' ')
 		i++;
 	if (str[i] == '-' && str[i + 1])
 	{
@@ -27,7 +27,7 @@ void	ft_valid_links(char *str, int *f, t_data *data, int j)
 		data->i_links_end = j;
 		i++;
 	}
-	while (str[i] && str[i] != '-' && str[i] != ' ')//condition for valid symbols
+	while (str[i] && str[i] != '-' && str[i] != ' ')
 		i++;
 	(str[i] || !(ft_bit_check(*f, LINKS))) ? ft_error(3) : 1;
 }

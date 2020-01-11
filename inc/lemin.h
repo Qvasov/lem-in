@@ -43,8 +43,8 @@ typedef struct		s_path
 typedef struct		s_way
 {
 	struct s_path	*path;
-	size_t			path_number;
-	size_t			path_cost;
+	int				path_number;
+	int				path_cost;
 	struct s_way	*next;
 	struct s_way	*prev;
 }					t_way;
@@ -65,26 +65,26 @@ typedef struct		s_link
 typedef struct		s_room
 {
 	char			*name;
-	size_t			x;
-	size_t			y;
+	int				x;
+	int				y;
 	t_link			*links;
 	struct s_room	*room_out;
 	struct s_room	*room_in;
-	size_t			ant;
+	int				ant;//
 	int				cost;
 	struct s_room	*next;
 }					t_room;
 
 typedef struct		s_data
 {
-	size_t			ants;
+	int				ants;
 	t_room			*start;
 	t_room			*end;
 	t_room			*rooms;
-	size_t			rooms_count;
+	int				rooms_count;
 	t_way			*ways;
 	t_way			*old_ways;
-	size_t			old_steps;
+	int				old_steps;
 	int				ways_count;
 	int				i_ants;//index where ants saved
 	int				i_rooms_start;//index where rooms begin
@@ -130,7 +130,7 @@ t_way				*ft_ways_ascending(t_link *turn_head, t_link *turn_tail,
 												t_room *start, t_room *end);
 void				ft_lem_in(t_data *data);
 void				ft_copy_char(char *str, int *i, char c);
-void				ft_copy_num(char *str, int *i, size_t ant);
+void				ft_copy_num(char *str, int *i, int ant);
 void				ft_free_str_split(char ***str_split);
 void				ft_free_data(t_data *data);
 void				ft_free_links(t_link *links);

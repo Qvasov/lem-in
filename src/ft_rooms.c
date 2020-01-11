@@ -14,12 +14,12 @@
 
 t_room			*ft_createroom(char *name)
 {
-	size_t	i;
+	int		i;
 	t_room	*room;
 
 	if (!(room = (t_room *)malloc(sizeof(t_room))))
 		ft_perror();
-	i = 1;
+	i = 0; // why was 1??
 	while (name[i] != '\0' && name[i] != ' ')
 		++i;
 	if (!(room->name = ft_strsub(name, 0, i)))
@@ -37,16 +37,17 @@ t_room			*ft_createroom(char *name)
 
 static t_room	*ft_createroom_xy(char *line)
 {
-	size_t	i;
+	int		i;
 	t_room	*room;
 
 	room = ft_createroom(line);
-	i = ft_strlen(room->name) + 1;
-	room->x = ft_atoll(&line[i]);
-	while (line[i] != ' ')
-		++i;
-	i = i + 1;
-	room->y = ft_atoll(&line[i]);
+	i = (int)ft_strlen(room->name) + 1;
+	line += i;
+	room->x = ft_satoi(line, &i);
+	(i == 0 || line[i] != ' ') ? ft_error(2) : 1;
+	line += i;
+	room->y = ft_satoi(line, &i);
+	(i == 0 || line[i] != 0) ? ft_error(2) : 1;
 	return (room);
 }
 

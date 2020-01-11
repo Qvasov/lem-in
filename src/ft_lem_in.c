@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static void	ft_join_text(t_buf *buf, size_t ant, char *name)
+static void	ft_join_text(t_buf *buf, int ant, char *name)
 {
 	int		j;
 
@@ -24,7 +24,7 @@ static void	ft_join_text(t_buf *buf, size_t ant, char *name)
 		ft_copy_char(buf->str, &buf->i, name[j]);
 }
 
-static void	ft_copy(t_data *data, t_path *path, t_buf *buf, size_t ant)
+static void	ft_copy(t_data *data, t_path *path, t_buf *buf, int ant)
 {
 	(buf->space) ? ft_copy_char(buf->str, &buf->i, ' ') : (buf->space = 1);
 	ft_join_text(buf, ant, path->prev->room->name);
@@ -33,7 +33,7 @@ static void	ft_copy(t_data *data, t_path *path, t_buf *buf, size_t ant)
 	(path->room == data->start) ? --path->room->ant : (path->room->ant = 0);
 }
 
-static void	ft_step(t_data *data, size_t *ant, t_buf *buf)
+static void	ft_step(t_data *data, int *ant, t_buf *buf)
 {
 	t_way	*way;
 	t_path	*path;
@@ -59,7 +59,7 @@ static void	ft_step(t_data *data, size_t *ant, t_buf *buf)
 
 void		ft_lem_in(t_data *data)
 {
-	size_t	ant;
+	int		ant;
 	t_buf	buf;
 
 	ant = 0;

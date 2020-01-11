@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static t_path	*ft_path(t_link *head, size_t *cost, t_room *end)
+static t_path	*ft_path(t_link *head, int *cost, t_room *end)
 {
 	t_path	*path;
 	t_path	*tmp;
@@ -45,7 +45,7 @@ static t_way	*ft_add_path(t_link *head, t_way *ways, t_room *end)
 {
 	t_path	*path;
 	t_way	*way;
-	size_t	cost;
+	int		cost;
 
 	cost = 0;
 	path = ft_path(head, &cost, end);

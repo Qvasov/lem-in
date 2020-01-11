@@ -12,11 +12,11 @@
 
 #include "lemin.h"
 
-static int	ft_min_steps_for_ants(t_way *way, size_t ants)
+static int	ft_min_steps_for_ants(t_way *way, int ants)
 {
-	size_t	steps;
-	size_t	ost;
-	size_t	tmp;
+	int	steps;
+	int	ost;
+	int	tmp;
 
 	steps = 0;
 	ost = 0; //переменная для остатка шагов
@@ -40,7 +40,7 @@ static int	ft_min_steps_for_ants(t_way *way, size_t ants)
 	return (steps);
 }
 
-static int	ft_cmp_ways(t_data *data, t_way **new_way, size_t new_steps)
+static int	ft_cmp_ways(t_data *data, t_way **new_way, int new_steps)
 {
 	if (new_steps < data->old_steps)
 	{
@@ -78,7 +78,7 @@ static int	number_of_paths(t_room *start, t_room *end)
 void		ft_ways(t_data *data)
 {
 	t_way	*new_ways;
-	size_t	new_steps;
+	int		new_steps;
 
 	new_steps = 0;
 	data->ways_count = number_of_paths(data->start, data->end); //находит ВОЗМОЖНОЕ наибольшее кол-во непересекающихся путей

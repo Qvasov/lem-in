@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static void		ft_create_way(t_path *path, size_t path_cost, t_way **ways)
+static void		ft_create_way(t_path *path, int path_cost, t_way **ways)
 {
 	t_way	*way;
 
@@ -32,7 +32,7 @@ static void		ft_path(t_link *tail, t_way **ways)
 {
 	t_path	*tmp;
 	t_path	*path;
-	size_t	path_cost;
+	int		path_cost;
 
 	path = NULL;
 	path_cost = tail->room->cost;

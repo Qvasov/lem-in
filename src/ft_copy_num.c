@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-void	ft_copy_num(char *str, int *i, size_t ant)
+void	ft_copy_num(char *str, int *i, int ant)
 {
 	if (ant / 10)
 		ft_copy_num(str, i, ant / 10);
