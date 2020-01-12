@@ -1,5 +1,6 @@
 220
 #Here is the number of lines required: 45
+#After turn_update cond 1: loop fixed
 ##start
 Hsb3 2 2
 ##end
