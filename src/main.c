@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 22:28:23 by dbennie           #+#    #+#             */
-/*   Updated: 2019/10/11 22:28:47 by dbennie          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:26:38 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	print_n_free_map_data(char **map_data)
 
 static void	ft_zerodata(t_data *data)
 {
-    data->ants = 0;
+	data->ants = 0;
 	data->start = NULL;
 	data->end = NULL;
 	data->rooms = NULL;
@@ -43,7 +43,7 @@ int			main(int ac, char **av)
 {
 	t_data	data;
 	char	**str_split;
-	char 	*map_data;
+	char	*map_data;
 	t_flags	flags;
 
 	ft_flags_lemin(&flags, ac, av);
@@ -58,5 +58,4 @@ int			main(int ac, char **av)
 	ft_lem_in(&data);
 	ft_free_data(&data);
 	return (0);
-	//dobavit ft_perror v libu
 }

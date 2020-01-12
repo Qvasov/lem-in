@@ -6,7 +6,7 @@
 /*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 17:44:00 by dbennie           #+#    #+#             */
-/*   Updated: 2020/01/08 10:18:30 by ddarell          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:25:48 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_error(int id)
 {
-	write (2, "ERROR\n", 6);
+	write(2, "ERROR\n", 6);
 	exit(id);
 }
 
-void ft_perror()
+void	ft_perror(void)
 {
 	perror("lem-in");
-	exit (1);
+	exit(1);
 }

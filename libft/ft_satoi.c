@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_spec.c                                     :+:      :+:    :+:   */
+/*   ft_satoi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/08 21:44:01 by ddarell           #+#    #+#             */
-/*   Updated: 2019/12/08 21:44:24 by ddarell          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:38:38 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
- *	special atoi function with error feedback. If error occurred or no number found,
- *	(*i) is set to 0 and returned value is 0. When no error, (*i) saves
- *	number of chars atoi processed with
+**	Special atoi function with error feedback.
+**	If error occurred or no number found,
+**	(*i) is set to 0 and returned value is 0. When no error, (*i) saves
+**	number of chars atoi processed with
 */
 
 static int	count_number(const char *str, int ord, int f, int *i)
