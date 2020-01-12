@@ -34,11 +34,11 @@ static int	is_loopa(t_link *link)
 	while(ptr)
 	{
 		if (
-//		link->room == ptr->room_src ||
-		link->room->room_out == ptr->room_src->room_in// ||
-//		link->room->room_in == ptr->room_src->room_out ||
-//		link->room == ptr->room_src->room_out ||
-//		link->room->room_in == ptr->room_src
+		(link->room && link->room == ptr->room_src) ||
+		(link->room->room_out && link->room->room_out == ptr->room_src->room_in) ||
+		(link->room->room_in && link->room->room_in == ptr->room_src->room_out) ||
+		(link->room && link->room == ptr->room_src->room_out) ||
+		(link->room->room_in && link->room->room_in == ptr->room_src)
 		)
 			return (1);
 		ptr = ptr->parrent;
@@ -57,19 +57,19 @@ void	ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
 		(!(*head)->parrent || ptr->room != (*head)->parrent->room) &&
 		ptr->room != data->start)
 		{
-			if (ptr->room->cost != 0x7FFFFFFF)
-				if ((is_loopa(ptr)))
-				{
-					ptr = ptr->next;
-					continue ;
-				}
-			if (ptr->turn_in == 0)
-			{
+//			if (ptr->room->cost != 0x7FFFFFFF)
+//				if ((is_loopa(ptr)))
+//				{
+//					ptr = ptr->next;
+//					continue ;
+//				}
+//			if (ptr->turn_in == 0) попробовать удалить очередь или переделать
+//			{
 				(*tail)->turn_next = ptr;
 				ptr->turn_prev = *tail;
 				ptr->turn_in = 1;
 				*tail = (*tail)->turn_next;
-			}
+//			}
 			ptr->parrent = *head;
 			ptr->room->cost = (*head)->room->cost + ptr->cost;
 			if (ptr->room == data->end)
