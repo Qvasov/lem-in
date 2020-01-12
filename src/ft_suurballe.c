@@ -34,7 +34,7 @@ static void	ft_out(t_room *in, t_room *out, t_room *room)
 		link->cost = 0;
 	}
 	else
-		in->links = link;
+		in->links = link; // то есть NULL?
 }
 
 static void	ft_duplicate_rooms(t_path *path)
@@ -48,9 +48,8 @@ static void	ft_duplicate_rooms(t_path *path)
 		if (!path->next || !path->next->next)
 			return ;
 		in = path->next->room;
-		out = NULL;
 		if (!in->room_out && !in->room_in)
-			ft_out(in, out, path->room);
+			ft_out(in, NULL, path->room); // сдесь NULL загоняется для того чтобы не обьявлять переменную в теле функции (Норминет)
 		else if (in->room_out && !path->room->room_in)
 		{
 			out = path->room;

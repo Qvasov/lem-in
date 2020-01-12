@@ -26,25 +26,25 @@ void	ft_turn_null(t_link *turn_tail)
 	}
 }
 
-static int	is_loopa(t_link *link)
-{
-	t_link	*ptr;
-
-	ptr = link;
-	while(ptr)
-	{
-		if (
-		(link->room && link->room == ptr->room_src) ||
-		(link->room->room_out && link->room->room_out == ptr->room_src->room_in) ||
-		(link->room->room_in && link->room->room_in == ptr->room_src->room_out) ||
-		(link->room && link->room == ptr->room_src->room_out) ||
-		(link->room->room_in && link->room->room_in == ptr->room_src)
-		)
-			return (1);
-		ptr = ptr->parrent;
-	}
-	return (0);
-}
+//static int	is_loopa(t_link *link)
+//{
+//	t_link	*ptr;
+//
+//	ptr = link;
+//	while(ptr)
+//	{
+//		if (
+//		(link->room && link->room == ptr->room_src) ||
+//		(link->room->room_out && link->room->room_out == ptr->room_src->room_in) ||
+//		(link->room->room_in && link->room->room_in == ptr->room_src->room_out) ||
+//		(link->room && link->room == ptr->room_src->room_out) ||
+//		(link->room->room_in && link->room->room_in == ptr->room_src)
+//		)
+//			return (1);
+//		ptr = ptr->parrent;
+//	}
+//	return (0);
+//}
 
 void	ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
 {
@@ -63,13 +63,13 @@ void	ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
 //					ptr = ptr->next;
 //					continue ;
 //				}
-//			if (ptr->turn_in == 0) попробовать удалить очередь или переделать
-//			{
+			if (ptr->turn_in == 0) //попробовать удалить очередь или переделать
+			{
 				(*tail)->turn_next = ptr;
 				ptr->turn_prev = *tail;
 				ptr->turn_in = 1;
 				*tail = (*tail)->turn_next;
-//			}
+			}
 			ptr->parrent = *head;
 			ptr->room->cost = (*head)->room->cost + ptr->cost;
 			if (ptr->room == data->end)
