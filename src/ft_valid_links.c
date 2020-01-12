@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid_links.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:22:43 by dbennie           #+#    #+#             */
-/*   Updated: 2019/12/11 20:22:44 by dbennie          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:41:57 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ void	ft_valid_links(char *str, int *f, t_data *data, int j)
 		i++;
 	(str[i] || !(ft_bit_check(*f, LINKS))) ? ft_error(3) : 1;
 }
-//rewrite with - and space

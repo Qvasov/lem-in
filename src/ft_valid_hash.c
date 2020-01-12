@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid_hash.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 19:48:31 by dbennie           #+#    #+#             */
-/*   Updated: 2019/12/11 19:48:33 by dbennie          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:42:23 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_valid_hash(char *str, int *f)
 		&& !(ft_bit_check(*f, LINKS)) && !(ft_bit_check(*f, DEF_SE)))
 		{
 			ft_bit_on(f, START);
-			ft_bit_on(f, DEF_SE);//start/end definition flag
+			ft_bit_on(f, DEF_SE);
 		}
 		else
 			ft_error(4);

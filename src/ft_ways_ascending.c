@@ -49,7 +49,7 @@ static t_way	*ft_add_path(t_link *head, t_way *ways, t_room *end)
 
 	cost = 0;
 	path = ft_path(head, &cost, end);
-	if (!(way = (t_way *)malloc(sizeof(t_way))))
+	if (!(way = (t_way *)malloc(sizeof(t_way)))) //possibly no free
 		ft_perror();
 	way->path = path;
 	way->path_cost = cost;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid_rooms.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 18:59:52 by dbennie           #+#    #+#             */
-/*   Updated: 2019/12/11 18:59:53 by dbennie          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:41:38 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	check_room(char *str)
 	(space != 2) ? ft_error(2) : 1;
 }
 
-int	ft_valid_rooms(char *str, int *f, t_data *data, int j)
+int			ft_valid_rooms(char *str, int *f, t_data *data, int j)
 {
 	check_room(str);
 	ft_bit_on(f, ROOMS);
@@ -51,5 +51,3 @@ int	ft_valid_rooms(char *str, int *f, t_data *data, int j)
 	ft_bit_off(f, DEF_SE);
 	return (0);
 }
-//check naming on -
-//negative coordinates and positive with +

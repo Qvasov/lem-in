@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid_duplicates_rooms.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:43:29 by dbennie           #+#    #+#             */
-/*   Updated: 2019/12/11 20:43:29 by dbennie          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:42:30 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static int	ft_roomcmp(char *room1, char *room2)//(start 0 1) && (100 100 100) --> duplicates??
+static int	ft_roomcmp(char *room1, char *room2)
 {
 	int		i;
 	int		j;

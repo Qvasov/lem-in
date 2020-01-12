@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 20:06:00 by dbennie           #+#    #+#             */
-/*   Updated: 2019/10/14 20:06:02 by dbennie          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:40:22 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ int			ft_valid(t_data *data, char **strings)
 //	ft_valid_duplicates_links(data, strings);
 	return (0);
 }
-//valid no minus
