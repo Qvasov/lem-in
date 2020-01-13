@@ -30,6 +30,6 @@ void	ft_free_data(t_data *data)
 		free(tmp->room_out);
 		free(tmp);
 	}
-	ft_free_way(data->ways);
+//	ft_free_way(data->ways);
 	ft_free_way(data->old_ways);
 }

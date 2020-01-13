@@ -26,7 +26,8 @@ static void	ft_zerodata(t_data *data)
 	data->end = NULL;
 	data->rooms = NULL;
 	data->rooms_count = 0;
-	data->ways = NULL;
+	data->vars = NULL;
+//	data->ways = NULL;
 	data->old_ways = NULL;
 	data->ways_count = 0;
 	data->i_ants = 0;

@@ -84,7 +84,7 @@ int				ft_dijkstra(t_data *data)
 	}
 	if (turn_end)
 	{
-		ft_path(turn_end, &data->ways);
+		ft_path(turn_end, &data->old_ways);
 		ft_turn_null(turn_tail);
 		return (1);
 	}

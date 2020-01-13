@@ -40,16 +40,25 @@ static int	ft_min_steps_for_ants(t_way *way, int ants)
 	return (steps);
 }
 
-static int	ft_cmp_ways(t_data *data, t_way **new_way, int new_steps)
+static t_var	*ft_cmp_vars(t_var *vars)
 {
-	if (new_steps <= data->old_steps)
-	{
-		ft_free_way(data->old_ways);
-		data->old_ways = *new_way;
-		data->old_steps = new_steps;
-		return (1);
-	}
-	return (0);
+	t_var	*ptr;
+	int		best_steps;
+	t_var	*best_var;
+
+	ptr = vars;
+	best_steps = ptr->steps;
+	best_var = ptr;
+	while ((ptr = ptr->next))
+		if (ptr->steps < best_steps)
+		{
+			best_steps = ptr->steps;
+			best_var = ptr;
+		}
+	if (!best_var)
+		ft_error(1);
+
+	return (best_var);
 }
 
 static int	number_of_paths(t_room *start, t_room *end)
@@ -79,6 +88,7 @@ void		ft_ways(t_data *data)
 {
 	t_way	*new_ways;
 	int		new_steps;
+	t_var	*var;
 
 	new_steps = 0;
 	data->ways_count = number_of_paths(data->start, data->end); //находит ВОЗМОЖНОЕ наибольшее кол-во непересекающихся путей
@@ -87,13 +97,20 @@ void		ft_ways(t_data *data)
 		--data->ways_count; //Удаление из возможнных
 		if ((new_ways = ft_paths_ascending(data->start, data->end)))
 			new_steps = ft_min_steps_for_ants(new_ways, data->ants); //sprosit u dimasa pro segu
-		if (!data->old_ways)
+		!(var = (t_var *)malloc(sizeof(t_var))) ? ft_perror() : 0;
+		var->ways = new_ways;
+		var->steps = new_steps;
+		var->next = NULL;
+		if (!data->vars)
+			data->vars = var;
+		else
 		{
-			data->old_ways = new_ways;
-			data->old_steps = new_steps;
+			var->next = data->vars;
+			data->vars = var;
 		}
-		else if (!ft_cmp_ways(data, &new_ways, new_steps))
-			break ;
 	}
-	data->old_ways == NULL ? ft_error(10) : 1;//added condition to avoid SEG when no ways found
+	data->vars == NULL ? ft_error(10) : 1;//added condition to avoid SEG when no ways found
+	data->best_var = ft_cmp_vars(data->vars);
+	data->old_ways = data->best_var->ways;
+	data->old_steps = data->best_var->steps;
 }

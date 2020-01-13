@@ -49,6 +49,13 @@ typedef struct		s_way
 	struct s_way	*prev;
 }					t_way;
 
+typedef struct		s_var
+{
+	t_way 			*ways;
+	int				steps;
+	struct s_var 	*next;
+}					t_var;
+
 typedef struct		s_link
 {
 	int				cost;
@@ -82,7 +89,8 @@ typedef struct		s_data
 	t_room			*end;
 	t_room			*rooms;
 	int				rooms_count;
-	t_way			*ways;
+	t_var			*vars;
+	t_var			*best_var;
 	t_way			*old_ways;
 	int				old_steps;
 	int				ways_count;
