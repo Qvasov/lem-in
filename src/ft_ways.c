@@ -42,7 +42,7 @@ static int	ft_min_steps_for_ants(t_way *way, int ants)
 
 static int	ft_cmp_ways(t_data *data, t_way **new_way, int new_steps)
 {
-	if (new_steps < data->old_steps)
+	if (new_steps <= data->old_steps)
 	{
 		ft_free_way(data->old_ways);
 		data->old_ways = *new_way;
