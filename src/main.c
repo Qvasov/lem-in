@@ -40,14 +40,15 @@ static void	ft_zerodata(t_data *data)
 	data->i_end = 0;
 }
 
-static void print_ways(t_way *way)
+static void	print_ways(t_way *way)
 {
 	t_path *ptr;
+
 	while (way)
 	{
 		ptr = way->path;
 		printf("%d) ", way->path_number);
-		while(ptr)
+		while (ptr)
 		{
 			printf("%s", ptr->room->name);
 			if (ptr->room->room_in && !ptr->room->room_out)

@@ -28,7 +28,7 @@ static int	ft_min_steps_for_ants(t_way *way, int ants)
 		{
 			tmp = steps - (way->path_cost - 1); //кол-во шагов подлежащие пересмотру
 			steps = steps - tmp;	//кол-во шагов которые не подлежащие пересмотру
-			tmp = (ost) ? tmp - 1: tmp;
+			tmp = (ost) ? tmp - 1 : tmp;
 			steps += ((tmp * (way->path_number - 1)) + ost) / way->path_number; //новое кол-во шагов для иекущего пути
 			ost = (tmp * (way->path_number - 1) + ost) % way->path_number; //кол-во муравьев в остатке (в неполном шаге)
 			steps = (ost) ? steps + 1 : steps;

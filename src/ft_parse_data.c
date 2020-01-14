@@ -14,7 +14,7 @@
 
 int	ft_parse_data(t_data *data, char **strings)
 {
-	int		i;
+	int	i;
 
 //	data->ants = ft_atoull(strings[data->i_ants]);  set in validation
 	i = data->i_rooms_start - 1;

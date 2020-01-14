@@ -49,7 +49,7 @@ static void	ft_free_ways(t_way *way)
 	}
 }
 
-static void ft_free_vars(t_var *vars)
+static void	ft_free_vars(t_var *vars)
 {
 	t_var	*tmp;
 

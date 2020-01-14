@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_flags_lemin.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/14 21:58:17 by dbennie           #+#    #+#             */
+/*   Updated: 2020/01/14 21:58:19 by dbennie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-static int	ft_usage()
+static void	ft_usage(void)
 {
 	write(1, "usage: ./lem-in [-flags] < <lem-in_map>\n", 40);
 	write(1, "-f <lem-in_map> - put the map as an argument\n", 45);
@@ -15,7 +27,7 @@ static void	ft_descriptor(char **fd, int ac, char **av, int *i)
 		ft_usage();
 }
 
-void	ft_flags_lemin(t_flags *flags, int ac, char **av)
+void		ft_flags_lemin(t_flags *flags, int ac, char **av)
 {
 	int	i;
 

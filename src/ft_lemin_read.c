@@ -20,8 +20,8 @@ static void	init_str(char **str)
 
 static char	**str_data_match(char *str, char c)
 {
-	int i;
-	char **ptr;
+	int		i;
+	char	**ptr;
 
 	i = ft_strchr_count(str, c);
 	i < 5 ? ft_error(1) : 1;
@@ -41,13 +41,12 @@ static char	**str_data_match(char *str, char c)
 		}
 		else
 			*(str - 1) == 0 ? 1 : ft_error(1);
-
 	}
 	ptr[i] = NULL;
 	return (ptr);
 }
 
-char *ft_lemin_read(t_flags *flags, char ***str_split)
+char		*ft_lemin_read(t_flags *flags, char ***str_split)
 {
 	int		ret;
 	char	buf[16385];

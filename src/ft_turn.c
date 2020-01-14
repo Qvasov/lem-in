@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-void	ft_turn_null(t_link *turn_tail)
+void		ft_turn_null(t_link *turn_tail)
 {
 	while (turn_tail)
 	{
@@ -33,7 +33,7 @@ static int	check_new_parrent_loop(t_link *new_parrent, t_room *start)
 
 	s = 0;
 	ptr = new_parrent;
-	while(ptr && s == 0)
+	while (ptr && s == 0)
 	{
 		if (ptr->parrent->room == new_parrent->room)
 			return (1);
@@ -44,7 +44,7 @@ static int	check_new_parrent_loop(t_link *new_parrent, t_room *start)
 	return (0);
 }
 
-void	ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
+void		ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
 {
 	t_link	*ptr;
 

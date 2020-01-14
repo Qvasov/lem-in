@@ -45,9 +45,8 @@ static void	ft_step(t_data *data, int *ant, t_buf *buf)
 		path = way->path;
 		while (path)
 		{
-			if (path->room == data->start
-			&& (way->path_cost <= data->best_var->steps || way->path_number == 1)
-			&& data->start->ant)
+			if (path->room == data->start && data->start->ant &&
+			(way->path_cost <= data->best_var->steps || way->path_number == 1))
 				ft_copy(data, path, buf, ++*ant);
 			else if (path->room != data->start && path->room != data->end
 			&& path->room->ant)
