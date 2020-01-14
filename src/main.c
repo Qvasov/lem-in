@@ -51,9 +51,9 @@ static void print_ways(t_way *way)
 		{
 			printf("%s", ptr->room->name);
 			if (ptr->room->room_in && !ptr->room->room_out)
-				printf("i");
-			else if (!ptr->room->room_in && ptr->room->room_out)
 				printf("o");
+			else if (!ptr->room->room_in && ptr->room->room_out)
+				printf("i");
 			else if (!ptr->room->room_in && !ptr->room->room_out)
 				printf("");
 			if (ptr->next)
