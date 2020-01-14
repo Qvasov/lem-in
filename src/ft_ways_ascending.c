@@ -63,7 +63,7 @@ static t_way	*ft_add_path(t_link *head, t_way *ways, t_room *end)
 }
 
 t_way			*ft_ways_ascending(t_link *head, t_link *tail,
-													t_room *start, t_room *end)
+				t_room *start, t_room *end)
 {
 	t_link	*link;
 	t_way	*ways;

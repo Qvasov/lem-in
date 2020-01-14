@@ -38,7 +38,7 @@ typedef struct		s_path
 	struct s_room	*room;
 	struct s_path	*next;
 	struct s_path	*prev;
-}					t_path;
+}					t_path; //список комнат
 
 typedef struct		s_way
 {
@@ -47,7 +47,7 @@ typedef struct		s_way
 	int				path_cost;
 	struct s_way	*next;
 	struct s_way	*prev;
-}					t_way;
+}					t_way; 	//список путей (из комнат)
 
 typedef struct		s_var
 {
@@ -77,7 +77,7 @@ typedef struct		s_room
 	t_link			*links;
 	struct s_room	*room_out;
 	struct s_room	*room_in;
-	int				ant;//
+	int				ant;
 	int				cost;
 	struct s_room	*next;
 }					t_room;
@@ -91,8 +91,7 @@ typedef struct		s_data
 	int				rooms_count;
 	t_var			*vars;
 	t_var			*best_var;
-	t_way			*old_ways;
-	int				old_steps;
+	t_way			*ways_dij; //все пути которые находил алгоритм дейкстры
 	int				ways_count;
 	int				i_ants;//index where ants saved
 	int				i_rooms_start;//index where rooms begin
@@ -116,9 +115,6 @@ int					ft_valid_ants(char *str, int *f, t_data *data, int j);
 int					ft_valid_rooms(char *str, int *f, t_data *data, int j);
 void				ft_valid_links(char *str, int *f, t_data *data, int j);
 int					ft_valid_duplicates_rooms(t_data *data, char **strings);
-
-//int				ft_valid_duplicates_links(t_data *data, char **strings);
-
 int					ft_parse_data(t_data *data, char **str_split);
 void				ft_rooms(t_data *data, char *str);
 t_room				*ft_createroom(char *line);
@@ -141,9 +137,6 @@ void				ft_copy_char(char *str, int *i, char c);
 void				ft_copy_num(char *str, int *i, int ant);
 void				ft_free_str_split(char ***str_split);
 void				ft_free_data(t_data *data);
-void				ft_free_links(t_link *links);
-void				ft_free_way(t_way *way);
-void				*ft_free_path(t_path *path);
 void				ft_error(int id);
 void				ft_perror();
 

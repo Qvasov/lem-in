@@ -40,13 +40,13 @@ static int	ft_min_steps_for_ants(t_way *way, int ants)
 	return (steps);
 }
 
-static t_var	*ft_cmp_vars(t_var *vars)
+static void	ft_cmp_vars(t_data *data)
 {
 	t_var	*ptr;
 	int		best_steps;
 	t_var	*best_var;
 
-	ptr = vars;
+	ptr = data->vars;
 	best_steps = ptr->steps;
 	best_var = ptr;
 	while ((ptr = ptr->next))
@@ -55,10 +55,7 @@ static t_var	*ft_cmp_vars(t_var *vars)
 			best_steps = ptr->steps;
 			best_var = ptr;
 		}
-	if (!best_var)
-		ft_error(1);
-
-	return (best_var);
+	data->best_var = best_var;
 }
 
 static int	number_of_paths(t_room *start, t_room *end)
@@ -96,7 +93,7 @@ void		ft_ways(t_data *data)
 	{
 		--data->ways_count; //Удаление из возможнных
 		if ((new_ways = ft_paths_ascending(data->start, data->end)))
-			new_steps = ft_min_steps_for_ants(new_ways, data->ants); //sprosit u dimasa pro segu
+			new_steps = ft_min_steps_for_ants(new_ways, data->ants);
 		!(var = (t_var *)malloc(sizeof(t_var))) ? ft_perror() : 0;
 		var->ways = new_ways;
 		var->steps = new_steps;
@@ -109,8 +106,6 @@ void		ft_ways(t_data *data)
 			data->vars = var;
 		}
 	}
-	data->vars == NULL ? ft_error(10) : 1;//added condition to avoid SEG when no ways found
-	data->best_var = ft_cmp_vars(data->vars);
-	data->old_ways = data->best_var->ways;
-	data->old_steps = data->best_var->steps;
+	(data->vars && data->vars->ways == NULL) ? ft_error(10) : 1; //added condition to avoid SEG when no ways found
+	ft_cmp_vars(data);
 }

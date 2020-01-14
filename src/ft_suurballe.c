@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static void	ft_out(t_room *in, t_room *out, t_room *room)
+static void	create_out_room(t_room *in, t_room *out, t_room *room)
 {
 	t_link	*link;
 
@@ -37,7 +37,7 @@ static void	ft_out(t_room *in, t_room *out, t_room *room)
 		in->links = link; // то есть NULL?
 }
 
-static void	ft_duplicate_rooms(t_path *path)
+static void	duplicate_rooms(t_path *path)
 {
 	t_room	*in;
 	t_room	*out;
@@ -49,7 +49,7 @@ static void	ft_duplicate_rooms(t_path *path)
 			return ;
 		in = path->next->room;
 		if (!in->room_out && !in->room_in)
-			ft_out(in, NULL, path->room); // сдесь NULL загоняется для того чтобы не обьявлять переменную в теле функции (Норминет)
+			create_out_room(in, NULL, path->room); // сдесь NULL загоняется для того чтобы не обьявлять переменную в теле функции (Норминет)
 		else if (in->room_out && !path->room->room_in)
 		{
 			out = path->room;
@@ -67,8 +67,8 @@ int			ft_suurballe(t_data *data)
 {
 	if (ft_dijkstra(data)) //поиск в ширину 1 - нашёл, 0 - не нашёл
 	{
-		ft_direction(data->old_ways->path);
-		ft_duplicate_rooms(data->old_ways->path); //end указывает сразу на room_i (не перенапрвляется)
+		ft_direction(data->ways_dij->path);
+		duplicate_rooms(data->ways_dij->path); //end указывает сразу на room_in(не перенапрвляется)
 		return (1);
 	}
 	return (0);

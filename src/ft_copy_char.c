@@ -17,7 +17,6 @@ void	ft_copy_char(char *str, int *i, char c)
 	if (*i == BUFF_SIZE - 1)
 	{
 		write(1, str, *i + 1);
-		//ft_bzero(str, BUFF_SIZE); konsultating s dimasom
 		*i = -1;
 	}
 	str[++*i] = c;

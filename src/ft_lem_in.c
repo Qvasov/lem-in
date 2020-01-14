@@ -39,17 +39,18 @@ static void	ft_step(t_data *data, int *ant, t_buf *buf)
 	t_path	*path;
 
 	buf->space = 0;
-	way = data->old_ways;
+	way = data->best_var->ways;
 	while (way)
 	{
 		path = way->path;
 		while (path)
 		{
-			if (path->room == data->start && (way->path_cost <= data->old_steps
-					|| way->path_number == 1) && data->start->ant)
+			if (path->room == data->start
+			&& (way->path_cost <= data->best_var->steps || way->path_number == 1)
+			&& data->start->ant)
 				ft_copy(data, path, buf, ++*ant);
-			else if (path->room != data->start && path->room != data->end &&
-					path->room->ant)
+			else if (path->room != data->start && path->room != data->end
+			&& path->room->ant)
 				ft_copy(data, path, buf, path->room->ant);
 			path = path->next;
 		}
@@ -61,15 +62,16 @@ void		ft_lem_in(t_data *data)
 {
 	int		ant;
 	t_buf	buf;
+	int		steps;
 
 	ant = 0;
-	//ft_bzero(buf.str, BUFF_SIZE); konsultating s dimasom
 	buf.i = -1;
-	while (data->old_steps)
+	steps = data->best_var->steps;
+	while (steps)
 	{
 		ft_step(data, &ant, &buf);
 		ft_copy_char(buf.str, &buf.i, '\n');
-		--data->old_steps;
+		--steps;
 	}
 	write(1, buf.str, buf.i + 1);
 }

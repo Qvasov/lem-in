@@ -27,8 +27,8 @@ static void	ft_zerodata(t_data *data)
 	data->rooms = NULL;
 	data->rooms_count = 0;
 	data->vars = NULL;
-//	data->ways = NULL;
-	data->old_ways = NULL;
+	data->best_var = NULL;
+	data->ways_dij = NULL;
 	data->ways_count = 0;
 	data->i_ants = 0;
 	data->i_rooms_start = 0;
@@ -80,12 +80,12 @@ int			main(int ac, char **av)
 	ft_parse_data(&data, str_split);
 	ft_free_str_split(&str_split);
 	ft_ways(&data);
-
-	print_ways(data.old_ways);
-
 	data.start->ant = data.ants;
 	print_n_free_map_data(&map_data);
 	ft_lem_in(&data);
+
+	print_ways(data.best_var->ways); //как флаг
+
 	ft_free_data(&data);
 	return (0);
 }
