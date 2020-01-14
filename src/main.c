@@ -49,10 +49,17 @@ static void print_ways(t_way *way)
 		printf("%d) ", way->path_number);
 		while(ptr)
 		{
+			printf("%s", ptr->room->name);
+			if (ptr->room->room_in && !ptr->room->room_out)
+				printf("i");
+			else if (!ptr->room->room_in && ptr->room->room_out)
+				printf("o");
+			else if (!ptr->room->room_in && !ptr->room->room_out)
+				printf("");
 			if (ptr->next)
-				printf("%s - ", ptr->room->name);
+				printf(" - ");
 			else
-				printf("%s\n", ptr->room->name);
+				printf("\n");
 			ptr = ptr->next;
 		}
 		way = way->next;
