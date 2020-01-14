@@ -40,6 +40,25 @@ static void	ft_zerodata(t_data *data)
 	data->i_end = 0;
 }
 
+static void print_ways(t_way *way)
+{
+	t_path *ptr;
+	while (way)
+	{
+		ptr = way->path;
+		printf("%d) ", way->path_number);
+		while(ptr)
+		{
+			if (ptr->next)
+				printf("%s - ", ptr->room->name);
+			else
+				printf("%s\n", ptr->room->name);
+			ptr = ptr->next;
+		}
+		way = way->next;
+	}
+}
+
 int			main(int ac, char **av)
 {
 	t_data	data;
@@ -54,6 +73,9 @@ int			main(int ac, char **av)
 	ft_parse_data(&data, str_split);
 	ft_free_str_split(&str_split);
 	ft_ways(&data);
+
+	print_ways(data.old_ways);
+
 	data.start->ant = data.ants;
 	print_n_free_map_data(&map_data);
 	ft_lem_in(&data);
