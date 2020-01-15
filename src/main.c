@@ -53,7 +53,7 @@ static void	print_ways(t_way *way)
 	ft_printf("\nTotal ways: %d\n", ways_count);
 	while (way)
 	{
-		ft_printf("[%d] ", way->ants);
+		ft_printf("%3d| ", way->ants);
 		ptr = way->path;
 		while (ptr && ptr->next)
 			ptr = ptr->next;
