@@ -42,26 +42,29 @@ static void	ft_zerodata(t_data *data)
 
 static void	print_ways(t_way *way)
 {
-	t_path *ptr;
+	t_path	*ptr;
+	t_way	*p;
+	int 	ways_count;
 
+	p = way;
+	ways_count = way->path_number;
+	while ((p = p->next))
+		++ways_count;
+	ft_printf("\nTotal ways: %d\n", ways_count);
 	while (way)
 	{
+		ft_printf("[%d] ", way->ants);
 		ptr = way->path;
-		printf("%d) ", way->path_number);
+		while (ptr && ptr->next)
+			ptr = ptr->next;
 		while (ptr)
 		{
-			printf("%s", ptr->room->name);
-			if (ptr->room->room_in && !ptr->room->room_out)
-				printf("o");
-			else if (!ptr->room->room_in && ptr->room->room_out)
-				printf("i");
-			else if (!ptr->room->room_in && !ptr->room->room_out)
-				printf("");
-			if (ptr->next)
-				printf(" - ");
+			ft_printf("%s", ptr->room->name);
+			if (ptr->prev)
+				ft_printf(" - ");
 			else
-				printf("\n");
-			ptr = ptr->next;
+				ft_printf("\n");
+			ptr = ptr->prev;
 		}
 		way = way->next;
 	}
@@ -81,12 +84,10 @@ int			main(int ac, char **av)
 	ft_parse_data(&data, str_split);
 	ft_free_str_split(&str_split);
 	ft_ways(&data);
-	data.start->ant = data.ants;
 	print_n_free_map_data(&map_data);
-	ft_lem_in(&data);
-
-	print_ways(data.best_var->ways); //как флаг
-
+	ft_lemin(&data);
+	(flags.ways == 1) ? print_ways(data.best_var->ways) : 0;
+//	print_ways(data.ways_dij); //для дебага
 	ft_free_data(&data);
 	return (0);
 }

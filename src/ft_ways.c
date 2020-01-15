@@ -50,7 +50,7 @@ static void	ft_cmp_vars(t_data *data)
 	best_steps = ptr->steps;
 	best_var = ptr;
 	while ((ptr = ptr->next))
-		if (ptr->steps < best_steps)
+		if (ptr->steps <= best_steps)
 		{
 			best_steps = ptr->steps;
 			best_var = ptr;

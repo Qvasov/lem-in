@@ -29,7 +29,7 @@
 typedef struct		s_buf
 {
 	char			str[BUFF_SIZE];
-	int				i;
+	size_t 			i;
 	int				space;
 }					t_buf;
 
@@ -45,6 +45,7 @@ typedef struct		s_way
 	struct s_path	*path;
 	int				path_number;
 	int				path_cost;
+	int				ants;
 	struct s_way	*next;
 	struct s_way	*prev;
 }					t_way; 	//список путей (из комнат)
@@ -105,6 +106,7 @@ typedef struct		s_data
 typedef struct		s_flags
 {
 	char			*fd_path;
+	char			ways;
 }					t_flags;
 
 void				ft_flags_lemin(t_flags *flags, int ac, char **av);
@@ -132,9 +134,7 @@ void				ft_turn_null(t_link *turn_tail);
 t_way				*ft_paths_ascending(t_room *start, t_room *end);
 t_way				*ft_ways_ascending(t_link *turn_head, t_link *turn_tail,
 												t_room *start, t_room *end);
-void				ft_lem_in(t_data *data);
-void				ft_copy_char(char *str, int *i, char c);
-void				ft_copy_num(char *str, int *i, int ant);
+void				ft_lemin(t_data *data);
 void				ft_free_str_split(char ***str_split);
 void				ft_free_data(t_data *data);
 void				ft_error(int id);

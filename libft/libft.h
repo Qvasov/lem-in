@@ -102,5 +102,11 @@ int					ft_bit_check(int flag, int position);
 void				ft_bit_on(int *flag, int position);
 void				ft_bit_off(int *flag, int position);
 int					ft_satoi(const char *str, int *i);
+void				ft_putchar_buf(char *buf, size_t *i, size_t buff_size,
+					char c);
+void				ft_putstr_buf(char *buf, size_t *i, size_t buff_size,
+					char *str);
+void				ft_putnbr_buf(char *buf, size_t *i, size_t buff_size,
+					int num);
 
 #endif

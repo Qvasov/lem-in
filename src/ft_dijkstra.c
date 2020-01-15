@@ -21,6 +21,7 @@ static void		ft_create_way(t_path *path, int path_cost, t_way **ways)
 	way->path = path;
 	way->path_number = (*ways) ? (*ways)->path_number + 1 : 1;
 	way->path_cost = path_cost;
+	way->ants = 0;
 	way->prev = NULL;
 	way->next = *ways;
 	if (*ways)

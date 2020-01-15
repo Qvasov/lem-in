@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_copy_num.c                                      :+:      :+:    :+:   */
+/*   ft_putchar_buf.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 19:18:31 by dbennie           #+#    #+#             */
-/*   Updated: 2019/12/05 19:18:32 by dbennie          ###   ########.fr       */
+/*   Created: 2020/01/15 19:58:02 by dbennie           #+#    #+#             */
+/*   Updated: 2020/01/15 19:58:10 by dbennie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#include "libft.h"
 
-void	ft_copy_num(char *str, int *i, int ant)
+void	ft_putchar_buf(char *buf, size_t *i, size_t buff_size, char c)
 {
-	if (ant / 10)
-		ft_copy_num(str, i, ant / 10);
-	ft_copy_char(str, i, ant % 10 + '0');
+	if (*i == buff_size)
+	{
+		write(1, buf, *i);
+		*i = 0;
+	}
+	buf[*i] = c;
+	(*i)++;
 }

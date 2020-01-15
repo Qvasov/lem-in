@@ -53,6 +53,7 @@ static t_way	*ft_add_path(t_link *head, t_way *ways, t_room *end)
 		ft_perror();
 	way->path = path;
 	way->path_cost = cost;
+	way->ants = 0;
 	if (ways)
 		ways->next = way;
 	way->prev = ways;
