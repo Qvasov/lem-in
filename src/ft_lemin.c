@@ -34,7 +34,7 @@ static void	ft_copy(t_data *data, t_path *path, t_buf *buf, int ant)
 	(path->room == data->start) ? --path->room->ant : (path->room->ant = 0);
 }
 
-static void	ft_step(t_data *data, int *ant, t_buf *buf)
+static void	ft_step(t_data *data, int *ant, t_buf *buf, int steps)
 {
 	t_way	*way;
 	t_path	*path;
@@ -47,7 +47,7 @@ static void	ft_step(t_data *data, int *ant, t_buf *buf)
 		while (path)
 		{
 			if (path->room == data->start && data->start->ant &&
-			(way->path_cost < data->best_var->steps || way->path_number == 1))
+			(way->path_cost <= steps || way->path_number == 1))
 			{
 				ft_copy(data, path, buf, ++*ant);
 				++way->ants; //подчсчет кол-ва муравьев проходящих через этот путь
@@ -73,7 +73,7 @@ void		ft_lemin(t_data *data)
 	steps = data->best_var->steps;
 	while (steps)
 	{
-		ft_step(data, &ant, &buf);
+		ft_step(data, &ant, &buf, steps);
 		ft_putchar_buf(buf.str, &buf.i, BUFF_SIZE, '\n');
 		--steps;
 	}
