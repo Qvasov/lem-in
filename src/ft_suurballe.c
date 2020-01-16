@@ -31,7 +31,7 @@ static void	create_out_room(t_room *in, t_room *out, t_room *room)
 	{
 		link->room = in;
 		link->room_src = out;
-		link->cost = 0;
+		link->cost = 1;
 	}
 	else
 		in->links = link; // то есть NULL?

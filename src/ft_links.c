@@ -18,7 +18,7 @@ t_link		*ft_createlink(t_room *room)
 
 	if (!(link = (t_link *)malloc(sizeof(t_link))))
 		ft_perror();
-	link->cost = 1;
+	link->cost = 2;
 	link->room_src = NULL;
 	link->room = room;
 	link->next = NULL;

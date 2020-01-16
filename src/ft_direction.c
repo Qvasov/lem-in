@@ -27,7 +27,7 @@ static void	ft_redirection_link(t_room *from, t_room *to)
 			from->links = link->next;
 		if (link->next)
 			link->next->prev = link->prev;
-		link->cost = (link->cost == -1) ? 1 : -1;
+		link->cost = (link->cost == -1) ? 2 : -1;
 		link->room = from;
 		link->room_src = to;
 		link->prev = NULL;

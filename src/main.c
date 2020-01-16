@@ -86,6 +86,10 @@ int			main(int ac, char **av)
 	ft_ways(&data);
 	print_n_free_map_data(&map_data);
 	ft_lemin(&data);
+
+	ft_printf("\n%d\n", data.best_var->steps);
+	(data.end->ant == data.ants) ? ft_printf("OK\n") : 0;
+
 	(flags.ways == 1) ? print_ways(data.best_var->ways) : 0;
 //	print_ways(data.ways_dij); //для дебага
 	ft_free_data(&data);

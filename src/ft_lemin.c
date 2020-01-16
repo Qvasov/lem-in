@@ -78,6 +78,4 @@ void		ft_lemin(t_data *data)
 		--steps;
 	}
 	write(1, buf.str, buf.i);
-
-	ft_printf("\n%d\n", data->best_var->steps);
 }
