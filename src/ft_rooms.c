@@ -29,9 +29,10 @@ t_room			*ft_createroom(char *name)
 	room->links = NULL;
 	room->room_out = NULL;
 	room->room_in = NULL;
+	room->room_parrent = NULL;
 	room->next = NULL;
 	room->ant = 0;
-	room->cost = 0x7FFFFFFF;
+	room->cost = 0x5FFFFFFF;
 	return (room);
 }
 

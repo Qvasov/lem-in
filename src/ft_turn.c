@@ -69,7 +69,7 @@ void		ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
 			}
 			ptr->parrent = *head;
 			ptr->room->cost = (*head)->room->cost + ptr->cost;
-			(ptr->room == data->end) ? *end = ptr : 0;
+
 		}
 		ptr = ptr->next;
 	}

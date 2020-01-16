@@ -70,24 +70,125 @@ static t_link	*ft_link_start(t_room *start)
 
 int				ft_dijkstra(t_data *data)
 {
-	t_link	*turn_head;
-	t_link	*turn_tail;
-	t_link	*turn_end;
+	t_link	*head;
+	t_link	*tail;
+	t_link	*end;
 
-	turn_head = ft_link_start(data->start);
-	turn_tail = turn_head;
-	turn_end = NULL;
-	while (turn_head)
+	head = ft_link_start(data->start);
+	tail = head;
+	end = NULL;
+	while (head)
 	{
-		if (turn_head->room->links && turn_head->room != data->end)
-			ft_turn(&turn_head, &turn_tail, &turn_end, data);
-		turn_head = turn_head->turn_next;
+		if (head->room->links && head->room != data->end)
+			ft_turn(&head, &tail, &end, data);
+		(head->room == data->end) ? end = head : 0;
+		head = head->turn_next;
 	}
-	if (turn_end)
+	if (end)
 	{
-		ft_path(turn_end, &data->ways_dij);
-		ft_turn_null(turn_tail);
+		ft_path(end, &data->ways_dij);
+		ft_turn_null(tail);
 		return (1);
 	}
 	return (0);
+}
+
+int	ft_ford(t_data *data)
+{
+	int		k;
+	t_room	*room_p;
+	t_room	*room_pd;
+	t_link	*link_p;
+	int		flag;
+
+	k = data->rooms_count - 1;
+	flag = 1;
+	data->start->cost = 0;
+	while (k && flag == 1)
+	{
+		flag = 0;
+		room_p = data->rooms;
+		while (room_p)
+		{
+			if (room_p == data->end)
+			{
+				room_p = room_p->next;
+				continue ;
+			}
+			link_p = room_p->links;
+			while (link_p)
+			{
+				if (room_p->cost + link_p->cost < link_p->room->cost && link_p->room != data->start)
+				{
+					link_p->room->cost = room_p->cost + link_p->cost;
+					link_p->room->room_parrent = room_p;
+					flag = 1;
+				}
+				link_p = link_p->next;
+			}
+			if ((room_pd = room_p->room_out) || ((room_pd = room_p->room_in)))
+			{
+				link_p = room_pd->links;
+				while (link_p)
+				{
+					if (room_pd->cost + link_p->cost < link_p->room->cost && link_p->room != data->start)
+					{
+						link_p->room->cost = room_pd->cost + link_p->cost;
+						link_p->room->room_parrent = room_pd;
+						flag = 1;
+					}
+					link_p = link_p->next;
+				}
+			}
+			room_p = room_p->next;
+		}
+		--k;
+	}
+	if (!data->end->room_parrent)
+		return (0);
+	t_path	*tmp;
+	t_path	*path;
+	int		path_cost;
+	t_room	*room;
+
+	room = data->end;
+	path_cost = room->cost;
+	if (!(path = (t_path *)malloc(sizeof(t_path))))
+		ft_perror();
+	path->room = data->end;
+	path->next = NULL;
+	path->prev = NULL;
+	while (room && room != data->start)
+	{
+		room_p = room->room_parrent;
+		link_p = room_p->links;
+		while (link_p && link_p->room != room)
+			link_p = link_p->next;
+		if (link_p && link_p->room == room)
+		{
+			tmp = path;
+			if (!(path = (t_path *)malloc(sizeof(t_path))))
+				ft_perror();
+			path->room = room_p;
+			path->next = tmp;
+			path->prev = NULL;
+			if (tmp)
+				tmp->prev = path;
+		}
+		room = room->room_parrent;
+	}
+	ft_create_way(path, path_cost, &data->ways_dij);
+	room_p = data->rooms;
+	while (room_p)
+	{
+		room_p->room_parrent = NULL;
+		room_p->cost = 0x5FFFFFFF;
+		if ((room_pd = room_p->room_out) || (room_pd = room_p->room_in))
+		{
+			room_pd->room_parrent = NULL;
+			room_pd->cost = 0x5FFFFFFF;
+		}
+		room_p = room_p->next;
+	}
+	return (1);
 }

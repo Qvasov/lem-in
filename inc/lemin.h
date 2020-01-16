@@ -84,6 +84,7 @@ typedef struct		s_room
 	t_link			*links;
 	struct s_room	*room_out;
 	struct s_room	*room_in;
+	struct s_room	*room_parrent; //
 	int				ant;
 	int				cost;
 	struct s_room	*next;
@@ -128,6 +129,7 @@ int					ft_findrooms(t_data *data, char *link, t_room **room1,
 void				ft_ways(t_data *data);
 int					ft_suurballe(t_data *data);
 int					ft_dijkstra(t_data *data);
+int	ft_ford(t_data *data);
 void				ft_direction(t_path *path);
 void				ft_turn(t_link **head, t_link **tail, t_link **end,
 																t_data *data);
