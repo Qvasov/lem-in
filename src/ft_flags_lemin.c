@@ -14,9 +14,9 @@
 
 static void	ft_usage(void)
 {
-	write(1, "usage: ./lem-in [-flags] < <lem-in_map>\n", 40);
-	write(1, "-f <lem-in_map> - put the map as an argument\n", 45);
-	write(1, "-w usage dlya a\n", 16); // usage dlya aa
+	write(1, "usage:\t./lem-in [-flags] < <lem-in_map>\n"
+		  "\t\t-f <lem-in_map> - put the map as an argument\n"
+	"\t\t-w alternative output\n", 111);
 	exit(0);
 }
 
@@ -32,8 +32,6 @@ void		ft_flags_lemin(t_flags *flags, int ac, char **av)
 {
 	int	i;
 
-	flags->fd_path = NULL;
-	flags->ways = 0;
 	if (ac == 1)
 		return ;
 	i = 0;

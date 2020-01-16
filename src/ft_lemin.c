@@ -26,11 +26,14 @@ static void	ft_join_text(t_buf *buf, int ant, char *name)
 
 static void	ft_copy(t_data *data, t_path *path, t_buf *buf, int ant)
 {
-	(buf->space) ? ft_putchar_buf(buf->str, &buf->i, BUFF_SIZE, ' ')
-	: (buf->space = 1);
-	ft_join_text(buf, ant, path->prev->room->name);
+	if(data->flags.ways == 0)
+	{
+		(buf->space) ? ft_putchar_buf(buf->str, &buf->i, BUFF_SIZE, ' ')
+		: (buf->space = 1);
+		ft_join_text(buf, ant, path->prev->room->name);
+	}
 	path->prev->room->ant = (path->prev->room != data->end) ?
-							ant : path->prev->room->ant + 1;
+			ant : path->prev->room->ant + 1;
 	(path->room == data->start) ? --path->room->ant : (path->room->ant = 0);
 }
 
@@ -74,8 +77,10 @@ void		ft_lemin(t_data *data)
 	while (steps)
 	{
 		ft_step(data, &ant, &buf, steps);
-		ft_putchar_buf(buf.str, &buf.i, BUFF_SIZE, '\n');
+		if (data->flags.ways == 0)
+			ft_putchar_buf(buf.str, &buf.i, BUFF_SIZE, '\n');
 		--steps;
 	}
-	write(1, buf.str, buf.i);
+	if (data->flags.ways == 0)
+		write(1, buf.str, buf.i);
 }

@@ -38,25 +38,25 @@ static void	ft_zerodata(t_data *data)
 	data->i_links_end = 0;
 	data->i_start = 0;
 	data->i_end = 0;
+	data->flags.fd_path = NULL;
+	data->flags.ways = 0;
 }
 
-static void	print_ways(t_way *way)
+static void ft_print_ways(t_way *way, int steps)
 {
 	t_path	*ptr;
 	t_way	*w;
 	int 	ways_count;
-	int		total_ants;
 
 	w = way;
-	ways_count = 1;
-	total_ants = 0;
-	while ((w = w->next))
+	ways_count = (w->ants) ? 1 : 0;
+	while ((w = w->next) && w->ants)
 		++ways_count;
-	ft_printf("\nTotal ways: %d\n", ways_count);
+	ft_printf("Total lines: %d\nTotal ways:  %d\n"
+		   " ANTS | WAYS\n", ways_count, steps);
 	while (way && way->ants > 0)
 	{
-		total_ants += way->ants;
-		ft_printf("%3d| ", way->ants);
+		ft_printf("%5d | ", way->ants);
 		ptr = way->path;
 		while (ptr && ptr->next)
 			ptr = ptr->next;
@@ -68,7 +68,6 @@ static void	print_ways(t_way *way)
 		}
 		way = way->next;
 	}
-	ft_printf("%d\n", total_ants);
 }
 
 int			main(int ac, char **av)
@@ -76,23 +75,17 @@ int			main(int ac, char **av)
 	t_data	data;
 	char	**str_split;
 	char	*map_data;
-	t_flags	flags;
 
-	ft_flags_lemin(&flags, ac, av);
-	map_data = ft_lemin_read(&flags, &str_split);
 	ft_zerodata(&data);
+	ft_flags_lemin(&data.flags, ac, av);
+	map_data = ft_lemin_read(&data.flags, &str_split);
 	ft_valid(&data, str_split);
 	ft_parse_data(&data, str_split);
 	ft_free_str_split(&str_split);
 	ft_ways(&data);
 	print_n_free_map_data(&map_data);
 	ft_lemin(&data);
-
-	ft_printf("Total steps: %d\n", data.best_var->steps);
-	(data.end->ant == data.ants) ? ft_printf("OK\n") : 0;
-
-	(flags.ways == 1) ? print_ways(data.best_var->ways) : 0;
-//	print_ways(data.ways_dij); //для дебага
+	(data.flags.ways == 1) ? ft_print_ways(data.best_var->ways, data.best_var->steps) : 0;
 	ft_free_data(&data);
 	return (0);
 }

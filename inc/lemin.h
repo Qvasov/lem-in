@@ -33,6 +33,12 @@ typedef struct		s_buf
 	int				space;
 }					t_buf;
 
+typedef struct		s_flags
+{
+	char			*fd_path;
+	char			ways;
+}					t_flags;
+
 typedef struct		s_path
 {
 	struct s_room	*room;
@@ -101,13 +107,8 @@ typedef struct		s_data
 	int				i_links_end;//index where links end
 	int				i_start;//index of room start
 	int				i_end;//index of room end
+	t_flags			flags;
 }					t_data;
-
-typedef struct		s_flags
-{
-	char			*fd_path;
-	char			ways;
-}					t_flags;
 
 void				ft_flags_lemin(t_flags *flags, int ac, char **av);
 char				*ft_lemin_read(t_flags *flags, char ***str_split);
