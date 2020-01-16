@@ -45,14 +45,17 @@ static void	print_ways(t_way *way)
 	t_path	*ptr;
 	t_way	*w;
 	int 	ways_count;
+	int		total_ants;
 
 	w = way;
 	ways_count = 1;
+	total_ants = 0;
 	while ((w = w->next))
 		++ways_count;
 	ft_printf("\nTotal ways: %d\n", ways_count);
-	while (way)
+	while (way && way->ants > 0)
 	{
+		total_ants += way->ants;
 		ft_printf("%3d| ", way->ants);
 		ptr = way->path;
 		while (ptr && ptr->next)
@@ -60,14 +63,12 @@ static void	print_ways(t_way *way)
 		while (ptr)
 		{
 			ft_printf("%s", ptr->room->name);
-			if (ptr->prev)
-				ft_printf(" - ");
-			else
-				ft_printf("\n");
+			(ptr->prev) ? ft_printf(" - ") : ft_printf("\n");
 			ptr = ptr->prev;
 		}
 		way = way->next;
 	}
+	ft_printf("%d\n", total_ants);
 }
 
 int			main(int ac, char **av)
@@ -87,7 +88,7 @@ int			main(int ac, char **av)
 	print_n_free_map_data(&map_data);
 	ft_lemin(&data);
 
-	ft_printf("\n%d\n", data.best_var->steps);
+	ft_printf("Total steps: %d\n", data.best_var->steps);
 	(data.end->ant == data.ants) ? ft_printf("OK\n") : 0;
 
 	(flags.ways == 1) ? print_ways(data.best_var->ways) : 0;
