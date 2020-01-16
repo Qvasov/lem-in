@@ -43,12 +43,12 @@ static void	ft_zerodata(t_data *data)
 static void	print_ways(t_way *way)
 {
 	t_path	*ptr;
-	t_way	*p;
+	t_way	*w;
 	int 	ways_count;
 
-	p = way;
-	ways_count = way->path_number;
-	while ((p = p->next))
+	w = way;
+	ways_count = 1;
+	while ((w = w->next))
 		++ways_count;
 	ft_printf("\nTotal ways: %d\n", ways_count);
 	while (way)

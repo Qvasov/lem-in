@@ -53,7 +53,7 @@ void		ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
 	{
 		if (((*head)->room->cost + ptr->cost < ptr->room->cost) && //для того чтобы не уйти в room_out так как цена не изменится
 		(!(*head)->parrent || ptr->room != (*head)->parrent->room) &&
-		ptr->room != data->start && ptr->cost != 0)
+		ptr->room != data->start /*&& ptr->cost != 0*/)
 		{
 			if (ptr->turn_in == 0)
 			{
