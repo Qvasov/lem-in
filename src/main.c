@@ -53,7 +53,7 @@ static void ft_print_ways(t_way *way, int steps)
 	while ((w = w->next) && w->ants)
 		++ways_count;
 	ft_printf("Total lines: %d\nTotal ways:  %d\n"
-		   " ANTS | WAYS\n", ways_count, steps);
+		   " ANTS | WAYS\n", steps, ways_count);
 	while (way && way->ants > 0)
 	{
 		ft_printf("%5d | ", way->ants);
