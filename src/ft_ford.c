@@ -16,17 +16,20 @@ static void	null(t_room *room)
 {
 	while (room)
 	{
-		room->room_parrent = NULL;
-		room->cost = 0x7FFFFFFF;
-		if (room->room_out)
+		if (room->state)
 		{
-			room->room_out->room_parrent = NULL;
-			room->room_out->cost = 0x7FFFFFFF;
-		}
-		else if (room->room_in)
-		{
-			room->room_in->room_parrent = NULL;
-			room->room_in->cost = 0x7FFFFFFF;
+			room->room_parrent = NULL;
+			room->cost = INF;
+			if (room->room_out)
+			{
+				room->room_out->room_parrent = NULL;
+				room->room_out->cost = INF;
+			}
+			else if (room->room_in)
+			{
+				room->room_in->room_parrent = NULL;
+				room->room_in->cost = INF;
+			}
 		}
 		room = room->next;
 	}
@@ -99,7 +102,8 @@ int			ft_ford(t_data *data)
 		(room == data->end) ? room = room->next : 0;
 		while (room)
 		{
-			ft_turn(room, data->start, &flag);
+			if (room->state)
+				ft_turn(room, data->start, &flag);
 			((room = room->next) == data->end) ? room = room->next : 0;
 		}
 	}

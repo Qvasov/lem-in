@@ -44,6 +44,7 @@ static void	ft_connectlink(t_room *room_src, t_room *room_dst)
 	else
 		room_src->links = link;
 	link->room_src = room_src;
+	room_src->links_count += 1;
 }
 
 static int	ft_check_duplicate_link(t_room *room1, t_room *room2)

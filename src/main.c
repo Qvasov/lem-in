@@ -12,13 +12,6 @@
 
 #include "lemin.h"
 
-static void	print_n_free_map_data(char **map_data)
-{
-	ft_printf("%s\n", *map_data);
-	free(*map_data);
-	*map_data = NULL;
-}
-
 static void	ft_zerodata(t_data *data)
 {
 	data->ants = 0;
@@ -41,6 +34,13 @@ static void	ft_zerodata(t_data *data)
 	data->flags.ways = 0;
 }
 
+static void	print_n_free_map_data(char **map_data)
+{
+	ft_printf("%s\n", *map_data);
+	free(*map_data);
+	*map_data = NULL;
+}
+
 static void ft_print_ways(t_way *way, int steps)
 {
 	t_path	*ptr;
@@ -52,7 +52,7 @@ static void ft_print_ways(t_way *way, int steps)
 	while ((w = w->next) && w->ants)
 		++ways_count;
 	ft_printf("Total lines: %d\nTotal ways:  %d\n"
-		   " ANTS | WAYS\n", steps, ways_count);
+			  " ANTS | WAYS\n", steps, ways_count);
 	while (way && way->ants > 0)
 	{
 		ft_printf("%5d | ", way->ants);
@@ -81,6 +81,7 @@ int			main(int ac, char **av)
 	ft_valid(&data, str_split);
 	ft_parse_data(&data, str_split);
 	ft_free_str_split(&str_split);
+	ft_match_rooms_off(data.rooms);
 	ft_ways(&data);
 	print_n_free_map_data(&map_data);
 	ft_lemin(&data);

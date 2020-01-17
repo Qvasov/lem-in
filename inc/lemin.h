@@ -24,6 +24,7 @@
 # define END		4
 # define DEF_SE		5
 
+# define INF		(0x7FFFFFFF)
 # define BUFF_SIZE	2048
 
 typedef struct		s_buf
@@ -80,12 +81,14 @@ typedef struct		s_room
 	int				x;
 	int				y;
 	t_link			*links;
+	int				links_count;
 	struct s_room	*room_out;
 	struct s_room	*room_in;
 	struct s_room	*room_parrent;
 	int				ant;
 	int				cost;
 	struct s_room	*next;
+	int				state;
 }					t_room;
 
 typedef struct		s_data
@@ -123,6 +126,7 @@ void				ft_links(t_data *data, char *str);
 t_link				*ft_createlink(t_room *room);
 int					ft_findrooms(t_data *data, char *link, t_room **room1,
 					t_room **room2);
+void				ft_match_rooms_off(t_room *rooms);
 void				ft_ways(t_data *data);
 int					ft_suurballe(t_data *data);
 int					ft_ford(t_data *data);

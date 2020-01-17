@@ -27,12 +27,14 @@ t_room			*ft_createroom(char *name)
 	room->x = 0;
 	room->y = 0;
 	room->links = NULL;
+	room->links_count = 0;
 	room->room_out = NULL;
 	room->room_in = NULL;
 	room->room_parrent = NULL;
 	room->next = NULL;
 	room->ant = 0;
-	room->cost = 0x7FFFFFFF;
+	room->cost = INF;
+	room->state = 1;
 	return (room);
 }
 

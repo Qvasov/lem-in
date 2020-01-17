@@ -42,7 +42,7 @@ void 		ft_turn(t_room *room, t_room *start, int *flag)
 	t_link	*link;
 	t_room	*room_d;
 
-	if (room->cost != 0x7FFFFFFF)
+	if (room->cost != INF)
 	{
 		link = room->links;
 		while (link)
@@ -52,7 +52,7 @@ void 		ft_turn(t_room *room, t_room *start, int *flag)
 			link = link->next;
 		}
 	}
-	if ((room_d = room->room_out) && room_d->cost != 0x7FFFFFFF)
+	if ((room_d = room->room_out) && room_d->cost != INF)
 	{
 		link = room_d->links;
 		while (link)
