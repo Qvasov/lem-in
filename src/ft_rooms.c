@@ -32,7 +32,7 @@ t_room			*ft_createroom(char *name)
 	room->room_parrent = NULL;
 	room->next = NULL;
 	room->ant = 0;
-	room->cost = 0x5FFFFFFF;
+	room->cost = 0x7FFFFFFF;
 	return (room);
 }
 

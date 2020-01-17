@@ -1,6 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_dijkstra.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/28 18:06:35 by dbennie           #+#    #+#             */
+/*   Updated: 2019/11/28 18:06:36 by dbennie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-static void		ft_create_way(t_path *path, int path_cost, t_way **ways)
+static void	null(t_room *room)
+{
+	while (room)
+	{
+		room->room_parrent = NULL;
+		room->cost = 0x7FFFFFFF;
+		if (room->room_out)
+		{
+			room->room_out->room_parrent = NULL;
+			room->room_out->cost = 0x7FFFFFFF;
+		}
+		else if (room->room_in)
+		{
+			room->room_in->room_parrent = NULL;
+			room->room_in->cost = 0x7FFFFFFF;
+		}
+		room = room->next;
+	}
+}
+
+static void	create_way(t_path *path, int path_cost, t_way **ways)
 {
 	t_way	*way;
 
@@ -17,79 +49,98 @@ static void		ft_create_way(t_path *path, int path_cost, t_way **ways)
 	*ways = way;
 }
 
-static void		ft_path(t_link *tail, t_way **ways)
+static void	path(t_room *room, t_room *start, t_way **ways)
 {
 	t_path	*tmp;
 	t_path	*path;
+	t_room	*room_p;
+	t_link	*link_p;
 	int		path_cost;
 
-	path = NULL;
-	path_cost = tail->room->cost;
-	while (tail)//loop of the cycle on b_loop when ways_count == 13
+	path_cost = room->cost;
+	(!(path = (t_path *)malloc(sizeof(t_path)))) ? ft_perror() : 0;
+	path->room = room;
+	path->next = NULL;
+	path->prev = NULL;
+	while (room && room != start)
 	{
-		tmp = path;
-		if (!(path = (t_path *)malloc(sizeof(t_path))))
-			ft_perror();
-		path->room = tail->room;
-		path->next = tmp;
-		path->prev = NULL;
-		if (tmp)
-			tmp->prev = path;
-		tail = tail->parrent;
+		room_p = room->room_parrent;
+		link_p = room_p->links;
+		while (link_p && link_p->room != room)
+			link_p = link_p->next;
+		if (link_p && link_p->room == room)
+		{
+			tmp = path;
+			(!(path = (t_path *)malloc(sizeof(t_path)))) ? ft_perror() : 0;
+			path->room = room_p;
+			path->next = tmp;
+			path->prev = NULL;
+			if (tmp)
+				tmp->prev = path;
+		}
+		room = room->room_parrent;
 	}
-	ft_create_way(path, path_cost, ways);
+	create_way(path, path_cost, ways);
 }
 
-static t_link	*ft_link_start(t_room *start)
+static void	change_cost(t_room *room, t_link *link, t_room *start, int *flag)
 {
-	t_link		*ptr;
-
-	ptr = (start->links) ? start->links->room->links : NULL;
-	if (ptr)
-		start->cost = 0;
-	while (ptr)
-	{
-		if (ptr->room->name == start->name)
-			return (ptr);
-		ptr = ptr->next;
-	}
-	return (NULL);
+		link->room->cost = room->cost + link->cost;
+		link->room->room_parrent = room;
+		*flag = 1;
 }
 
-static void	inf(int *d, int room_count)
+static void turn(t_room *room, t_room *start, int *flag)
 {
-	int	i;
+	t_link	*link;
+	t_room	*room_d;
 
-	i = 0;
-	d[i] = 0;
-	while (++i < room_count)
-		d[i] = 0x7FFFFFFF;
+	if (room->cost != 0x7FFFFFFF)
+	{
+		link = room->links;
+		while (link)
+		{
+			if (room->cost + link->cost < link->room->cost && link->room != start)
+				change_cost(room, link, start, flag);
+			link = link->next;
+		}
+	}
+	if ((room_d = room->room_out) && room_d->cost != 0x7FFFFFFF)
+	{
+		link = room_d->links;
+		while (link)
+		{
+			if (room_d->cost + link->cost < link->room->cost && link->room != start)
+				change_cost(room_d, link, start, flag);
+			link = link->next;
+		}
+	}
 }
 
 int			ft_ford(t_data *data)
 {
-	t_link	*head;
-	t_link	*tail;
-	t_link	*end;
+	int		k;
+	t_room	*room;
+	int		flag;
 
-	head = ft_link_start(data->start);
-	tail = head;
-	end = NULL;
-	while (head)
+	k = data->rooms_count - 1;
+	flag = 1;
+	data->start->cost = 0;
+	while (--k && flag == 1)
 	{
-		if (head->room->links && head->room != data->end)
+		flag = 0;
+		room = data->rooms;
+		(room == data->end) ? room = room->next : 0;
+		while (room)
 		{
-			ft_turn(&head, &tail, data);
-			(head->room == data->end) ? end = head : 0;
+			turn(room, data->start, &flag);
+			((room = room->next) == data->end) ? room = room->next : 0;
 		}
-		head = head->turn_next;
 	}
-	if (end)
-	{
-		ft_path(end, &data->ways_dij);
-		ft_turn_null(tail);
-		return (1);
-	}
-	return (0);
+	//на ноль
+	if (!data->end->room_parrent)
+		return (0);
+	path(data->end, data->start, &data->ways_dij);
+	null(data->rooms);
+	return (1);
 }
-

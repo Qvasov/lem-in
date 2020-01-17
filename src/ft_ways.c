@@ -106,6 +106,6 @@ void		ft_ways(t_data *data)
 			data->vars = var;
 		}
 	}
-	(data->vars && data->vars->ways == NULL) ? ft_error(10) : 1; //added condition to avoid SEG when no ways found
+	(!data->vars || (data->vars && !data->vars->ways)) ? ft_error(10) : 1; //added condition to avoid SEG when no ways found
 	ft_cmp_vars(data);
 }
