@@ -44,7 +44,7 @@ static int	check_new_parrent_loop(t_link *new_parrent, t_room *start)
 	return (0);
 }
 
-void		ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
+void ft_turn(t_link **head, t_link **tail, t_data *data)
 {
 	t_link	*ptr;
 
@@ -53,23 +53,17 @@ void		ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
 	{
 		if (((*head)->room->cost + ptr->cost < ptr->room->cost) && //для того чтобы не уйти в room_out так как цена не изменится
 		(!(*head)->parrent || ptr->room != (*head)->parrent->room) &&
-		ptr->room != data->start)
+		ptr->room != data->start && ptr->room)
 		{
-			if (ptr->turn_in == 0)
-			{
+			ptr->parrent = *head;
+			ptr->room->cost = (*head)->room->cost + ptr->cost;
+//			if (ptr->turn_in == 0)
+//			{
 				(*tail)->turn_next = ptr;
 				ptr->turn_prev = *tail;
 				ptr->turn_in = 1;
 				*tail = (*tail)->turn_next;
-			}
-			if (ptr->parrent && check_new_parrent_loop((*head), data->start))
-			{
-				ptr = ptr->next;
-				continue ;
-			}
-			ptr->parrent = *head;
-			ptr->room->cost = (*head)->room->cost + ptr->cost;
-			(ptr->room == data->end) ? *end = ptr : 0;
+//			}
 		}
 		ptr = ptr->next;
 	}

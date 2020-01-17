@@ -80,7 +80,7 @@ int				ft_dijkstra(t_data *data)
 	while (turn_head)
 	{
 		if (turn_head->room->links && turn_head->room != data->end)
-			ft_turn(&turn_head, &turn_tail, &turn_end, data);
+			ft_turn(&turn_head, &turn_tail, data);
 		turn_head = turn_head->turn_next;
 	}
 	if (turn_end)

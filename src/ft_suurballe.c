@@ -65,7 +65,7 @@ static void	duplicate_rooms(t_path *path)
 
 int			ft_suurballe(t_data *data)
 {
-	if (ft_dijkstra(data)) //поиск в ширину 1 - нашёл, 0 - не нашёл
+	if (ft_ford(data)) //поиск в ширину 1 - нашёл, 0 - не нашёл
 	{
 		ft_direction(data->ways_dij->path);
 		duplicate_rooms(data->ways_dij->path); //end указывает сразу на room_in(не перенапрвляется)
