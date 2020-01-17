@@ -19,7 +19,7 @@ static void	valid_strings(t_data *data, char *str, int i, int *f)
 	else if (str[0] == '#')
 		ft_valid_hash(str, f);
 	else if (!(ft_bit_check(*f, ANTS)))
-		ft_valid_ants(str, f, data, i);
+		ft_valid_ants(str, f, data);
 	else if (ft_bit_check(*f, ANTS) && !(ft_bit_check(*f, LINKS)) &&
 			ft_strchr(str, ' '))
 		ft_valid_rooms(str, f, data, i);

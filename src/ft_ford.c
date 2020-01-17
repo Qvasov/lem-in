@@ -83,47 +83,13 @@ static void	path(t_room *room, t_room *start, t_way **ways)
 	create_way(path, path_cost, ways);
 }
 
-static void	change_cost(t_room *room, t_link *link, t_room *start, int *flag)
-{
-		link->room->cost = room->cost + link->cost;
-		link->room->room_parrent = room;
-		*flag = 1;
-}
-
-static void turn(t_room *room, t_room *start, int *flag)
-{
-	t_link	*link;
-	t_room	*room_d;
-
-	if (room->cost != 0x7FFFFFFF)
-	{
-		link = room->links;
-		while (link)
-		{
-			if (room->cost + link->cost < link->room->cost && link->room != start)
-				change_cost(room, link, start, flag);
-			link = link->next;
-		}
-	}
-	if ((room_d = room->room_out) && room_d->cost != 0x7FFFFFFF)
-	{
-		link = room_d->links;
-		while (link)
-		{
-			if (room_d->cost + link->cost < link->room->cost && link->room != start)
-				change_cost(room_d, link, start, flag);
-			link = link->next;
-		}
-	}
-}
-
 int			ft_ford(t_data *data)
 {
 	int		k;
 	t_room	*room;
 	int		flag;
 
-	k = data->rooms_count - 1;
+	k = data->rooms_count;
 	flag = 1;
 	data->start->cost = 0;
 	while (--k && flag == 1)
@@ -133,11 +99,10 @@ int			ft_ford(t_data *data)
 		(room == data->end) ? room = room->next : 0;
 		while (room)
 		{
-			turn(room, data->start, &flag);
+			ft_turn(room, data->start, &flag);
 			((room = room->next) == data->end) ? room = room->next : 0;
 		}
 	}
-	//на ноль
 	if (!data->end->room_parrent)
 		return (0);
 	path(data->end, data->start, &data->ways_dij);

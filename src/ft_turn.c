@@ -12,65 +12,54 @@
 
 #include "lemin.h"
 
-void		ft_turn_null(t_link *turn_tail)
+static int	loop(t_room *new_parrent, t_room *room)
 {
-	while (turn_tail)
-	{
-		turn_tail->room->cost = 0x7FFFFFFF;
-		turn_tail->turn_in = 0;
-		turn_tail->parrent = NULL;
-		if (turn_tail->turn_next)
-			turn_tail->turn_next->turn_prev = NULL;
-		turn_tail->turn_next = NULL;
-		turn_tail = turn_tail->turn_prev;
-	}
-}
+	t_room	*ptr;
 
-static int	check_new_parrent_loop(t_link *new_parrent, t_room *start)
-{
-	t_link	*ptr;
-	int		s;
-
-	s = 0;
 	ptr = new_parrent;
-	while (ptr && s == 0)
+	while (ptr)
 	{
-		if (ptr->parrent->room == new_parrent->room)
+		if (ptr == room)
 			return (1);
-		if (ptr->parrent->room_src == start)
-			s = 1;
-		ptr = ptr->parrent;
+		ptr = ptr->room_parrent;
 	}
 	return (0);
 }
 
-void		ft_turn(t_link **head, t_link **tail, t_link **end, t_data *data)
+static void	change_cost(t_room *room, t_link *link, int *flag)
 {
-	t_link	*ptr;
-
-	ptr = (*head)->room->links;
-	while (ptr)
+	link->room->cost = room->cost + link->cost;
+	if (!link->room->room_parrent ||
+	((link->room->room_parrent) && !loop(room, link->room)))
 	{
-		if (((*head)->room->cost + ptr->cost < ptr->room->cost) && //для того чтобы не уйти в room_out так как цена не изменится
-		(!(*head)->parrent || ptr->room != (*head)->parrent->room) &&
-		ptr->room != data->start)
-		{
-			if (ptr->turn_in == 0)
-			{
-				(*tail)->turn_next = ptr;
-				ptr->turn_prev = *tail;
-				ptr->turn_in = 1;
-				*tail = (*tail)->turn_next;
-			}
-			if (ptr->parrent && check_new_parrent_loop((*head), data->start))
-			{
-				ptr = ptr->next;
-				continue ;
-			}
-			ptr->parrent = *head;
-			ptr->room->cost = (*head)->room->cost + ptr->cost;
+		link->room->room_parrent = room;
+		*flag = 1;
+	}
+}
 
+void 		ft_turn(t_room *room, t_room *start, int *flag)
+{
+	t_link	*link;
+	t_room	*room_d;
+
+	if (room->cost != 0x7FFFFFFF)
+	{
+		link = room->links;
+		while (link)
+		{
+			if (room->cost + link->cost < link->room->cost && link->room != start)
+				change_cost(room, link, flag);
+			link = link->next;
 		}
-		ptr = ptr->next;
+	}
+	if ((room_d = room->room_out) && room_d->cost != 0x7FFFFFFF)
+	{
+		link = room_d->links;
+		while (link)
+		{
+			if (room_d->cost + link->cost < link->room->cost && link->room != start)
+				change_cost(room_d, link, flag);
+			link = link->next;
+		}
 	}
 }

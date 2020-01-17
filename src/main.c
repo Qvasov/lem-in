@@ -30,7 +30,6 @@ static void	ft_zerodata(t_data *data)
 	data->best_var = NULL;
 	data->ways_dij = NULL;
 	data->ways_count = 0;
-	data->i_ants = 0;
 	data->i_rooms_start = 0;
 	data->i_rooms_end = 0;
 	data->i_links_start = 0;
