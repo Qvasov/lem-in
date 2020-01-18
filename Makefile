@@ -28,7 +28,7 @@ SRC_NAME		=	ft_lemin_read.c ft_rooms.c ft_ford.c ft_suurballe.c\
 					ft_valid_hash.c ft_valid_links.c ft_lemin.c\
 					ft_valid_rooms.c ft_links.c ft_ways.c ft_parse_data.c\
 					ft_ways_ascending.c ft_path_ascending.c main.c\
-					ft_flags_lemin.c\
+					ft_flags_lemin.c ft_match_rooms_off.c\
 
 SRC				=	$(addprefix $(SRC_PATH), $(SRC_NAME))
 INC				=	$(addprefix $(INC_PATH), $(INC_NAME))

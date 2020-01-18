@@ -126,7 +126,7 @@ void				ft_links(t_data *data, char *str);
 t_link				*ft_createlink(t_room *room);
 int					ft_findrooms(t_data *data, char *link, t_room **room1,
 					t_room **room2);
-void				ft_match_rooms_off(t_room *rooms);
+void ft_match_rooms_off(t_room *rooms, t_room *start, t_room *end);
 void				ft_ways(t_data *data);
 int					ft_suurballe(t_data *data);
 int					ft_ford(t_data *data);

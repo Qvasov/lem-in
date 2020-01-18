@@ -16,7 +16,7 @@ static void	check_linked_room(t_room *room)
 {
 	t_link	*l;
 
-	while (room->links_count == 2)
+	while (room->links_count == 2 && room->state == 1)
 	{
 		room->state = 0;
 		l = (room->links->room->state == 0) ? room->links->next : room->links;
@@ -24,10 +24,15 @@ static void	check_linked_room(t_room *room)
 	}
 }
 
-void	ft_match_rooms_off(t_room *rooms)
+void		ft_match_rooms_off(t_room *rooms, t_room *start, t_room *end)
 {
 	while(rooms)
 	{
+		if (rooms == start || rooms == end)
+		{
+			rooms = rooms->next;
+			continue ;
+		}
 		if (rooms->links_count < 2)
 		{
 			rooms->state = 0;
