@@ -32,7 +32,9 @@ static int	ft_roomcmp(char *room1, char *room2)
 	while (room1[++i] && room2[++j])
 		if (room1[i] != room2[j])
 			return (0);
-	return (1);
+	if (room1[i] == '\0' && room2[j] == '\0')
+		return (1);
+	return (0);
 }
 
 int			ft_valid_duplicates_rooms(t_data *data, char **strings)
