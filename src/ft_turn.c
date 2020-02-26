@@ -12,42 +12,54 @@
 
 #include "lemin.h"
 
-void	ft_turn_null(t_link *turn_tail)
+static int	loop(t_room *new_parrent, t_room *room)
 {
-	while (turn_tail)
+	t_room	*ptr;
+
+	ptr = new_parrent;
+	while (ptr)
 	{
-		turn_tail->room->cost = 0x7FFFFFFF;
-		turn_tail->turn_in = 0;
-		turn_tail->parrent = NULL;
-		if (turn_tail->turn_next)
-			turn_tail->turn_next->turn_prev = NULL;
-		turn_tail->turn_next = NULL;
-		turn_tail = turn_tail->turn_prev;
+		if (ptr == room)
+			return (1);
+		ptr = ptr->room_parrent;
+	}
+	return (0);
+}
+
+static void	change_cost(t_room *room, t_link *link, int *flag)
+{
+	link->room->cost = room->cost + link->cost;
+	if (!link->room->room_parrent ||
+	((link->room->room_parrent) && !loop(room, link->room)))
+	{
+		link->room->room_parrent = room;
+		*flag = 1;
 	}
 }
 
-void	ft_turn(t_link **head, t_link **tail, t_link **end, t_room *e)
+void 		ft_turn(t_room *room, t_room *start, int *flag)
 {
 	t_link	*link;
+	t_room	*room_d;
 
-	link = (*head)->room->links;
-	while (link)
+	if (room->cost != INF)
 	{
-		if (((*head)->room->cost + link->cost < link->room->cost) &&
-			(!(*head)->parrent || link->room != (*head)->parrent->room))
+		link = room->links;
+		while (link)
 		{
-			if (link->turn_in == 0)
-			{
-				(*tail)->turn_next = link;
-				link->turn_prev = *tail;
-				link->turn_in = 1;
-				*tail = (*tail)->turn_next;
-			}
-			link->parrent = *head;
-			link->room->cost = (*head)->room->cost + link->cost;
-			if (link->room == e)
-				*end = link;
+			if (room->cost + link->cost < link->room->cost && link->room != start)
+				change_cost(room, link, flag);
+			link = link->next;
 		}
-		link = link->next;
+	}
+	if ((room_d = room->room_out) && room_d->cost != INF)
+	{
+		link = room_d->links;
+		while (link)
+		{
+			if (room_d->cost + link->cost < link->room->cost && link->room != start)
+				change_cost(room_d, link, flag);
+			link = link->next;
+		}
 	}
 }

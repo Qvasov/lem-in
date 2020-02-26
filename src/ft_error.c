@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 17:44:00 by dbennie           #+#    #+#             */
-/*   Updated: 2019/10/18 17:44:01 by dbennie          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:25:48 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int	ft_error(t_data *data, char **str_split)
+void	ft_error(int id)
 {
-	if (data)
-		ft_free_data(data);
-	if (str_split)
-		ft_free_str_split(str_split);
-	return (-1);
+	write(2, "ERROR\n", 6);
+	exit(id);
+}
+
+void	ft_perror(void)
+{
+	perror("lem-in");
+	exit(1);
 }

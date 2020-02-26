@@ -17,26 +17,23 @@ t_link		*ft_createlink(t_room *room)
 	t_link	*link;
 
 	if (!(link = (t_link *)malloc(sizeof(t_link))))
-		return (NULL);
+		ft_perror();
 	link->cost = 1;
 	link->room_src = NULL;
 	link->room = room;
 	link->next = NULL;
 	link->prev = NULL;
 	link->turn_next = NULL;
-	link->turn_prev = NULL;
 	link->parrent = NULL;
-	link->turn_in = 0;
 	return (link);
 }
 
-static int	ft_connectlink(t_room *room_src, t_room *room_dst)
+static void	ft_connectlink(t_room *room_src, t_room *room_dst)
 {
 	t_link	*link;
 	t_link	*tmp;
 
-	if (!(link = ft_createlink(room_dst)))
-		return (0);
+	link = ft_createlink(room_dst);
 	if (room_src->links)
 	{
 		tmp = room_src->links;
@@ -47,19 +44,34 @@ static int	ft_connectlink(t_room *room_src, t_room *room_dst)
 	else
 		room_src->links = link;
 	link->room_src = room_src;
-	return (1);
+	room_src->links_count += 1;
 }
 
-int			ft_links(t_data *data, char *link_str)
+static int	ft_check_duplicate_link(t_room *room1, t_room *room2)
+{
+	t_link	*link;
+
+	link = room1->links;
+	while (link)
+	{
+		if (link->room == room2)
+			return (1);
+		link = link->next;
+	}
+	return (0);
+}
+
+void		ft_links(t_data *data, char *link_str)
 {
 	t_room	*room1;
 	t_room	*room2;
 
 	room1 = NULL;
 	room2 = NULL;
-	if (ft_findrooms(data, link_str, &room1, &room2))
-		return (-1);
-	if (!ft_connectlink(room1, room2) || !ft_connectlink(room2, room1))
-		return (-1);
-	return (0);
+	ft_findrooms(data, link_str, &room1, &room2);
+	if (!ft_check_duplicate_link(room1, room2))
+	{
+		ft_connectlink(room1, room2);
+		ft_connectlink(room2, room1);
+	}
 }

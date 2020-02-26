@@ -12,12 +12,9 @@
 
 #include "lemin.h"
 
-void	ft_free_str_split(char **str_split)
+void	ft_free_str_split(char ***str_split)
 {
-	size_t	i;
-
-	i = 0;
-	while (str_split[i])
-		free(str_split[i++]);
-	free(str_split);
+	free(*str_split[0]);
+	free(*str_split);
+	*str_split = NULL;
 }

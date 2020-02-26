@@ -12,45 +12,45 @@
 
 #include "lemin.h"
 
-static void	ft_redirection_link(t_room *src, t_room *dst)
+static void	ft_redirection_link(t_room *from, t_room *to)
 {
 	t_link	*link;
 
-	link = src->links;
-	while (link && link->room != dst)
+	link = from->links;
+	while (link && link->room != to)
 		link = link->next;
-	if (link && link->room == dst)
+	if (link && link->room == to)
 	{
 		if (link->prev)
 			link->prev->next = link->next;
 		else
-			src->links = link->next;
+			from->links = link->next;
 		if (link->next)
 			link->next->prev = link->prev;
-		link->cost = (link->cost == -1) ? 1 : -1;
-		link->room = src;
-		link->room_src = dst;
+		link->cost = (link->cost == -1) ? 2 : -1;
+		link->room = from;
+		link->room_src = to;
 		link->prev = NULL;
-		link->next = dst->links;
-		if (dst->links)
-			dst->links->prev = link;
-		dst->links = link;
+		link->next = to->links;
+		if (to->links)
+			to->links->prev = link;
+		to->links = link;
 	}
 }
 
-static void	ft_delete_link(t_room *src, t_room *dst)
+static void	ft_delete_link(t_room *from, t_room *to)
 {
 	t_link	*link;
 
-	link = dst->links;
-	while (link && link->room != src)
+	link = from->links;
+	while (link && link->room != to)
 		link = link->next;
-	if (link && link->room == src)
+	if (link && link->room == to)
 	{
 		if (link->prev)
 			link->prev->next = link->next;
 		else
-			dst->links = link->next;
+			from->links = link->next;
 		if (link->next)
 			link->next->prev = link->prev;
 		free(link);
@@ -68,19 +68,19 @@ void		ft_direction(t_path *path)
 		room_dst = path->next->room;
 		if (!(room_src->room_in || room_src->room_out) &&
 		!(room_dst->room_in || room_dst->room_out))
-			ft_delete_link(room_src, room_dst);
+			ft_delete_link(room_dst, room_src);
 		else if (!(room_src->room_in || room_src->room_out) &&
 		room_dst->room_out)
-			ft_delete_link(room_src, room_dst->room_out);
+			ft_delete_link(room_dst->room_out, room_src);
 		else if (!(room_src->room_in || room_src->room_out) &&
 		room_dst->room_in)
-			ft_delete_link(room_src, room_dst->room_in);
+			ft_delete_link(room_dst->room_in, room_src);
 		else if (room_src->room_in &&
 		!(room_dst->room_in || room_dst->room_out))
-			ft_delete_link(room_src->room_in, room_dst);
+			ft_delete_link(room_dst, room_src->room_in);
 		else if (room_src->room_out &&
 		!(room_dst->room_in || room_dst->room_out))
-			ft_delete_link(room_src->room_out, room_dst);
+			ft_delete_link(room_dst, room_src->room_out);
 		ft_redirection_link(room_src, room_dst);
 		path = path->next;
 	}

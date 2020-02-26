@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 20:46:28 by dbennie           #+#    #+#             */
-/*   Updated: 2019/10/03 16:14:20 by dbennie          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:32:04 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef union			u_double
 {
 	struct
 	{
-		unsigned long	m: 64;
+		unsigned long long	m: 64;
 		unsigned int	e: 15;
 		unsigned int	s: 1;
 	}					bits;

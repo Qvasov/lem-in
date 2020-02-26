@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid_duplicates_rooms.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:43:29 by dbennie           #+#    #+#             */
-/*   Updated: 2019/12/11 20:43:29 by dbennie          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:42:30 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,17 @@ static int	ft_roomcmp(char *room1, char *room2)
 	while (room2[++j] && room2[j] != ' ')
 		;
 	while (room1[++i] && room2[++j])
-		if (room1[i] != room2[i])
+		if (room1[i] != room2[j])
 			return (0);
+	if (room1[i] == '\0' && room2[j] == '\0')
+		return (0);
 	return (1);
 }
 
 int			ft_valid_duplicates_rooms(t_data *data, char **strings)
 {
-	long	i;
-	long	j;
+	int	i;
+	int	j;
 
 	i = data->i_rooms_start - 1;
 	while (++i <= data->i_rooms_end)
@@ -49,7 +51,7 @@ int			ft_valid_duplicates_rooms(t_data *data, char **strings)
 			while (++j <= data->i_rooms_end)
 				if (strings[j][0] != '#')
 					if (ft_roomcmp(strings[i], strings[j]))
-						exit(2);
+						ft_error(2);
 		}
 	}
 	return (0);

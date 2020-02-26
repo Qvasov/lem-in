@@ -26,7 +26,8 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c\
 	  ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c\
 	  ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_swap.c ft_swapptr.c\
 	  ft_strrev.c ft_strlsplit.c ft_lstsize.c ft_lstrev.c ft_atoll.c ft_isnum.c\
-	  ft_lltoa.c get_next_line.c ft_atoull.c ft_ulltoa.c\
+	  ft_lltoa.c get_next_line.c ft_atoull.c ft_ulltoa.c ft_strchr_count.c\
+	  ft_bit.c ft_satoi.c ft_putchar_buf.c ft_putstr_buf.c ft_putnbr_buf.c\
 
 PRINTF = ft_printf/
 
@@ -38,24 +39,26 @@ OBJS = $(addprefix $(DIR_O),$(SRC:.c=.o))
 
 HEADO = libft.h.gch
 
+CC = gcc
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@make -C $(PRINTF)
-	@cp ft_printf/ft_printf.a $(NAME)
-	@ar rc $(NAME) $(OBJS)
-	@ranlib $(NAME)
+	make -C $(PRINTF)
+	cp ft_printf/ft_printf.a $(NAME)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
 $(DIR_O)%.o: $(DIR_S)%.c
 	@mkdir -p $(DIR_O)
-	@$(CC) $(FLAGS) -o $@ -c $<
+	$(CC) $(FLAGS) -o $@ -c $<
 
 clean:
-	@/bin/rm -rf $(DIR_O)
-	@make clean -C $(PRINTF)
+	/bin/rm -rf $(DIR_O)
+	make clean -C $(PRINTF)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
-	@make fclean -C $(PRINTF)
+	/bin/rm -f $(NAME)
+	make fclean -C $(PRINTF)
 
 re: fclean all

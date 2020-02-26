@@ -12,20 +12,15 @@
 
 #include "lemin.h"
 
-int	ft_valid_ants(char *str, int *flag, t_data *data, long j)
+int	ft_valid_ants(char *str, int *f, t_data *data)
 {
-	long	i;
-	char	*tmp;
+	int	flag;
 
-	i = -1;
-	while (str[++i])
-		if (!(str[i] >= '0' && str[i] <= '9') || i >= 20)
-			exit(1);
-	tmp = ft_ulltoa(ft_atoull(str));
-	if (ft_strcmp(tmp, str))
-		exit(1);
-	free(tmp);
-	ANTS = 1;
-	data->i_ants = j;
+	if (!(*str == '+' || (*str <= '9' && *str >= '0')))
+		ft_error(1);
+	data->ants = ft_satoi(str, &flag);
+	if (!(flag) || *(str + flag))
+		ft_error(1);
+	ft_bit_on(f, ANTS);
 	return (0);
 }

@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static void		ft_null(t_link *turn_head, t_link *turn_tail, t_room *end)
+static void		null(t_link *turn_head, t_link *turn_tail, t_room *end)
 {
 	turn_head = end->links;
 	while (turn_head && turn_head->cost != -1)
@@ -55,8 +55,7 @@ t_way			*ft_paths_ascending(t_room *start, t_room *end)
 		return (NULL);
 	turn_tail = turn_head;
 	ft_link_end(&turn_head, &turn_tail);
-	if (!(ways_begin = ft_ways_ascending(turn_head, turn_tail, start, end)))
-		return (NULL);
-	ft_null(turn_head, turn_tail, end);
+	ways_begin = ft_ways_ascending(turn_head, turn_tail, start, end); //много путей сразу ищет
+	null(turn_head, turn_tail, end);
 	return (ways_begin);
 }

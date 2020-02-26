@@ -12,7 +12,57 @@
 
 #include "lemin.h"
 
-void	ft_free_data(t_data *data)
+static void	ft_free_links(t_link *links)
+{
+	t_link	*tmp;
+
+	while (links)
+	{
+		tmp = links;
+		links = links->next;
+		free(tmp);
+	}
+}
+
+static void	ft_free_path(t_path *path)
+{
+	t_path	*tmp;
+
+	while (path)
+	{
+		tmp = path;
+		path = path->next;
+		free(tmp);
+	}
+}
+
+static void	ft_free_ways(t_way *way)
+{
+	t_way	*tmp;
+
+	while (way)
+	{
+		tmp = way;
+		way = way->next;
+		ft_free_path(tmp->path);
+		free(tmp);
+	}
+}
+
+static void	ft_free_vars(t_var *vars)
+{
+	t_var	*tmp;
+
+	while (vars)
+	{
+		tmp = vars;
+		vars = vars->next;
+		ft_free_ways(tmp->ways);
+		free(tmp);
+	}
+}
+
+void		ft_free_data(t_data *data)
 {
 	t_room	*tmp;
 
@@ -30,6 +80,6 @@ void	ft_free_data(t_data *data)
 		free(tmp->room_out);
 		free(tmp);
 	}
-	ft_free_way(data->ways);
-	ft_free_way(data->mod_ways);
+	ft_free_ways(data->ways_dij);
+	ft_free_vars(data->vars);
 }

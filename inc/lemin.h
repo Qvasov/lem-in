@@ -17,117 +17,128 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-# define ANTS		flag[0]
-# define ROOMS		flag[1]
-# define LINKS		flag[2]
-# define START		flag[3]
-# define END		flag[4]
-# define DEF_SE		flag[5]
+# define ANTS		0
+# define ROOMS		1
+# define LINKS		2
+# define START		3
+# define END		4
+# define DEF_SE		5
 
+# define INF		(0x7FFFFFFF)
 # define BUFF_SIZE	2048
 
 typedef struct		s_buf
 {
 	char			str[BUFF_SIZE];
-	int				i;
+	size_t 			i;
 	int				space;
 }					t_buf;
+
+typedef struct		s_flags
+{
+	char			*fd_path;
+	char			ways;
+}					t_flags;
 
 typedef struct		s_path
 {
 	struct s_room	*room;
 	struct s_path	*next;
 	struct s_path	*prev;
-}					t_path;
+}					t_path; //список комнат
 
 typedef struct		s_way
 {
 	struct s_path	*path;
-	size_t			path_number;
-	size_t			path_cost;
+	int				path_number;
+	int				path_cost;
+	int				ants;
 	struct s_way	*next;
 	struct s_way	*prev;
-}					t_way;
+}					t_way; 	//список путей (из комнат)
+
+typedef struct		s_var
+{
+	t_way 			*ways;
+	int				steps;
+	struct s_var 	*next;
+}					t_var;
 
 typedef struct		s_link
 {
-	long			cost;
+	int				cost;
 	struct s_room	*room_src;
 	struct s_room	*room;
 	struct s_link	*next;
 	struct s_link	*prev;
 	struct s_link	*turn_next;
-	struct s_link	*turn_prev;
 	struct s_link	*parrent;
-	int				turn_in;
 }					t_link;
 
 typedef struct		s_room
 {
 	char			*name;
-	size_t			x;
-	size_t			y;
+	int				x;
+	int				y;
 	t_link			*links;
+	int				links_count;
 	struct s_room	*room_out;
 	struct s_room	*room_in;
-	size_t			ant;
-	long			cost;
+	struct s_room	*room_parrent;
+	int				ant;
+	int				cost;
 	struct s_room	*next;
+	int				state;
 }					t_room;
 
 typedef struct		s_data
 {
-	size_t			ants;
+	int				ants;
 	t_room			*start;
 	t_room			*end;
 	t_room			*rooms;
-	size_t			rooms_count;
-	t_way			*ways;
-	t_way			*mod_ways;
-	size_t			steps;
-	long			ways_count;
-	long			i_ants;
-	long			i_rooms_start;
-	long			i_rooms_end;
-	long			i_links_start;
-	long			i_links_end;
-	long			i_start;
-	long			i_end;
+	int				rooms_count;
+	t_var			*vars;
+	t_var			*best_var;
+	t_way			*ways_dij; //все пути которые находил алгоритм дейкстры
+	int				ways_count;
+	int				i_rooms_start;//index where rooms begin
+	int				i_rooms_end;//index where roms end
+	int				i_links_start;//index where links begin
+	int				i_links_end;//index where links end
+	int				i_start;//index of room start
+	int				i_end;//index of room end
+	t_flags			flags;
 }					t_data;
 
-int					ft_read(int fd, char ***data);
+void				ft_flags_lemin(t_flags *flags, int ac, char **av);
+char				*ft_lemin_read(t_flags *flags, char ***str_split);
 int					ft_valid(t_data *data, char **strings);
 int					ft_valid_hash(char *str, int *flag);
-int					ft_valid_ants(char *str, int *flag, t_data *data, long j);
-int					ft_valid_rooms(char *str, int *flag, t_data *data, long j);
-int					ft_valid_links(char *str, int *flag, t_data *data, long j);
+int					ft_valid_ants(char *str, int *f, t_data *data);
+int					ft_valid_rooms(char *str, int *f, t_data *data, int j);
+void				ft_valid_links(char *str, int *f, t_data *data, int j);
 int					ft_valid_duplicates_rooms(t_data *data, char **strings);
-int					ft_valid_duplicates_links(t_data *data, char **strings);
-int					ft_parse(t_data *data, char **str_split);
-int					ft_rooms(t_data *data, char *str);
+int					ft_parse_data(t_data *data, char **str_split);
+void				ft_rooms(t_data *data, char *str);
 t_room				*ft_createroom(char *line);
-int					ft_links(t_data *data, char *str);
+void				ft_links(t_data *data, char *str);
 t_link				*ft_createlink(t_room *room);
 int					ft_findrooms(t_data *data, char *link, t_room **room1,
-															t_room **room2);
-int					ft_ways(t_data *data);
+					t_room **room2);
+void ft_match_rooms_off(t_room *rooms, t_room *start, t_room *end);
+void				ft_ways(t_data *data);
 int					ft_suurballe(t_data *data);
-int					ft_dijkstra(t_data *data);
+int					ft_ford(t_data *data);
+void 				ft_turn(t_room *room, t_room *start, int *flag);
 void				ft_direction(t_path *path);
-void				ft_turn(t_link **head, t_link **tail, t_link **end,
-																t_room *e);
-void				ft_turn_null(t_link *turn_tail);
 t_way				*ft_paths_ascending(t_room *start, t_room *end);
 t_way				*ft_ways_ascending(t_link *turn_head, t_link *turn_tail,
-												t_room *start, t_room *end);
-void				ft_lem_in(t_data *data, size_t steps);
-void				ft_copy_char(char *str, int *i, char c);
-void				ft_copy_num(char *str, int *i, size_t ant);
-void				ft_free_str_split(char **str_split);
+					t_room *start, t_room *end);
+void				ft_lemin(t_data *data);
+void				ft_free_str_split(char ***str_split);
 void				ft_free_data(t_data *data);
-void				ft_free_links(t_link *links);
-void				ft_free_way(t_way *way);
-void				*ft_free_path(t_path *path);
-int					ft_error(t_data *data, char **str_split);
+void				ft_error(int id);
+void				ft_perror();
 
 #endif

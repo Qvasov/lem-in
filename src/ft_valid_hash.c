@@ -3,36 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_valid_hash.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbennie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ddarell <ddarell@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 19:48:31 by dbennie           #+#    #+#             */
-/*   Updated: 2019/12/11 19:48:33 by dbennie          ###   ########.fr       */
+/*   Updated: 2020/01/12 13:42:23 by ddarell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int	ft_valid_hash(char *str, int *flag)
+int	ft_valid_hash(char *str, int *f)
 {
 	if (ft_strequ(str, "##start"))
 	{
-		if (!START && ANTS && !LINKS && !DEF_SE)
+		if (!(ft_bit_check(*f, START)) && ft_bit_check(*f, ANTS)
+		&& !(ft_bit_check(*f, LINKS)) && !(ft_bit_check(*f, DEF_SE)))
 		{
-			START = 1;
-			DEF_SE = 1;
+			ft_bit_on(f, START);
+			ft_bit_on(f, DEF_SE);
 		}
 		else
-			exit(4);
+			ft_error(4);
 	}
 	else if (ft_strequ(str, "##end"))
 	{
-		if (!END && ANTS && !LINKS && !DEF_SE)
+		if (!(ft_bit_check(*f, END)) && ft_bit_check(*f, ANTS)
+		&& !(ft_bit_check(*f, LINKS)) && !(ft_bit_check(*f, DEF_SE)))
 		{
-			END = 1;
-			DEF_SE = 1;
+			ft_bit_on(f, END);
+			ft_bit_on(f, DEF_SE);
 		}
 		else
-			exit(4);
+			ft_error(4);
 	}
 	return (0);
 }
