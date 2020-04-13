@@ -94,8 +94,6 @@ Suurballe Algorithm is based on the [Bellman Ford Algorithm](https://en.wikipedi
 
 ## Project Structure
 
-This project consists of five parts:
-
 * Libft - A library that contains useful native functions (`ft_printf`, `ft_split`, `ft_atoi`, `ft_itoa`, varios `str`
 functions (`ft_strcpy`, `ft_strdub`, `ft_strcmp` etc.))
 * For_test - part for test this project.
