@@ -81,7 +81,7 @@ int			main(int ac, char **av)
 	ft_valid(&data, str_split);
 	ft_parse_data(&data, str_split);
 	ft_free_str_split(&str_split);
-	ft_match_rooms_off(data.rooms, NULL, NULL);
+	ft_match_rooms_off(data.rooms, data.start, data.end);
 	ft_ways(&data);
 	print_n_free_map_data(&map_data);
 	ft_lemin(&data);
